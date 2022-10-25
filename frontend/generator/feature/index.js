@@ -29,6 +29,11 @@ module.exports = function (
           type: 'add',
           path: 'src/features/{{kebabCase feature}}/components/{{pascalCase feature}}.tsx',
           templateFile: 'generator/feature/components/Component.tsx.hbs'
+        },
+        {
+          type: 'add',
+          path: 'src/features/{{kebabCase feature}}/pages/{{pascalCase feature}}Page.tsx',
+          templateFile: 'generator/feature/Pages/Page.tsx.hbs'
         }
       ]
 

@@ -11,7 +11,8 @@
     "format": "prettier . --write --ignore-path .gitignore",
     "format:lint": "yarn format && yarn lint:fix",
     "lint-staged": "lint-staged",
-    "prepare": "cd .. && husky install frontend/.husky"
+    "prepare": "cd .. && husky install frontend/.husky",
+    "plop": "plop"
   },
   "dependencies": {
     "@aspida/axios": "^1.11.0",
