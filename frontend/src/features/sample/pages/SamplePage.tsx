@@ -2,8 +2,8 @@ import { NextPage } from 'next'
 
 import { Component } from '../components/Component'
 
-const Sample: NextPage = () => {
+const SamplePage: NextPage = () => {
   return <Component />
 }
 
-export default Sample
+export default SamplePage
