@@ -2,16 +2,63 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:import/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:import/warnings",
+    "plugin:react-hooks/recommended",
     "prettier"
   ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "simple-import-sort"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    // 「.ts」と「.tsx」を認識させる。
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".d.ts"
+        ]
+      },
+      "typescript": {
+        "project": "tsconfig.json"
+      }
+    }
+  },
   "rules": {
-    "import/order": [
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "no-restricted-imports": [
       "error",
       {
-        "alphabetize": {
-          "order": "asc"
-        }
+        "patterns": [
+          /* @/components */
+          "@/components/*/*",
+          "!@/components/*",
+          /* @/features */
+          "@/features/*/*",
+          "!@/features/student/**",
+          "!@/features/teacher/**"
+        ]
       }
     ]
   }
