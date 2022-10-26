@@ -16,5 +16,15 @@ services:
     volumes:
       - "db-data:/var/lib/postgresql/data"
 
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: framings-swagger
+    environment:
+      - SWAGGER_URL=./swagger.yaml
+      - SWAGGER_JSON=/swagger/swagger.yaml
+    ports:
+      - 8080:8080
+    volumes:
+      - ./swagger/:/swagger
 volumes:
   db-data:
