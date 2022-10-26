@@ -22,7 +22,7 @@ frontend/src
 |
 +-- config  # 設定, 環境変数など
 |
-+-- features  # アプリケーションの機能
++-- module  # アプリケーションを実現するためのmoduleを定義する
 |
 +-- hooks  # 汎用的なhooks
 |
@@ -39,6 +39,8 @@ frontend/src
 
 外部moduleからの呼び出しはaliasを用いた絶対パス  
 内部moduleからの呼び出しは相対パス
+
+> ここで書いたmoduleはsrc/moduleとは別
 
 <br />
 
@@ -59,7 +61,7 @@ components
 +---- index.ts
 ```
 
-- components/*で定義されているコンポーネントからfeaturesを呼ぶことはしない
+- components/*で定義されているコンポーネントからmoduleを呼ぶことはしない
 
 ### 外部moduleからの呼び出し
 
@@ -85,19 +87,19 @@ export * from './Hoge'
 
 <br />
 
-### src/features
+### src/module
 
 ```sh
-src/features
+src/module
 |
-+-- awesome-feature
++-- awesome-module
 |
 +-- hoge-hoge
 :
 ```
 
 ```sh
-awesome-feature
+awesome-module
 |
 +-- assets
 |
@@ -111,31 +113,31 @@ awesome-feature
 |
 +-- pages
 |
-+-- index.ts  # feature endpoint
++-- index.ts  # module endpoint
 ```
 
-- featureの粒度はそのfeatureを削除すると機能が無くなるかどうかで判断
+- moduleの粒度はそのmoduleを削除すると機能が無くなるかどうかで判断
 
 ### 外部moduleからの呼び出し
 
 ```typescript
-import { AwesomeFeature, useAwesomeFeature } from '@/features/awesome-feature'
+import { AwesomeModule, useAwesomeModule } from '@/module/awesome-module'
 ```
 
-### features/awesome-feature/index.ts
+### module/awesome-module/index.ts
 
 > **📘 参考資料**
 > 
 > [barrel - TypeScript Deep Dive](https://typescript-jp.gitbook.io/deep-dive/main-1/barrel)
 
 ```typescript
-/* その機能(awesome-feature)を実現するために必要なmoduleをexport */
+/* その機能(awesome-module)を実現するために必要なmoduleをexport */
 export * from './pages/AwesomePage'
-export * from './components/AwesomeFeature'
+export * from './components/AwesomeModule'
 export * from './types'
 ```
 
-featureが他のfeatureを包括することもできるが、包括されたfeatureは外部moduleからは
+moduleが他のmoduleを包括することもできるが、包括されたmoduleは外部moduleからは
 使わないようにする。
 ただし型のimportは許容する。
 
@@ -144,25 +146,25 @@ featureが他のfeatureを包括することもできるが、包括されたfea
 ```sh
 src
 |
-+-- features
-+---- featureA
-+---- featureB
++-- module
++---- moduleA
++---- moduleB
 :
 |
 +-- pages
 +---- Hoge.tsx
 ```
 
-- featureAはfeatureBを包括した機能
+- moduleAはmoduleBを包括した機能
 
 ### pages/Hoge.tsx
 
 ```typescript
-import { FeatureA } from '@/features/featureA' // good
+import { moduleA } from '@/module/moduleA' // good
 ```
 
 ```typescript
-import { FeatureB } from '@/features/featureB' // bad
+import { moduleB } from '@/module/moduleB' // bad
 ```
 
 例外
@@ -170,7 +172,7 @@ import { FeatureB } from '@/features/featureB' // bad
 - 型のimport
 
 ```typescript
-import type { FeatureB } from '@/features/featureB' // bad
+import type { moduleB } from '@/module/moduleB' // bad
 ```
 
 <br />
@@ -187,8 +189,8 @@ import type { FeatureB } from '@/features/featureB' // bad
       "@/components/*/*",
       "!@/components/*",
 
-      /* @/features */
-      "@/features/*/*"
+      /* @/module */
+      "@/module/*/*"
     ]
   }
 ],
@@ -199,4 +201,4 @@ import type { FeatureB } from '@/features/featureB' // bad
 ```shell
 yarn plop
 ```
-実行で`src/features/*/**`, `src/components/*, src/components/Elements/*`を作成できる
+実行で`src/module/*/**`, `src/components/*, src/components/Elements/*`を作成できる
