@@ -1,14 +1,21 @@
 // 投稿カード
 
 import styled from '@emotion/styled'
+import React, { useState } from 'react'
 
 export type PostCardProps = {
-  //
+  // 投稿日、年齢、性別
+  postInfo_text: string
+  // 投稿内容
+  postContent_text: string
 }
 
-export const PostCard = ({}: PostCardProps) => {
+export const PostCard = ({ postInfo_text, postContent_text }: PostCardProps) => {
+  // 投稿カードのバックカラー初期値
+  const [backColor, changeColor] = useState('#FFFFFF')
+
   return (
-    <Card>
+    <Card onClick={() => changeColor('#FFAA2C')} style={{ backgroundColor: backColor }}>
       <PostInfo>{postInfo_text}</PostInfo>
       <PostContent_parent>
         <PostContent>{postContent_text}</PostContent>
@@ -17,13 +24,13 @@ export const PostCard = ({}: PostCardProps) => {
   )
 }
 
-// 投稿日、年齢、性別
-const postInfo_text = '3月11日/20代/男'
-// 投稿内容
-const postContent_text = '〇〇を見る会??? ざけんな税金払うのアホくさ。 ００党に投票するやつ頭悪い。'
-
+let contentLength: number
 // 投稿内容の文字数
-const contentLength = postContent_text.length
+export default function getPostContent_text({ postContent_text }: PostCardProps) {
+  const contentLength = postContent_text.length
+  return contentLength
+}
+
 // 投稿内容のプロパティ値を入れる変数
 const valueList: string[] = []
 // 投稿内容の文量から上下の余白とtextAlignの値を設定
@@ -34,12 +41,12 @@ function setOptionValue() {
       valueList.push('56') // 下
       valueList.push('center') // textAlign
       break
-    case contentLength <= 44 && 22 <= contentLength: // 二行くらい
+    case contentLength <= 44 && 22 <= contentLength: // 二行くらいの文
       valueList.push('12')
       valueList.push('50')
       valueList.push('left')
       break
-    default: // 長いやつ
+    default: // 長い文
       valueList.push('12')
       valueList.push('29')
       valueList.push('left')
