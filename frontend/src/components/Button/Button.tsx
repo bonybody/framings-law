@@ -28,8 +28,6 @@ type ButtonStyleProps = {
 
 const ButtonWrap = styled.button<ButtonStyleProps>`
   cursor: pointer;
-  font-size: 20px;
-  line-height: 20px;
   padding: 20px 0;
   min-width: 240px;
   border: solid 5px #000;
