@@ -1,21 +1,16 @@
 import styled from '@emotion/styled'
-import type { ReactNode } from 'react'
+import type { MouseEventHandler, ReactNode } from 'react'
 
 export type ButtonProps = {
-  children: ReactNode
   isActive?: boolean
   isDisable?: boolean
+  handleClick: MouseEventHandler<HTMLButtonElement>
+  children: ReactNode
 }
 
-export const Button = ({ isActive, isDisable, children }: ButtonProps) => {
+export const Button = ({ isActive, isDisable, handleClick, children }: ButtonProps) => {
   return (
-    <ButtonWrap
-      isActive={isActive}
-      isDisable={isDisable}
-      onClick={() => {
-        console.log('click')
-      }}
-    >
+    <ButtonWrap isActive={isActive} isDisable={isDisable} onClick={handleClick}>
       {children}
     </ButtonWrap>
   )
