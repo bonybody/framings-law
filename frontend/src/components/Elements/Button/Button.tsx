@@ -4,24 +4,19 @@ import type { MouseEventHandler, ReactNode } from 'react'
 export type ButtonProps = {
   isActive?: boolean
   isDisable?: boolean
-  handleClick: MouseEventHandler<HTMLButtonElement>
+  onClick: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
 }
 
-export const Button = ({ isActive, isDisable, handleClick, children }: ButtonProps) => {
+export const Button = ({ isActive, isDisable, onClick, children }: ButtonProps) => {
   return (
-    <ButtonWrap isActive={isActive} isDisable={isDisable} onClick={handleClick}>
+    <ButtonWrap isActive={isActive} isDisable={isDisable} onClick={onClick}>
       {children}
     </ButtonWrap>
   )
 }
 
-type ButtonStyleProps = {
-  isActive?: boolean
-  isDisable?: boolean
-}
-
-const ButtonWrap = styled.button<ButtonStyleProps>`
+const ButtonWrap = styled.button<ButtonProps>`
   cursor: pointer;
   padding: 20px 0;
   min-width: 240px;
