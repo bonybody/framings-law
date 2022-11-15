@@ -6,24 +6,19 @@ export type PostCardProps = {
   // 投稿日、年齢、性別
   postInfo_text: string
   // 投稿内容
-  postContent_text: string
+  content: string
   // 選択できる状態か否か
   canSelect: boolean
   // 炎上カードだと思ったか
   judgBurst: boolean
 }
 
-export const PostCard = ({
-  postInfo_text,
-  postContent_text,
-  canSelect,
-  judgBurst
-}: PostCardProps) => {
+export const PostCard = ({ postInfo_text, content, canSelect, judgBurst }: PostCardProps) => {
   return (
     <Card judgBurst={judgBurst} canSelect={canSelect}>
       <PostInfo>{postInfo_text}</PostInfo>
       <PostContent_parent>
-        <PostContent>{postContent_text}</PostContent>
+        <PostContent>{content}</PostContent>
       </PostContent_parent>
     </Card>
   )
