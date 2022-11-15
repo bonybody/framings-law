@@ -16,7 +16,7 @@ export const Button = ({ isActive, isDisable, onClick, children }: ButtonProps) 
   )
 }
 
-const ButtonWrap = styled.button<ButtonProps>`
+const ButtonWrap = styled.button<{ isActive: boolean | undefined; isDisable: boolean | undefined }>`
   cursor: pointer;
   padding: 20px 0;
   min-width: 240px;
