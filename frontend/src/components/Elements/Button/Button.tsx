@@ -4,11 +4,11 @@ import type { MouseEventHandler, ReactNode } from 'react'
 export type ButtonProps = {
   isActive?: boolean
   isDisable?: boolean
-  onClick: MouseEventHandler<HTMLButtonElement>
+  onClick?: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
 }
 
-export const Button = ({ isActive, isDisable, onClick, children }: ButtonProps) => {
+export const Button = ({ isActive = false, isDisable = false, onClick, children }: ButtonProps) => {
   return (
     <ButtonWrap isActive={isActive} isDisable={isDisable} onClick={onClick}>
       {children}
@@ -16,7 +16,7 @@ export const Button = ({ isActive, isDisable, onClick, children }: ButtonProps) 
   )
 }
 
-const ButtonWrap = styled.button<{ isActive: boolean | undefined; isDisable: boolean | undefined }>`
+const ButtonWrap = styled.button<Required<Pick<ButtonProps, 'isActive' | 'isDisable'>>>`
   cursor: pointer;
   padding: 20px 0;
   min-width: 240px;
