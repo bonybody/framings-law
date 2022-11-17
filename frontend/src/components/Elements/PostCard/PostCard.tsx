@@ -42,7 +42,7 @@ const Card = styled.div<{ isFlamePost: boolean; isSelect: boolean }>`
   position: relative;
   width: 100%;
   min-height: 140px;
-  padding: 18px 0 0 18px;
+  padding: 18px 18px 29px 18px;
   background-color: ${(props) => (props.isFlamePost ? '#FFAA2C' : '#FFFFFF')};
   border: solid 5px #2b2b2b;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -67,7 +67,6 @@ const Card = styled.div<{ isFlamePost: boolean; isSelect: boolean }>`
 // 投稿日、年齢、性別
 const PostInfo = styled.div`
   margin: 0;
-  /* padding: 18px 0 0 18px; */
 `
 // テキスト
 const PostText = styled.p`
@@ -80,10 +79,7 @@ const PostText = styled.p`
 `
 // 投稿内容
 const PostContent = styled.div`
-  color: #2b2b2b;
   margin: 0;
-  padding: 0 18px 0px 20px;
   padding-top: 12px;
-  padding-bottom: 29px;
   display: inline-block;
 `
