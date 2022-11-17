@@ -4,11 +4,11 @@ import styled from '@emotion/styled'
 
 export type PostCardProps = {
   // 投稿日
-  PostedDate: string
+  postedDate: string
   // 年齢
-  Age: string
+  age: string
   // 性別
-  Gender: string
+  gender: string
   // 投稿内容
   content: string
   // 選択できる状態か否か
@@ -18,9 +18,9 @@ export type PostCardProps = {
 }
 
 export const PostCard = ({
-  PostedDate,
-  Age,
-  Gender,
+  postedDate,
+  age,
+  gender,
   content,
   isSelect,
   isFlamePost
@@ -28,7 +28,7 @@ export const PostCard = ({
   return (
     <Card isFlamePost={isFlamePost} isSelect={isSelect}>
       <PostInfo>
-        <PostText>{PostedDate + '/' + Age + '代/' + Gender}</PostText>
+        <PostText>{postedDate + '/' + age + '代/' + gender}</PostText>
       </PostInfo>
       <PostContent>
         <PostText>{content}</PostText>
@@ -42,9 +42,10 @@ const Card = styled.div<{ isFlamePost: boolean; isSelect: boolean }>`
   position: relative;
   width: 100%;
   min-height: 140px;
+  padding: 18px 0 0 18px;
   background-color: ${(props) => (props.isFlamePost ? '#FFAA2C' : '#FFFFFF')};
   border: solid 5px #2b2b2b;
-  box-shadow: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   opacity: ${(props) => (props.isSelect ? 'none' : '0.5')};
   box-sizing: border-box;
 
@@ -64,9 +65,9 @@ const Card = styled.div<{ isFlamePost: boolean; isSelect: boolean }>`
 `
 
 // 投稿日、年齢、性別
-const PostInfo = styled.p`
+const PostInfo = styled.div`
   margin: 0;
-  padding: 18px 0 0 18px;
+  /* padding: 18px 0 0 18px; */
 `
 // テキスト
 const PostText = styled.p`
@@ -78,7 +79,7 @@ const PostText = styled.p`
   line-height: 20px;
 `
 // 投稿内容
-const PostContent = styled.p`
+const PostContent = styled.div`
   color: #2b2b2b;
   margin: 0;
   padding: 0 18px 0px 20px;
