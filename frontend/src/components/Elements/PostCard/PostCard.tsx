@@ -48,6 +48,7 @@ const Card = styled.div<{ isFlamePost: boolean; isSelect: boolean }>`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   opacity: ${(props) => (props.isSelect ? 'none' : '0.5')};
   box-sizing: border-box;
+  z-index: -1;
 
   // 炎
   &::before {
