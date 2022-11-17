@@ -77,6 +77,7 @@ const PostText = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  word-break: break-all;
 `
 // 投稿内容
 const PostContent = styled.div`
