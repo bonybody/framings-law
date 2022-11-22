@@ -18,12 +18,7 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "react",
-    "react-hooks",
-    "@typescript-eslint",
-    "simple-import-sort"
-  ],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "simple-import-sort"],
   "settings": {
     "react": {
       "version": "detect"
@@ -31,13 +26,7 @@
     // 「.ts」と「.tsx」を認識させる。
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx",
-          ".d.ts"
-        ]
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts"]
       },
       "typescript": {
         "project": "tsconfig.json"
@@ -63,6 +52,7 @@
           "!@/features/teacher/**"
         ]
       }
-    ]
+    ],
+    "@typescript-eslint/no-misused-promises": "off"
   }
 }
