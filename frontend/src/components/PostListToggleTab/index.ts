@@ -1,2 +1,2 @@
-export * from './Elements'
 export * from './PostListToggleTab'
+export * from './Tab'
