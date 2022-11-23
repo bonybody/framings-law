@@ -1,24 +1,24 @@
 import styled from '@emotion/styled'
 
 export type TabProps = {
-  // 選択状態
-  // isSelect: boolean
+  // タブ選択状態
+  isTab: boolean
 }
 
-export const Tab = ({}: TabProps) => {
+export const Tab = ({ isTab }: TabProps) => {
   return (
-    <SwitchBtn>
+    <SwitchBtn isTab={isTab}>
       <BtnText>すべて</BtnText>
     </SwitchBtn>
   )
 }
 
 // ボタン本体
-const SwitchBtn = styled.div`
+const SwitchBtn = styled.div<{ isTab: boolean }>`
   box-sizing: border-box;
   width: 49.1%;
   height: 32px;
-  background-color: #ff8a00;
+  background-color: ${(prop) => (prop.isTab ? '#FF8A00' : '#D9D9D9')};
   border: 3px solid #2b2b2b;
 `
 
