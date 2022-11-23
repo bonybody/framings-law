@@ -9,8 +9,8 @@ export type PostListToggleTabProps = {
 export const PostListToggleTab = ({}: PostListToggleTabProps) => {
   return (
     <TabBox>
-      <Tab isTab={true} />
-      <Tab isTab={false} />
+      <Tab isSelect={true} isActive={true} tabName="すべて" />
+      <Tab isSelect={false} isActive={false} tabName="炎上" />
     </TabBox>
   )
 }

@@ -2,24 +2,29 @@ import styled from '@emotion/styled'
 
 export type TabProps = {
   // タブ選択状態
-  isTab: boolean
+  isSelect: boolean
+  // 選択可否状態
+  isActive: boolean
+  // テキスト
+  tabName: string
 }
 
-export const Tab = ({ isTab }: TabProps) => {
+export const Tab = ({ isSelect, isActive, tabName }: TabProps) => {
   return (
-    <SwitchBtn isTab={isTab}>
-      <BtnText>すべて</BtnText>
+    <SwitchBtn isSelect={isSelect} isActive={isActive}>
+      <BtnText>{tabName}</BtnText>
     </SwitchBtn>
   )
 }
 
 // ボタン本体
-const SwitchBtn = styled.div<{ isTab: boolean }>`
+const SwitchBtn = styled.div<{ isSelect: boolean; isActive: boolean }>`
   box-sizing: border-box;
   width: 49.1%;
   height: 32px;
-  background-color: ${(prop) => (prop.isTab ? '#FF8A00' : '#D9D9D9')};
+  background-color: ${(prop) => (prop.isSelect ? '#FF8A00' : '#D9D9D9')};
   border: 3px solid #2b2b2b;
+  opacity: ${(props) => (props.isActive ? 'none' : '0.5')};
 `
 
 // テキスト
