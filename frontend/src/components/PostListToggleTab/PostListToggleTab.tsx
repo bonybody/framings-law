@@ -8,10 +8,16 @@ export type PostListToggleTabProps = {
 
 export const PostListToggleTab = ({}: PostListToggleTabProps) => {
   return (
-    <Dami>
+    <TabBox>
       <Tab />
-    </Dami>
+      <Tab />
+    </TabBox>
   )
 }
 
-const Dami = styled.div``
+// Tabの親
+const TabBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`

@@ -16,7 +16,7 @@ export const Tab = ({}: TabProps) => {
 // ボタン本体
 const SwitchBtn = styled.div`
   box-sizing: border-box;
-  width: 160px;
+  width: 49.1%;
   height: 32px;
   background-color: #ff8a00;
   border: 3px solid #2b2b2b;
