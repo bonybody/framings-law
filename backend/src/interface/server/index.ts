@@ -1,6 +1,6 @@
 import express, { Application, Request, Response, urlencoded } from "express";
 import { CONFIG } from "../../config";
-
+import { roomsRouter } from "./handler";
 const { server } = CONFIG;
 const app: Application = express();
 
@@ -10,6 +10,8 @@ app.use(urlencoded({ extended: true }));
 app.get("/health", async (_req: Request, res: Response) => {
   return res.status(200).send({ status: "ok" });
 });
+
+app.use("/rooms", roomsRouter);
 
 try {
   app.listen(server.port, () => {
