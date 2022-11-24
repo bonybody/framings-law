@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const componentGenerater = require('./generator/component')
-const featureGenerater = require('./generator/feature')
+const moduleGenerater = require('./generator/module')
 
 module.exports = function (
   /** @type {import('plop').NodePlopAPI} */
@@ -33,5 +33,5 @@ module.exports = function (
     return action
   }
   componentGenerater('component', plop)
-  featureGenerater('feature', plop)
+  moduleGenerater('module', plop)
 }
