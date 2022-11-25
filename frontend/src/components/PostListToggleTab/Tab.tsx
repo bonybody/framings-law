@@ -14,13 +14,17 @@ export type TabProps = {
 export const Tab = ({ isSelect, isActive, tabName, icon }: TabProps) => {
   return (
     <SwitchBtn isSelect={isSelect} isActive={isActive}>
-      <BtnText icon={icon}>{tabName}</BtnText>
+      <Icon icon={icon} />
+      <BtnText>{tabName}</BtnText>
     </SwitchBtn>
   )
 }
 
 // ボタン本体
 const SwitchBtn = styled.div<{ isSelect: boolean; isActive: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
   width: 49.1%;
   height: 32px;
@@ -30,7 +34,8 @@ const SwitchBtn = styled.div<{ isSelect: boolean; isActive: boolean }>`
 `
 
 // テキスト
-const BtnText = styled.p<{ icon: string }>`
+const BtnText = styled.p`
+  display: inline-block;
   margin: 0;
   font-style: normal;
   font-weight: 400;
@@ -41,17 +46,14 @@ const BtnText = styled.p<{ icon: string }>`
   /* text-shadow: 1px 0 0 #2b2b2b, -1px 0 0 #2b2b2b, 0 -1px 0 #2b2b2b, 0 1px 0 #2b2b2b,
     1px 1px 0 #2b2b2b, -1px -1px 0 #2b2b2b, -1px 1px 0 #2b2b2b, 1px -1px 0 #2b2b2b; */
   -webkit-text-stroke: 0.5px #2b2b2b;
+`
 
-  // アイコン
-  &::before {
-    display: inline-block;
-    width: ${(props) => (props.icon == "url('/cards.png')" ? '30px' : '16.95px')};
-    height: ${(props) => (props.icon == "url('/cards.png')" ? '13.71px' : '20.87px')};
-    right: 0;
-    bottom: 0;
-    content: '';
-    background-image: ${(props) => props.icon};
-    background-size: cover;
-    z-index: -1;
-  }
+// アイコン
+const Icon = styled.p<{ icon: string }>`
+  margin: 0;
+  width: ${(props) => (props.icon == "url('/cards.png')" ? '30px' : '16.95px')};
+  height: ${(props) => (props.icon == "url('/cards.png')" ? '13.71px' : '20.87px')};
+  margin-right: 12px;
+  background-image: ${(props) => props.icon};
+  background-size: cover;
 `

@@ -9,8 +9,8 @@ export type PostListToggleTabProps = {
 export const PostListToggleTab = ({}: PostListToggleTabProps) => {
   return (
     <TabBox>
-      <Tab isSelect={true} isActive={true} tabName="すべて" icon="url('/cards.png')" />
-      <Tab isSelect={false} isActive={true} tabName="炎上" icon="url('/fire.png')" />
+      <Tab isSelect={true} isActive={false} tabName="すべて" icon="url('/cards.png')" />
+      <Tab isSelect={false} isActive={false} tabName="炎上" icon="url('/fire.png')" />
     </TabBox>
   )
 }
