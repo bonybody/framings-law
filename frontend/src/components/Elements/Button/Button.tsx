@@ -17,6 +17,7 @@ export const Button = ({ isActive = false, isDisable = false, onClick, children 
 }
 
 const ButtonWrap = styled.button<Required<Pick<ButtonProps, 'isActive' | 'isDisable'>>>`
+  font-family: inherit;
   cursor: pointer;
   padding: 20px 0;
   min-width: 240px;
