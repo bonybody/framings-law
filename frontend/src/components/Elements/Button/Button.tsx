@@ -17,11 +17,14 @@ export const Button = ({ isActive = false, isDisable = false, onClick, children 
 }
 
 const ButtonWrap = styled.button<Required<Pick<ButtonProps, 'isActive' | 'isDisable'>>>`
+  font-family: inherit;
   cursor: pointer;
   padding: 20px 0;
   min-width: 240px;
+  font-size: ${(props) => props.theme.fonts.sizes.body1};
   border: solid 5px #000;
   box-sizing: border-box;
-  background-color: ${(props) => (props.isActive ? '#FF8A00' : '#fff')};
-  opacity: ${(props) => (props.isDisable ? 0.6 : 1)};
+  background-color: ${(props) =>
+    props.isActive ? props.theme.colors.primary.main : props.theme.colors.white};
+  opacity: ${(props) => (props.isDisable ? props.theme.opacity : 'none')};
 `
