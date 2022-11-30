@@ -1,38 +1,32 @@
 import styled from '@emotion/styled'
 
-import { Tab } from './Tab'
+import { AllTab, FlamerTab } from './Tab'
 
 export type PostListToggleTabProps = {
-  // "すべて"がactiveか
-  isActiveAll: boolean
-  // "炎上"がactiveか
-  isActiveFlame: boolean
-  // "すべて"が選択されているか
-  isSelectAll: boolean
-  // "炎上"が選択されているか
-  isSelectFlame: boolean
+  // ユーザーがフレイマーかどうか
+  isFlamer: boolean
+  // すべて、炎上、どちらを選択しているか
+  selectedTab: 'all' | 'frame'
 }
 
-export const PostListToggleTab = ({
-  isActiveAll,
-  isActiveFlame,
-  isSelectAll,
-  isSelectFlame
-}: PostListToggleTabProps) => {
-  // const [ddd, handlClick] = useState("")
+export const PostListToggleTab = ({ isFlamer, selectedTab }: PostListToggleTabProps) => {
   return (
     <TabBox>
-      <Tab
-        isSelect={isSelectAll}
-        isActive={isActiveAll}
+      <AllTab
+        // selectedTab={selectedTab}
+        selectedTab="all"
+        // isFlamer={isFlamer}
+        isFlamer={false}
         tabName="すべて"
-        icon="url('/cards.png')"
+        icon="url('/card.svg')"
       />
-      <Tab
-        isSelect={isSelectFlame}
-        isActive={isActiveFlame}
+      <FlamerTab
+        // selectedTab={selectedTab}
+        selectedTab="frame"
+        // isFlamer={isFlamer}
+        isFlamer={false}
         tabName="炎上"
-        icon="url('/fire.png')"
+        icon="url('/fire.svg')"
       />
     </TabBox>
   )
@@ -43,4 +37,5 @@ const TabBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 40px;
 `
