@@ -35,6 +35,7 @@ type CustomTheme = {
   fonts: Fonts
   colors: Colors
   shadow: '0 4px 4px 0 rgba(0, 0, 0, 0.25)'
+  opacity: '0.5'
 }
 
 export const theme: CustomTheme = {
@@ -69,5 +70,6 @@ export const theme: CustomTheme = {
     gray: '#D9D9D9',
     white: '#FFFFFF'
   },
-  shadow: '0 4px 4px 0 rgba(0, 0, 0, 0.25)'
+  shadow: '0 4px 4px 0 rgba(0, 0, 0, 0.25)',
+  opacity: '0.5'
 }

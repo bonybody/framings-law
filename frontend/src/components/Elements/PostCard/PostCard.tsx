@@ -47,7 +47,7 @@ const Card = styled.div<Required<Pick<PostCardProps, 'isSelect' | 'isFlamePost'>
   background-color: ${(props) => (props.isFlamePost ? '#FFAA2C' : '#FFFFFF')};
   border: solid 5px #2b2b2b;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  opacity: ${(props) => (props.isSelect ? 'none' : '0.5')};
+  opacity: ${(props) => (props.isSelect ? 'none' : props.theme.opacity)};
   box-sizing: border-box;
   z-index: -1;
 

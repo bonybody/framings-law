@@ -26,5 +26,5 @@ const ButtonWrap = styled.button<Required<Pick<ButtonProps, 'isActive' | 'isDisa
   box-sizing: border-box;
   background-color: ${(props) =>
     props.isActive ? props.theme.colors.primary.main : props.theme.colors.white};
-  opacity: ${(props) => (props.isDisable ? 0.6 : 1)};
+  opacity: ${(props) => (props.isDisable ? props.theme.opacity : 'none')};
 `
