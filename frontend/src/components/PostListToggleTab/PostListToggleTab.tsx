@@ -13,12 +13,14 @@ export const PostListToggleTab = ({ isFlamer, selectedTab }: PostListToggleTabPr
   return (
     <TabBox>
       <AllTab
+        isSelected={true}
         selectedTab={selectedTab}
         isFlamer={isFlamer}
         tabName="すべて"
         icon="url('/card.svg')"
       />
       <FlamerTab
+        isSelected={false}
         selectedTab={selectedTab}
         isFlamer={isFlamer}
         tabName="炎上"

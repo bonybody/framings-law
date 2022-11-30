@@ -2,7 +2,8 @@ import styled from '@emotion/styled'
 
 export type AllTabProps = {
   // タブ選択状態
-  selectedTab: string
+  isSelected: boolean
+  selectedTab: 'all' | 'flame'
   // フレイマーかどうか
   isFlamer: boolean
   // テキスト
@@ -13,7 +14,8 @@ export type AllTabProps = {
 
 export type FlamerTabProps = {
   // タブ選択状態
-  selectedTab: string
+  isSelected: boolean
+  selectedTab: 'all' | 'flame'
   // フレイマーかどうか
   isFlamer: boolean
   // テキスト
@@ -24,7 +26,7 @@ export type FlamerTabProps = {
 
 export const AllTab = ({ selectedTab, tabName, icon }: AllTabProps) => {
   return (
-    <SwitchBtn selectedTab={selectedTab}>
+    <SwitchBtn isSelected={selectedTab === 'all'}>
       <Icon icon={icon} />
       <BtnText>{tabName}</BtnText>
     </SwitchBtn>
@@ -33,7 +35,7 @@ export const AllTab = ({ selectedTab, tabName, icon }: AllTabProps) => {
 
 export const FlamerTab = ({ selectedTab, isFlamer, tabName, icon }: FlamerTabProps) => {
   return (
-    <SwitchBtn selectedTab={selectedTab} isFlamer={isFlamer}>
+    <SwitchBtn isSelected={selectedTab === 'flame'} isFlamer={isFlamer}>
       <Icon icon={icon} />
       <BtnText>{tabName}</BtnText>
     </SwitchBtn>
@@ -41,15 +43,15 @@ export const FlamerTab = ({ selectedTab, isFlamer, tabName, icon }: FlamerTabPro
 }
 
 // ボタン本体
-const SwitchBtn = styled.div<{ selectedTab: string; isFlamer?: boolean }>`
+const SwitchBtn = styled.div<{ isSelected: boolean; isFlamer?: boolean }>`
   padding: 4px 0 5px 0;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  width: 49.1%;
+  width: 100%;
   height: 32px;
-  background-color: ${(props) => (props.selectedTab === 'flame' ? '#FF8A00' : '#D9D9D9')};
+  background-color: ${(props) => (props.isSelected ? '#FF8A00' : '#D9D9D9')};
   border: 3px solid #2b2b2b;
   opacity: ${(props) => (props.isFlamer ? '0.5' : 'none')};
 `
