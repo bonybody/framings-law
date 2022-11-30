@@ -49,7 +49,7 @@ const SwitchBtn = styled.div<{ selectedTab: string; isFlamer?: boolean }>`
   box-sizing: border-box;
   width: 49.1%;
   height: 32px;
-  background-color: ${(props) => (props.selectedTab === 'frame' ? '#FF8A00' : '#D9D9D9')};
+  background-color: ${(props) => (props.selectedTab === 'flame' ? '#FF8A00' : '#D9D9D9')};
   border: 3px solid #2b2b2b;
   opacity: ${(props) => (props.isFlamer ? '0.5' : 'none')};
 `

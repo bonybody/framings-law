@@ -6,7 +6,7 @@ export type PostListToggleTabProps = {
   // ユーザーがフレイマーかどうか
   isFlamer: boolean
   // すべて、炎上、どちらを選択しているか
-  selectedTab: 'all' | 'frame'
+  selectedTab: 'all' | 'flame'
 }
 
 export const PostListToggleTab = ({ isFlamer, selectedTab }: PostListToggleTabProps) => {
