@@ -70,7 +70,7 @@ const Home: NextPage = () => {
       <h1>Input Field</h1>
       <div>
         <InputField
-          label="ニックネーム"
+          label="ルーム"
           register={register('room')}
           placeholder="room"
           backgroundColor={theme.colors.primary.dark}
@@ -79,8 +79,8 @@ const Home: NextPage = () => {
       <div>
         <InputField
           label="ニックネーム"
-          register={register('room')}
-          placeholder="room"
+          register={register('nickname')}
+          placeholder="nickname"
           backgroundColor={theme.colors.secondary.dark}
         />
       </div>

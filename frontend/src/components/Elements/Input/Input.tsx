@@ -20,6 +20,7 @@ export const Input = ({ placeholder, register, backgroundColor, minWidth }: Inpu
 }
 
 const TextInput = styled.input<Pick<InputProps, 'backgroundColor' | 'minWidth'>>`
+  font-family: inherit;
   width: 100%;
   min-width: ${(props) => props.minWidth};
   height: 56px;
