@@ -1,31 +1,21 @@
 import styled from '@emotion/styled'
 
-import { AllTab, FlamerTab } from './Tab'
+import { AllTab, FlamerTab, TabProps } from './Tab'
 
 export type PostListToggleTabProps = {
   // ユーザーがフレイマーかどうか
   isFlamer: boolean
   // すべて、炎上、どちらを選択しているか
-  selectedTab: 'all' | 'flame'
+  selectedTab: TabProps['selectedTab']
+  // クリック
+  handleTab: TabProps['handleTab']
 }
 
-export const PostListToggleTab = ({ isFlamer, selectedTab }: PostListToggleTabProps) => {
+export const PostListToggleTab = ({ isFlamer, selectedTab, handleTab }: PostListToggleTabProps) => {
   return (
     <TabBox>
-      <AllTab
-        isSelected={true}
-        selectedTab={selectedTab}
-        isFlamer={isFlamer}
-        tabName="すべて"
-        icon="url('/card.svg')"
-      />
-      <FlamerTab
-        isSelected={false}
-        selectedTab={selectedTab}
-        isFlamer={isFlamer}
-        tabName="炎上"
-        icon="url('/fire.svg')"
-      />
+      <AllTab selectedTab={selectedTab} handleTab={handleTab} />
+      <FlamerTab selectedTab={selectedTab} isFlamer={isFlamer} handleTab={handleTab} />
     </TabBox>
   )
 }
