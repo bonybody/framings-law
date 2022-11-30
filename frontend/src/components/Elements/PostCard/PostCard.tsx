@@ -38,7 +38,8 @@ export const PostCard = ({
 }
 
 // 投稿カード
-const Card = styled.div<{ isFlamePost: boolean; isSelect: boolean }>`
+const Card = styled.div<Required<Pick<PostCardProps, 'isSelect' | 'isFlamePost'>>>`
+  font-size: ${(props) => props.theme.fonts.sizes.xs};
   position: relative;
   width: 100%;
   min-height: 140px;
