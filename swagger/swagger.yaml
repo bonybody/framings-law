@@ -3,8 +3,9 @@ x-stoplight:
   id: 9draj2825l5yc
 info:
   title: swagger
-  version: "1.0"
-host: "localhost:3000"
+  version: '1.0'
+  description: ''
+host: 'localhost:3000'
 schemes:
   - http
 produces:
@@ -12,133 +13,31 @@ produces:
 consumes:
   - application/json
 paths:
-  "/users/{userId}":
-    parameters:
-      - type: integer
-        name: userId
-        in: path
-        required: true
-        description: Id of an existing user.
-    get:
-      summary: Get User Info by User ID
-      tags: []
-      responses:
-        "200":
-          description: User Found
-          schema:
-            $ref: "#/definitions/User"
-          examples:
-            Get User Alice Smith:
-              id: 142
-              firstName: Alice
-              lastName: Smith
-              email: alice.smith@gmail.com
-              dateOfBirth: "1997-10-31"
-              emailVerified: true
-              signUpDate: "2019-08-24"
-        "404":
-          description: User Not Found
-          schema:
-            type: "null"
-          examples: {}
-      operationId: get-users-userId
-      description: Retrieve the information of the user with the matching user ID.
-    patch:
-      summary: Update User Information
-      operationId: patch-users-userId
-      responses:
-        "200":
-          description: User Updated
-          schema:
-            $ref: "#/definitions/User"
-          examples:
-            Update User Rebecca Baker:
-              id: 13
-              firstName: Rebecca
-              lastName: Baker
-              email: rebecca@gmail.com
-              dateOfBirth: "1985-10-02"
-              emailVerified: false
-              createDate: "2019-08-24"
-        "404":
-          description: User Not Found
-          schema:
-            type: "null"
-        "409":
-          description: Email Already Taken
-          schema:
-            type: "null"
-      description: Update the information of an existing user.
-      parameters:
-        - in: body
-          name: body
-          schema:
-            type: object
-            properties:
-              firstName:
-                type: string
-              lastName:
-                type: string
-              email:
-                type: string
-                description: "If a new email is given, the user's email verified property will be set to false."
-              dateOfBirth:
-                type: string
-          description: Patch user properties to update.
-          x-examples:
-            Update First Name:
-              firstName: Rebecca
-            Update Email:
-              email: rebecca@gmail.com
-            Update Last Name & Date of Birth:
-              lastName: Baker
-              dateOfBirth: "1985-10-02"
-  /user:
+  /rooms/:
     post:
-      summary: Create New User
-      operationId: post-user
+      summary: ルームの作成
+      operationId: post-rooms
       responses:
-        "200":
-          description: User Created
+        '200':
+          description: OK
           schema:
-            $ref: "#/definitions/User"
-        "400":
-          description: Missing Required Information
-          schema:
-            type: "null"
-        "409":
-          description: Email Already Taken
-          schema:
-            type: "null"
-      description: Create a new user.
+            $ref: '#/definitions/RoomCreateResponse'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+      description: 新しくゲームのルームを作成する。
+      tags:
+        - Room
       parameters:
         - in: body
           name: body
           schema:
-            type: object
-            properties:
-              firstName:
-                type: string
-              lastName:
-                type: string
-              email:
-                type: string
-              dateOfBirth:
-                type: string
-                format: date
-            required:
-              - firstName
-              - lastName
-              - email
-              - dateOfBirth
-          description: Post the necessary fields for the API to create a new user.
-          x-examples:
-            Create User Bob Fellow:
-              firstName: Bob
-              lastName: Fellow
-              email: bob.fellow@gmail.com
-              dateOfBirth: "1996-08-24"
-  "/rooms/{roomId}/join":
+            $ref: '#/definitions/RoomCreateRequest'
+          description: ''
+      security:
+        - authorization: []
+  '/rooms/{roomId}/joins':
     parameters:
       - type: string
         name: roomId
@@ -148,38 +47,110 @@ paths:
       summary: ルームに参加
       operationId: post-rooms-roomId-join
       responses:
-        "200":
+        '200':
           description: OK
           headers: {}
-      description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomJoinUsers'
+      description: ''
       tags:
         - Room
-      parameters:
-        - type: string
-          in: header
+      parameters: []
       security:
-        - Authorization: []
-  /rooms/:
-    post:
-      summary: ルームの作成
-      operationId: post-rooms
+        - authorization: []
+    get:
+      summary: ''
+      operationId: get-rooms-roomId-join
       responses:
-        "200":
+        '200':
           description: OK
-          schema:
-            $ref: "#/definitions/RoomCreateResponse"
-      description: 新しくゲームのルームを作成する。
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomJoinUsers'
       tags:
         - Room
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: "#/definitions/RoomCreateRequest"
-          description: ""
+  '/rooms/{roomId}/readies':
+    parameters:
+      - schema:
+          type: string
+        name: roomId
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-rooms-roomId-ready
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomReadyUsers'
       security:
-        - Authorization: []
-  "/games/{gameId}":
+        - authorization: []
+      tags:
+        - Room
+    get:
+      summary: ''
+      operationId: get-rooms-roomId-ready
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomReadyUsers'
+      tags:
+        - Room
+  '/rooms/{roomId}/users':
+    parameters:
+      - schema:
+          type: string
+        name: roomId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Room
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoomUsers'
+      operationId: get-rooms-roomId-users
+  /games/:
+    post:
+      summary: Create Game
+      operationId: post-games
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+      description: 新しくゲームを作成する。
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+        description: ''
+      tags:
+        - Game
+  '/games/{gameId}':
     parameters:
       - type: string
         name: gameId
@@ -189,12 +160,12 @@ paths:
       summary: 特定のゲームの状態を取得する
       responses: {}
       operationId: get-games-gameId
-      description: "{gameId}で指定されたゲームの状態を取得する。"
+      description: '{gameId}で指定されたゲームの状態を取得する。'
       tags:
         - Game
       security:
         - Authorization: []
-  "/games/{gameId}/posts":
+  '/games/{gameId}/cards':
     parameters:
       - type: string
         name: gameId
@@ -211,6 +182,61 @@ paths:
         削除された投稿は除外して取得する。
       security:
         - Authorization: []
+  '/games/{gameId}/players':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Game
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  players:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GamePlayer'
+      operationId: get-games-gameId-users
+      security:
+        - authorization: []
+  '/games/{gameId}/players/{playerId}':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: playerId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags:
+        - Game
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  player:
+                    $ref: '#/components/schemas/GamePlayer'
+      operationId: get-games-gameId-players-playerId
+      security:
+        - authorization: []
 definitions:
   User:
     title: User
@@ -229,7 +255,7 @@ definitions:
       dateOfBirth:
         type: string
         format: date
-        example: "1997-10-31"
+        example: '1997-10-31'
       emailVerified:
         type: boolean
         description: Set to true if the user's email has been verified.
@@ -272,3 +298,115 @@ securityDefinitions:
     name: Authorization
     type: apiKey
     in: header
+servers:
+  - description: ''
+    url: 'http://localhost:3000/'
+components:
+  securitySchemes:
+    authorization:
+      type: http
+      scheme: bearer
+      description: ''
+  responses:
+    CreateRoomResponse:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              hostUserId:
+                type: string
+              roomStatusId:
+                type: string
+              roomKey:
+                type: string
+              cardCount:
+                type: number
+              debateSeconds:
+                type: number
+  schemas:
+    Room:
+      type: object
+      title: Room
+      x-stoplight:
+        id: 4xht9vfhlqxj0
+      properties:
+        id:
+          type: string
+        hostUserId:
+          type: string
+        cardCount:
+          type: number
+        debateSeconds:
+          type: number
+        key:
+          type: string
+        status:
+          type: object
+          properties:
+            id:
+              type: string
+            code:
+              type: string
+    RoomUsers:
+      title: RoomUser
+      x-stoplight:
+        id: fzxcktazmlrjt
+      type: object
+      properties:
+        join:
+          type: array
+          items:
+            type: string
+        ready:
+          type: array
+          items:
+            type: string
+    RoomJoinUsers:
+      title: RoomJoinUsers
+      x-stoplight:
+        id: v7ogsfd0ihl3n
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            type: string
+    RoomReadyUsers:
+      title: RoomReadyUsers
+      x-stoplight:
+        id: ucv4ny2ar8u2w
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            type: string
+    GamePlayer:
+      title: GamePlayer
+      x-stoplight:
+        id: nwdk5sktjysqx
+      type: object
+      properties:
+        id:
+          type: string
+        userId:
+          type: string
+        gameId:
+          type: string
+        isFramer:
+          type: boolean
+        character:
+          type: object
+          properties:
+            id:
+              type: string
+            displayName:
+              type: string
+            imageUrl:
+              type: string
+security:
+  - authorization: []
