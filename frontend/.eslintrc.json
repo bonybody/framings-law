@@ -39,6 +39,7 @@
     "import/first": "error",
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
+    "import/ignore": ["firebase/app"],
     "no-restricted-imports": [
       "error",
       {
