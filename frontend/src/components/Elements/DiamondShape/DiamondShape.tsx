@@ -41,10 +41,6 @@ const ShapeWrap = styled.div<{ diagonal: string }>`
   align-items: center;
   width: ${(props) => props.diagonal};
   height: ${(props) => props.diagonal};
-  :nth-child(2) {
-    margin-top: 100px;
-    margin-left: -50px;
-  }
 `
 
 const Diamond = styled.div<{
