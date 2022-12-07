@@ -58,6 +58,7 @@ const Diamond = styled.div<{
   box-sizing: border-box;
   border: ${(props) => props.borderSize} solid ${(props) => props.borderColor};
   transform: rotate(45deg);
+  overflow: hidden;
 `
 
 const DiamondContents = styled.div<{ fontSize: string }>`
