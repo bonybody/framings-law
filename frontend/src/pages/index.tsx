@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 
-import { Button, PostCard } from '@/components'
+import { Button, DiamondShape, PostCard } from '@/components'
 
 const Home: NextPage = () => {
   return (
@@ -61,6 +61,27 @@ const Home: NextPage = () => {
           isSelect={false}
           isFlamePost={true}
         ></PostCard>
+      </div>
+      <h1>DiamondShape</h1>
+      <div style={{ display: 'flex' }}>
+        <DiamondShape
+          diagonal={200}
+          diamondColor="green"
+          borderColor="red"
+          borderSize="5px"
+          fontSize="20px"
+        >
+          aaaaa
+        </DiamondShape>
+        <DiamondShape
+          diagonal={200}
+          diamondColor="#D9D9D9"
+          borderColor="#2B2B2B"
+          borderSize="10px"
+          fontSize="40px"
+        >
+          ?
+        </DiamondShape>
       </div>
     </Main>
   )
