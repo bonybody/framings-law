@@ -40,6 +40,7 @@
     "import/first": "error",
     "import/newline-after-import": "error",
     "import/no-duplicates": "error",
+    "import/named": "off",
     "no-restricted-imports": [
       "error",
       {
@@ -53,6 +54,8 @@
           "!@/features/teacher/**"
         ]
       }
-    ]
+    ],
+    "@typescript-eslint/no-misused-promises": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
