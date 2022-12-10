@@ -17,7 +17,7 @@ const Home: NextPage = () => {
         `}
       />
       <Main>
-        <p>tttt</p>
+        <Logo />
       </Main>
     </>
   )
@@ -25,9 +25,21 @@ const Home: NextPage = () => {
 
 export default Home
 
+// 大枠
 const Main = styled.div`
   max-width: 700px;
   margin: 0 auto;
+`
+
+// ロゴ
+const Logo = styled.img`
+  position: absolute;
+  width: 46px;
+  height: 46px;
+  top: 55px;
+  right: 30px;
+  background-image: url('/logo.svg');
+  background-size: cover;
 `
 
 // background-color: ${(props) => props.theme.colors.background.right};
