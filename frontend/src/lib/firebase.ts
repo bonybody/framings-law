@@ -1,4 +1,5 @@
 import { FirebaseOptions, initializeApp } from 'firebase/app'
+import { getAuth } from 'firebase/auth'
 
 import { FIREBASE } from '@/config'
 
@@ -12,3 +13,4 @@ const config: FirebaseOptions = {
 }
 
 export const firebaseApp = initializeApp(config)
+export const firebaseAuth = getAuth(firebaseApp)
