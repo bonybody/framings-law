@@ -53,6 +53,8 @@
           "!@/features/teacher/**"
         ]
       }
-    ]
+    ],
+    "@typescript-eslint/no-misused-promises": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
