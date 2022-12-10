@@ -8,18 +8,21 @@ import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-    <>
+    <Main>
       <Global
         styles={css`
-          html {
+          body {
             background-color: #d2104a;
           }
         `}
       />
-      <Main>
-        <Logo />
-      </Main>
-    </>
+      <Anne src="/anne.svg" alt="anne" />
+      <Logo src="/logo.svg" alt="logo" />
+      <Title src="/titleLogo.svg" alt="title" />
+      <StartButton>
+        <Text>Tap to start game</Text>
+      </StartButton>
+    </Main>
   )
 }
 
@@ -37,9 +40,44 @@ const Logo = styled.img`
   width: 46px;
   height: 46px;
   top: 55px;
-  right: 30px;
-  background-image: url('/logo.svg');
-  background-size: cover;
+  left: 314px;
+`
+
+// アンネ
+const Anne = styled.img`
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 55px;
+`
+
+// タイトルロゴ
+const Title = styled.img`
+  position: absolute;
+  width: 331px;
+  height: 155px;
+  left: 29px;
+  top: 221px;
+`
+
+// スタートボタン
+const StartButton = styled.button`
+  position: absolute;
+  width: 215px;
+  height: 24px;
+  left: 87px;
+  top: 602px;
+  background-color: transparent;
+`
+// ボタン内テキスト
+const Text = styled.p`
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: ${(props) => props.theme.colors.white};
+  -webkit-text-stroke: 3px ${(props) => props.theme.colors.border.black};
 `
 
 // background-color: ${(props) => props.theme.colors.background.right};
