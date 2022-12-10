@@ -175,13 +175,61 @@ paths:
       summary: ゲーム内の投稿一覧取得
       tags:
         - Game
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cards:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GameCard'
       operationId: get-games-gameId-posts
       description: |-
         {gameId}で指定されたゲーム内の投稿を一覧取得する。
         削除された投稿は除外して取得する。
+      parameters:
+        - schema:
+            type: boolean
+          in: query
+          name: is_framing
+        - schema:
+            type: boolean
+          in: query
+          name: is_deleted
       security:
-        - Authorization: []
+        - authorization: []
+  '/games/{gameId}/cards/{cardId}':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: cardId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  card:
+                    $ref: '#/components/schemas/GameCard'
+      operationId: get-games-gameId-cards-cardId
+      security:
+        - authorization: []
   '/games/{gameId}/players':
     parameters:
       - schema:
@@ -206,6 +254,30 @@ paths:
                     items:
                       $ref: '#/components/schemas/GamePlayer'
       operationId: get-games-gameId-users
+      security:
+        - authorization: []
+  '/games/{gameId}/players/me':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  player:
+                    $ref: '#/components/schemas/GamePlayer'
+      operationId: get-games-gameId-players-me
       security:
         - authorization: []
   '/games/{gameId}/players/{playerId}':
@@ -408,5 +480,30 @@ components:
               type: string
             imageUrl:
               type: string
+    GameCard:
+      title: GameCard
+      x-stoplight:
+        id: ut9sfnme35ant
+      type: object
+      properties:
+        id:
+          type: string
+        gameId:
+          type: string
+        card:
+          type: object
+          properties:
+            id:
+              type: string
+            postedAt:
+              type: string
+            body:
+              type: string
+            commentary:
+              type: string
+            isFraming:
+              type: boolean
+        isDeleted:
+          type: boolean
 security:
   - authorization: []

@@ -1,11 +1,25 @@
-import { setObject } from "../lib/ioredis";
+import { getObject, setObject } from "../lib/ioredis";
+
+type Progress = {
+  turn: number;
+  phase: "ready" | "debate" | "vote" | "totalling" | "result";
+  phaseContent?: object;
+};
 
 export class GameProgressRepository {
-  async update(
+  async find(gameId: string) {
+    return (await getObject(`games/${gameId}/progress`)) as unknown as Progress;
+  }
+  async create(
     gameId: string,
     turn: number,
-    phase: "ready" | "debate" | "vote" | "totalling"
+    phase: "ready" | "debate" | "vote" | "totalling" | "result",
+    phaseContent?: object
   ) {
-    return await setObject(gameId, { turn, phase });
+    return await setObject(`games/${gameId}/progress`, {
+      turn,
+      phase,
+      phaseContent,
+    });
   }
 }

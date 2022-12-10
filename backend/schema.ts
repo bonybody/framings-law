@@ -72,9 +72,28 @@ export interface paths {
       };
     };
   };
+  "/games/{gameId}/cards/{cardId}": {
+    /** Your GET endpoint */
+    get: operations["get-games-gameId-cards-cardId"];
+    parameters: {
+      path: {
+        gameId: string;
+        cardId: string;
+      };
+    };
+  };
   "/games/{gameId}/players": {
     /** Your GET endpoint */
     get: operations["get-games-gameId-users"];
+    parameters: {
+      path: {
+        gameId: string;
+      };
+    };
+  };
+  "/games/{gameId}/players/me": {
+    /** Your GET endpoint */
+    get: operations["get-games-gameId-players-me"];
     parameters: {
       path: {
         gameId: string;
@@ -133,6 +152,19 @@ export interface components {
         displayName?: string;
         imageUrl?: string;
       };
+    };
+    /** GameCard */
+    GameCard: {
+      id?: string;
+      gameId?: string;
+      card?: {
+        id?: string;
+        postedAt?: string;
+        body?: string;
+        commentary?: string;
+        isFraming?: boolean;
+      };
+      isDeleted?: boolean;
     };
   };
   responses: {
@@ -265,7 +297,34 @@ export interface operations {
      * @description {gameId}で指定されたゲーム内の投稿を一覧取得する。
      * 削除された投稿は除外して取得する。
      */
+    parameters?: {
+      query?: {
+        is_framing?: boolean;
+        is_deleted?: boolean;
+      };
+    };
     responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            cards?: (components["schemas"]["GameCard"])[];
+          };
+        };
+      };
+    };
+  };
+  "get-games-gameId-cards-cardId": {
+    /** Your GET endpoint */
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            card?: components["schemas"]["GameCard"];
+          };
+        };
+      };
     };
   };
   "get-games-gameId-users": {
@@ -276,6 +335,21 @@ export interface operations {
         content: {
           "application/json": {
             players?: (components["schemas"]["GamePlayer"])[];
+          };
+        };
+      };
+    };
+  };
+  "get-games-gameId-players-me": {
+    /** Your GET endpoint */
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+        };
+        content: {
+          "application/json": {
+            player?: components["schemas"]["GamePlayer"];
           };
         };
       };

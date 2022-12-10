@@ -7,7 +7,6 @@ const pusher = new Pusher({
   key: config.appKey,
   secret: config.appSecret,
   cluster: "ap3",
-  useTLS: true,
 });
 
 export const getTrigger = () => {
@@ -34,13 +33,31 @@ type GameProgress = {
 };
 
 export const gameTriggers = {
-  debate: async (gameId: string, status: "start" | "end", seconds: number) => {
-    return pusher.trigger(`game-${gameId}`, "debate", { status, seconds });
+  ready: async (gameId: string, turn: number) => {
+    return pusher.trigger(`game-${gameId}`, "ready", { turn });
   },
-  progress: async (gameId: string, progress: GameProgress) => {
-    return pusher.trigger(`game-${gameId}`, "progress", { progress });
+  debate: async (gameId: string, turn: number, timeLimit: Date) => {
+    return pusher.trigger(`game-${gameId}`, "debate", {
+      turn,
+      timeLimit,
+    });
   },
-  end: async (gameId: string, winner: "framer" | "finder") => {
-    return pusher.trigger(`game-${gameId}`, "end", { winner });
+  vote: async (gameId: string, turn: number) => {
+    return pusher.trigger(`game-${gameId}`, "vote", { turn });
+  },
+  totalling: async (
+    gameId: string,
+    turn: number,
+    deletedGameCardId: string,
+    end: boolean
+  ) => {
+    return pusher.trigger(`game-${gameId}`, "totalling", {
+      turn,
+      deletedGameCardId,
+      end,
+    });
+  },
+  result: async (gameId: string, turn: number) => {
+    return pusher.trigger(`game-${gameId}`, "result", { turn });
   },
 };

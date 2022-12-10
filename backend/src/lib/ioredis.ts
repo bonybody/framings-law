@@ -21,3 +21,19 @@ export const getObject = async (key: string) => {
 export const setObject = async (key: string, value: object) => {
   return await redis.hmset(key, value);
 };
+
+export const setObjectProperty = async (
+  key: string,
+  property: string,
+  value: any
+) => {
+  return await redis.hset(key, property, value);
+};
+
+export const getObjectPropertyNames = async (key: string) => {
+  return await redis.hkeys(key);
+};
+
+export const getObjectValues = async (key: string) => {
+  return await redis.hvals(key);
+};

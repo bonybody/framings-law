@@ -1,7 +1,7 @@
 import express, { Application, Request, Response, urlencoded } from "express";
 import { CONFIG } from "../../config";
 import { initApp } from "../../lib/firebase-admin";
-import { gamesRouter, roomsRouter } from "./handler";
+import { gamesCardsRouter, gamesRouter, roomsRouter } from "./handler";
 import cors from "cors";
 
 const { server } = CONFIG;
@@ -19,6 +19,7 @@ app.get("/health", async (_req: Request, res: Response) => {
 
 app.use(roomsRouter);
 app.use(gamesRouter);
+app.use(gamesCardsRouter);
 
 try {
   app.listen(server.port, () => {

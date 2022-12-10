@@ -36,4 +36,19 @@ gamesRouter.get(
   }
 );
 
+gamesRouter.get(
+  "/games/:gameId/players/me",
+  authMiddleware,
+  async (req, res) => {
+    const gameId = req.params.gameId;
+    const userId = res.locals.firebaseUid;
+    const player = await gamePlayerUseCase.findByUserId(gameId, userId);
+    const resBody: paths["/games/{gameId}/players/me"]["get"]["responses"]["200"]["content"]["application/json"] =
+      {
+        player,
+      };
+    res.send(resBody);
+  }
+);
+
 export { gamesRouter };
