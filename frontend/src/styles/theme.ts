@@ -9,6 +9,7 @@ export interface Fonts {
     lg: '2.5rem'
     xl: '3rem'
   }
+  subFont: "'Inter', sans-serif"
 }
 
 export interface Colors {
@@ -49,7 +50,8 @@ export const theme: CustomTheme = {
       md: '2rem',
       lg: '2.5rem',
       xl: '3rem'
-    }
+    },
+    subFont: "'Inter', sans-serif"
   },
   colors: {
     primary: {
