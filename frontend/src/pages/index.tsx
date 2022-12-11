@@ -2,8 +2,6 @@ import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 
-// import { Button, DiamondShape, PostCard } from '@/components'
-
 // ホーム画面
 
 const Home: NextPage = () => {
@@ -72,14 +70,21 @@ const StartButton = styled.a`
   color: ${(props) => props.theme.colors.white};
   text-shadow: 3px 0 0 #2b2b2b, -3px 0 0 #2b2b2b, 0 -3px 0 #2b2b2b, 0 3px 0 #2b2b2b,
     3px 3px 0 #2b2b2b, -3px -3px 0 #2b2b2b, -3px 3px 0 #2b2b2b, 3px -3px 0 #2b2b2b;
+
+  //アニメーション
+  animation: flash 1s linear infinite;
+  @keyframes flash {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
 `
 
-// background-color: ${(props) => props.theme.colors.background.right};
-
-// font-family: ${(props) => props.theme.fonts.subFont};
-// font-weight: 900;
-// font-family: ${(props) => props.theme.fonts.subFont};
-// -webkit-text-stroke: 3px ${(props) => props.theme.colors.border.black};
+// 一応残しておきました↓
 
 // const Parts: NextPage = () => {
 //   return (
