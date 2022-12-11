@@ -19,9 +19,7 @@ const Home: NextPage = () => {
       <Anne src="/anne.svg" alt="anne" />
       <Logo src="/logo.svg" alt="logo" />
       <Title src="/titleLogo.svg" alt="title" />
-      <StartButton>
-        <Text>Tap to start game</Text>
-      </StartButton>
+      <StartButton>Tap to start game</StartButton>
     </Main>
   )
 }
@@ -61,16 +59,16 @@ const Title = styled.img`
 `
 
 // スタートボタン
-const StartButton = styled.button`
+const StartButton = styled.a`
+  display: block;
   position: absolute;
+  text-align: center;
   width: 215px;
   height: 24px;
   left: 87px;
   top: 602px;
   background-color: transparent;
-`
-// ボタン内テキスト
-const Text = styled.p`
+  text-decoration: none;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-style: normal;
   font-weight: 900;
