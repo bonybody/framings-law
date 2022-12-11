@@ -8,7 +8,7 @@ import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-    <Main>
+    <>
       <Global
         styles={css`
           body {
@@ -20,65 +20,66 @@ const Home: NextPage = () => {
       <Logo src="/logo.svg" alt="logo" />
       <Title src="/titleLogo.svg" alt="title" />
       <StartButton>Tap to start game</StartButton>
-    </Main>
+    </>
   )
 }
 
 export default Home
 
-// 大枠
-const Main = styled.div`
-  max-width: 700px;
-  margin: 0 auto;
-`
-
 // ロゴ
 const Logo = styled.img`
   position: absolute;
-  width: 46px;
-  height: 46px;
-  top: 55px;
-  left: 314px;
+  width: 12.5vw;
+  height: 12.5vw;
+  top: 6.5vh;
+  right: 6.5vw;
 `
 
 // アンネ
 const Anne = styled.img`
   position: absolute;
   width: 100%;
-  height: 100vh;
-  top: 55px;
+  height: 95%;
+  top: 6.5vh;
 `
 
 // タイトルロゴ
 const Title = styled.img`
-  position: absolute;
-  width: 331px;
-  height: 155px;
-  left: 29px;
-  top: 221px;
+  position: relative;
+  display: block;
+  width: 85vw;
+  height: 18.5vh;
+  margin: 0 auto;
+  top: 26vh;
 `
 
 // スタートボタン
 const StartButton = styled.a`
   display: block;
-  position: absolute;
+  position: relative;
   text-align: center;
-  width: 215px;
-  height: 24px;
-  left: 87px;
-  top: 602px;
+  width: 57.8vw;
+  height: 3vh;
+  margin: 0 auto;
+  top: 55vh;
   background-color: transparent;
   text-decoration: none;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-style: normal;
+  font-family: ${(props) => props.theme.fonts.subFont};
   font-weight: 900;
-  font-size: 24px;
+  font-style: normal;
+  font-size: 1.5rem;
   line-height: 29px;
   color: ${(props) => props.theme.colors.white};
-  -webkit-text-stroke: 3px ${(props) => props.theme.colors.border.black};
+  text-shadow: 3px 0 0 #2b2b2b, -3px 0 0 #2b2b2b, 0 -3px 0 #2b2b2b, 0 3px 0 #2b2b2b,
+    3px 3px 0 #2b2b2b, -3px -3px 0 #2b2b2b, -3px 3px 0 #2b2b2b, 3px -3px 0 #2b2b2b;
 `
 
 // background-color: ${(props) => props.theme.colors.background.right};
+
+// font-family: ${(props) => props.theme.fonts.subFont};
+// font-weight: 900;
+// font-family: ${(props) => props.theme.fonts.subFont};
+// -webkit-text-stroke: 3px ${(props) => props.theme.colors.border.black};
 
 // const Parts: NextPage = () => {
 //   return (
