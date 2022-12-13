@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import { useForm } from 'react-hook-form'
 
-import { Button, PostCard } from '@/components'
+import { Button, DiamondShape, PostCard } from '@/components/Elements'
 import { InputField } from '@/components/Form'
 
 const Home: NextPage = () => {
@@ -83,6 +83,7 @@ const Home: NextPage = () => {
           placeholder="nickname"
           backgroundColor={theme.colors.secondary.dark}
         />
+      </div>
       <h1>DiamondShape</h1>
       <div style={{ display: 'flex' }}>
         <DiamondShape
