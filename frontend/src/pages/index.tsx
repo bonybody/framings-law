@@ -67,7 +67,6 @@ const Home: NextPage = () => {
           isFlamePost={true}
         ></PostCard>
       </div>
-<<<<<<< HEAD
       <h1>Input Field</h1>
       <div>
         <InputField
@@ -84,7 +83,6 @@ const Home: NextPage = () => {
           placeholder="nickname"
           backgroundColor={theme.colors.secondary.dark}
         />
-=======
       <h1>DiamondShape</h1>
       <div style={{ display: 'flex' }}>
         <DiamondShape
@@ -105,7 +103,6 @@ const Home: NextPage = () => {
         >
           ?
         </DiamondShape>
->>>>>>> 6688c26192279ea191359ad56c421278c2c7780d
       </div>
     </Main>
   )
