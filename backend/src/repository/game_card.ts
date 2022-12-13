@@ -123,10 +123,13 @@ export class GameCardRepository {
       return await this.getWithDetailByFraming(gameId, isFraming);
     }
     if (isDeleted !== undefined && isFraming !== undefined) {
-      const res = await singleQuery<GameCardWithDetailRow>(`
+      const res = await singleQuery<GameCardWithDetailRow>(
+        `
         ${withDetailSelect} WHERE card_id = cards.id AND game_id = $1 AND is_deleted = ${
-        isDeleted ? "true" : "false"
-      } AND cards.is_framing = ${isFraming ? "true" : "false"}`);
+          isDeleted ? "true" : "false"
+        } AND cards.is_framing = ${isFraming ? "true" : "false"}`,
+        [gameId]
+      );
       return gameCardDetailRowsSchema.parse(res.rows);
     }
   }

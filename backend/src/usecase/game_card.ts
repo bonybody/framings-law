@@ -130,7 +130,6 @@ export class GameCardUseCase {
       return player.id;
     });
     if (!isVotedAll) return;
-    await this.totalling;
   }
 
   async totalling(gameId: string) {
@@ -142,10 +141,17 @@ export class GameCardUseCase {
       mostedValue[0]
     );
     if (deleted === null) throw new Error();
+    const remainingCount = await this.countFraming(gameId);
     return deleted;
   }
 
   async countFraming(gameId: string) {
-    const res = await this.gameCardRepository;
+    const options = {
+      isFramiing: true,
+      isDeleted: false,
+    };
+    const res = await this.gameCardRepository.search(gameId, options);
+    if (res === undefined) return 0;
+    return res.length;
   }
 }

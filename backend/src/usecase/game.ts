@@ -52,7 +52,7 @@ export class GameUseCase {
     await this.gameCardUseCase.init(game.id, room.card_count);
     await this.gamePlayerUseCase.init(roomId, game.id);
     await roomTriggers.start(roomId, game.id);
-    await gameTriggers.progress(game.id, { turn: 1, phase: "ready" });
+    await gameTriggers.ready(game.id, 1);
     return game.id;
   }
 

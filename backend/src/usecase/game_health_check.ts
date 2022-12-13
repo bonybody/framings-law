@@ -47,16 +47,19 @@ export class GameHealthCheckUseCase {
     const now = await this.gameProgressUseCase.now(gameId);
     switch (now.phase) {
       case "ready":
-        await this.gameProgressUseCase.next(gameId);
+        await this.gameProgressUseCase.ready(gameId, now.turn);
         break;
       case "debate":
-        await this.gameProgressUseCase.next(gameId);
+        await this.gameProgressUseCase.debate(gameId, now.turn);
         break;
       case "vote":
-        await this.gameProgressUseCase.next(gameId);
+        await this.gameProgressUseCase.vote(gameId, now.turn);
         break;
       case "totalling":
-        await this.
+        await this.gameProgressUseCase.totalling(gameId, now.turn);
+        break;
+      case "result":
+        await this.gameProgressUseCase.result(gameId, now.turn);
       default:
         break;
     }

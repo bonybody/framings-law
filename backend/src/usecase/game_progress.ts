@@ -32,35 +32,50 @@ export class GameProgressUseCase {
     };
   }
 
-  async next(gameId: string) {
-    const now = await this.now(gameId);
+  async update(
+    gameId: string,
+    turn: number,
+    phase: LifeCycle,
+    phaseContent?: object
+  ): Promise<GameProgress> {
+    await this.gameProgressRepository.create(gameId, turn, phase, phaseContent);
+    return await this.now(gameId);
   }
 
   async ready(gameId: string, turn: number) {
     this.gameProgressRepository.find(gameId);
     const res = await this.gameProgressRepository.create(gameId, turn, "ready");
     if (res !== "OK") throw new Error();
-    gameTriggers.ready(gameId, turn);
+    await gameTriggers.ready(gameId, turn);
+    await this.update(gameId, turn, "debate");
   }
 
   async debate(gameId: string, turn: number) {
-    const res = await this.gameProgressRepository.create(
-      gameId,
-      turn,
-      "debate"
-    );
-    if (res !== "OK") throw new Error();
     const now = getNow();
     const timeLimit = addSeconds(now, 600);
-    gameTriggers.debate(gameId, turn, timeLimit.toDate());
+    await gameTriggers.debate(gameId, turn, timeLimit.toDate());
+    await this.update(gameId, turn, "vote");
   }
 
   async vote(gameId: string, turn: number) {
-    const res = await this.gameCardUseCase;
+    // const res = await this.gameCardUseCase;
+    await this.update(gameId, turn, "totalling");
   }
 
   async totalling(gameId: string, turn: number) {
-    const res = await this.gameCardUseCase.totalling(gameId);
-    gameTriggers.totalling(gameId, turn, res.game_id);
+    const deletedCard = await this.gameCardUseCase.totalling(gameId);
+    const remainingCount = await this.gameCardUseCase.countFraming(gameId);
+    const isEnd = remainingCount < 1;
+    await gameTriggers.totalling(gameId, turn, deletedCard.id, isEnd);
+
+    if (isEnd) {
+      await this.update(gameId, turn, "result");
+    } else {
+      await this.update(gameId, turn++, "debate");
+    }
+  }
+
+  async result(gameId: string, turn: number) {
+    gameTriggers.result(gameId, turn);
   }
 }
