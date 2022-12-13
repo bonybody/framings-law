@@ -67,6 +67,7 @@ const Home: NextPage = () => {
           isFlamePost={true}
         ></PostCard>
       </div>
+<<<<<<< HEAD
       <h1>Input Field</h1>
       <div>
         <InputField
@@ -83,6 +84,28 @@ const Home: NextPage = () => {
           placeholder="nickname"
           backgroundColor={theme.colors.secondary.dark}
         />
+=======
+      <h1>DiamondShape</h1>
+      <div style={{ display: 'flex' }}>
+        <DiamondShape
+          diagonal={200}
+          diamondColor="green"
+          borderColor="red"
+          borderSize="5px"
+          fontSize="20px"
+        >
+          aaaaa
+        </DiamondShape>
+        <DiamondShape
+          diagonal={200}
+          diamondColor="#D9D9D9"
+          borderColor="#2B2B2B"
+          borderSize="10px"
+          fontSize="40px"
+        >
+          ?
+        </DiamondShape>
+>>>>>>> 6688c26192279ea191359ad56c421278c2c7780d
       </div>
     </Main>
   )

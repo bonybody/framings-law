@@ -1,5 +1,5 @@
 EXPORT_ENV=export $$(cat .env) > /dev/null;
-
+export GOOGLE_APPLICATION_CREDENTIALS="./serviceAccountKey.json"
 # cloneして最初に使う
 .PHONY:
 init:
@@ -47,3 +47,10 @@ db/down:
 db/down-v:
 	$(EXPORT_ENV) cd ..; docker compose down -v
 
+.PHONY: getToken
+getToken:
+	$(EXPORT_ENV) yarn token
+
+.PHONY: test
+test:
+	$(EXPORT_ENV) yarn test

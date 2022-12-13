@@ -5,32 +5,15 @@
 
 
 export interface paths {
-  "/users/{userId}": {
+  "/rooms/": {
     /**
-     * Get User Info by User ID 
-     * @description Retrieve the information of the user with the matching user ID.
+     * ルームの作成 
+     * @description 新しくゲームのルームを作成する。
      */
-    get: operations["get-users-userId"];
-    /**
-     * Update User Information 
-     * @description Update the information of an existing user.
-     */
-    patch: operations["patch-users-userId"];
-    parameters: {
-        /** @description Id of an existing user. */
-      path: {
-        userId: string;
-      };
-    };
+    post: operations["post-rooms"];
   };
-  "/user": {
-    /**
-     * Create New User 
-     * @description Create a new user.
-     */
-    post: operations["post-user"];
-  };
-  "/rooms/{roomId}/join": {
+  "/rooms/{roomId}/joins": {
+    get: operations["get-rooms-roomId-join"];
     /** ルームに参加 */
     post: operations["post-rooms-roomId-join"];
     parameters: {
@@ -39,12 +22,30 @@ export interface paths {
       };
     };
   };
-  "/rooms/": {
+  "/rooms/{roomId}/readies": {
+    get: operations["get-rooms-roomId-ready"];
+    post: operations["post-rooms-roomId-ready"];
+    parameters: {
+      path: {
+        roomId: string;
+      };
+    };
+  };
+  "/rooms/{roomId}/users": {
+    /** Your GET endpoint */
+    get: operations["get-rooms-roomId-users"];
+    parameters: {
+      path: {
+        roomId: string;
+      };
+    };
+  };
+  "/games/": {
     /**
-     * ルームの作成 
-     * @description 新しくゲームのルームを作成する。
+     * Create Game 
+     * @description 新しくゲームを作成する。
      */
-    post: operations["post-rooms"];
+    post: operations["post-games"];
   };
   "/games/{gameId}": {
     /**
@@ -58,7 +59,7 @@ export interface paths {
       };
     };
   };
-  "/games/{gameId}/posts": {
+  "/games/{gameId}/cards": {
     /**
      * ゲーム内の投稿一覧取得 
      * @description {gameId}で指定されたゲーム内の投稿を一覧取得する。
@@ -71,68 +72,126 @@ export interface paths {
       };
     };
   };
+  "/games/{gameId}/cards/{cardId}": {
+    /** Your GET endpoint */
+    get: operations["get-games-gameId-cards-cardId"];
+    parameters: {
+      path: {
+        gameId: string;
+        cardId: string;
+      };
+    };
+  };
+  "/games/{gameId}/players": {
+    /** Your GET endpoint */
+    get: operations["get-games-gameId-users"];
+    parameters: {
+      path: {
+        gameId: string;
+      };
+    };
+  };
+  "/games/{gameId}/players/me": {
+    /** Your GET endpoint */
+    get: operations["get-games-gameId-players-me"];
+    parameters: {
+      path: {
+        gameId: string;
+      };
+    };
+  };
+  "/games/{gameId}/players/{playerId}": {
+    /** Your GET endpoint */
+    get: operations["get-games-gameId-players-playerId"];
+    parameters: {
+      path: {
+        gameId: string;
+        playerId: string;
+      };
+    };
+  };
 }
 
 export type webhooks = Record<string, never>;
 
-export type components = Record<string, never>;
+export interface components {
+  schemas: {
+    /** Room */
+    Room: {
+      id?: string;
+      hostUserId?: string;
+      cardCount?: number;
+      debateSeconds?: number;
+      key?: string;
+      status?: {
+        id?: string;
+        code?: string;
+      };
+    };
+    /** RoomUser */
+    RoomUsers: {
+      join?: (string)[];
+      ready?: (string)[];
+    };
+    /** RoomJoinUsers */
+    RoomJoinUsers: {
+      users?: (string)[];
+    };
+    /** RoomReadyUsers */
+    RoomReadyUsers: {
+      users?: (string)[];
+    };
+    /** GamePlayer */
+    GamePlayer: {
+      id?: string;
+      userId?: string;
+      gameId?: string;
+      isFramer?: boolean;
+      character?: {
+        id?: string;
+        displayName?: string;
+        imageUrl?: string;
+      };
+    };
+    /** GameCard */
+    GameCard: {
+      id?: string;
+      gameId?: string;
+      card?: {
+        id?: string;
+        postedAt?: string;
+        body?: string;
+        commentary?: string;
+        isFraming?: boolean;
+      };
+      isDeleted?: boolean;
+    };
+  };
+  responses: {
+    /** @description Example response */
+    CreateRoomResponse: {
+      content: {
+        "application/json": {
+          id?: string;
+          hostUserId?: string;
+          roomStatusId?: string;
+          roomKey?: string;
+          cardCount?: number;
+          debateSeconds?: number;
+        };
+      };
+    };
+  };
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
+}
 
 export type external = Record<string, never>;
 
 export interface operations {
 
-  "get-users-userId": {
-    /**
-     * Get User Info by User ID 
-     * @description Retrieve the information of the user with the matching user ID.
-     */
-    responses: {
-      /** @description User Found */
-      200: never;
-      /** @description User Not Found */
-      404: never;
-    };
-  };
-  "patch-users-userId": {
-    /**
-     * Update User Information 
-     * @description Update the information of an existing user.
-     */
-    responses: {
-      /** @description User Updated */
-      200: never;
-      /** @description User Not Found */
-      404: never;
-      /** @description Email Already Taken */
-      409: never;
-    };
-  };
-  "post-user": {
-    /**
-     * Create New User 
-     * @description Create a new user.
-     */
-    responses: {
-      /** @description User Created */
-      200: never;
-      /** @description Missing Required Information */
-      400: never;
-      /** @description Email Already Taken */
-      409: never;
-    };
-  };
-  "post-rooms-roomId-join": {
-    /** ルームに参加 */
-    parameters?: {
-      header?: {
-        undefined?: string;
-      };
-    };
-    responses: {
-      /** @description OK */
-      200: never;
-    };
-  };
   "post-rooms": {
     /**
      * ルームの作成 
@@ -140,7 +199,88 @@ export interface operations {
      */
     responses: {
       /** @description OK */
-      200: never;
+      200: {
+        content: {
+          "application/json": components["schemas"]["Room"];
+        };
+      };
+    };
+  };
+  "get-rooms-roomId-join": {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["RoomJoinUsers"];
+        };
+      };
+    };
+  };
+  "post-rooms-roomId-join": {
+    /** ルームに参加 */
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+        };
+        content: {
+          "application/json": components["schemas"]["RoomJoinUsers"];
+        };
+      };
+    };
+  };
+  "get-rooms-roomId-ready": {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["RoomReadyUsers"];
+        };
+      };
+    };
+  };
+  "post-rooms-roomId-ready": {
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["RoomReadyUsers"];
+        };
+      };
+    };
+  };
+  "get-rooms-roomId-users": {
+    /** Your GET endpoint */
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["RoomUsers"];
+        };
+      };
+    };
+  };
+  "post-games": {
+    /**
+     * Create Game 
+     * @description 新しくゲームを作成する。
+     */
+    requestBody?: {
+      content: {
+        "application/json": {
+          roomId?: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Created */
+      201: {
+        content: {
+          "application/json": {
+            id?: string;
+          };
+        };
+      };
     };
   };
   "get-games-gameId": {
@@ -157,7 +297,75 @@ export interface operations {
      * @description {gameId}で指定されたゲーム内の投稿を一覧取得する。
      * 削除された投稿は除外して取得する。
      */
+    parameters?: {
+      query?: {
+        is_framing?: boolean;
+        is_deleted?: boolean;
+      };
+    };
     responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            cards?: (components["schemas"]["GameCard"])[];
+          };
+        };
+      };
+    };
+  };
+  "get-games-gameId-cards-cardId": {
+    /** Your GET endpoint */
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            card?: components["schemas"]["GameCard"];
+          };
+        };
+      };
+    };
+  };
+  "get-games-gameId-users": {
+    /** Your GET endpoint */
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            players?: (components["schemas"]["GamePlayer"])[];
+          };
+        };
+      };
+    };
+  };
+  "get-games-gameId-players-me": {
+    /** Your GET endpoint */
+    responses: {
+      /** @description OK */
+      200: {
+        headers: {
+        };
+        content: {
+          "application/json": {
+            player?: components["schemas"]["GamePlayer"];
+          };
+        };
+      };
+    };
+  };
+  "get-games-gameId-players-playerId": {
+    /** Your GET endpoint */
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": {
+            player?: components["schemas"]["GamePlayer"];
+          };
+        };
+      };
     };
   };
 }
