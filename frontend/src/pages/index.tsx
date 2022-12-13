@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 
-import { Button, DiamondShape, PostCard } from '@/components'
+import { Button, DiamondShape, PostCard, WaitingDiamondShape } from '@/components'
 
 const Home: NextPage = () => {
   return (
@@ -82,6 +82,9 @@ const Home: NextPage = () => {
         >
           ?
         </DiamondShape>
+        <WaitingDiamondShape diagonal={200} fontSize="14px">
+          Loading...
+        </WaitingDiamondShape>
       </div>
     </Main>
   )
