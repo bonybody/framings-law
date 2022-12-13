@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 
-import { Button, DiamondShape, PostCard } from '@/components'
+import { Button, DiamondShape, PostCard } from '@/components/Elements'
 
 const Home: NextPage = () => {
   return (
