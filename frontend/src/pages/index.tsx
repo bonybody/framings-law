@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import { useForm } from 'react-hook-form'
 
-import { Button, Input, PostCard } from '@/components'
+import { Button, PostCard } from '@/components'
 import { InputField } from '@/components/Form'
 
 const Home: NextPage = () => {
