@@ -1,4 +1,3 @@
-import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 
@@ -6,23 +5,22 @@ import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-    <>
-      <Global
-        styles={css`
-          body {
-            background-color: #d2104a;
-          }
-        `}
-      />
-      <Anne src="/anne.svg" alt="anne" />
+    <Container>
+      <Anne />
       <Logo src="/logo.svg" alt="logo" />
       <Title src="/titleLogo.svg" alt="title" />
       <StartButton>Tap to start game</StartButton>
-    </>
+    </Container>
   )
 }
 
 export default Home
+
+const Container = styled.div`
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+`
 
 // ロゴ
 const Logo = styled.img`
@@ -34,11 +32,13 @@ const Logo = styled.img`
 `
 
 // アンネ
-const Anne = styled.img`
+const Anne = styled.div`
   position: absolute;
   width: 100%;
   height: 95%;
   top: 6.5vh;
+  background-size: 110%;
+  background-image: url('/anne.svg');
 `
 
 // タイトルロゴ
@@ -72,7 +72,7 @@ const StartButton = styled.a`
     3px 3px 0 #2b2b2b, -3px -3px 0 #2b2b2b, -3px 3px 0 #2b2b2b, 3px -3px 0 #2b2b2b;
 
   //アニメーション
-  animation: flash 1s linear infinite;
+  animation: flash 2s linear infinite;
   @keyframes flash {
     0%,
     100% {
