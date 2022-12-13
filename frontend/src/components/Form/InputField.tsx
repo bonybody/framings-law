@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
-import { Input } from '../Input'
+import { Input } from './Input'
 
 export type InputFieldProps = {
   label: string
