@@ -1,21 +1,29 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import { ReactNode } from 'react'
 
-import { mixinDiamond,mixinDiamondWrap } from '../DiamondShape/mixin'
+import { Fonts } from '@/styles'
+
+import { mixinDiamond, mixinDiamondWrap } from '../DiamondShape/mixin'
 
 export type WaitingDiamondShapeProps = {
   diagonal: number
-  fontSize: string
-  children: ReactNode
+  fontSize: keyof Fonts['sizes']
+  isJoining: boolean
 }
 
-export const WaitingDiamondShape = ({ diagonal, fontSize, children }: WaitingDiamondShapeProps) => {
+export const WaitingDiamondShape = ({
+  diagonal,
+  fontSize,
+  isJoining
+}: WaitingDiamondShapeProps) => {
   const shapeDiagonal = `${diagonal / Math.sqrt(2)}px`
   const shapeSide = `${diagonal}px`
   return (
     <ShapeWrap diagonal={shapeSide}>
       <Diamond diagonal={shapeDiagonal}>
-        <DiamondContents fontSize={fontSize}>{children}</DiamondContents>
+        <DiamondContents fontSize={fontSize}>
+          {isJoining ? 'joining...' : 'no player'}
+        </DiamondContents>
       </Diamond>
     </ShapeWrap>
   )
@@ -23,8 +31,10 @@ export const WaitingDiamondShape = ({ diagonal, fontSize, children }: WaitingDia
 
 const ShapeWrap = styled.div<{ diagonal: string }>`
   ${mixinDiamondWrap}
-  width: ${(props) => props.diagonal};
-  height: ${(props) => props.diagonal};
+  ${({ diagonal }) => css`
+    width: ${diagonal};
+    height: ${diagonal};
+  `}
 `
 
 const Diamond = styled.div<{
@@ -34,12 +44,14 @@ const Diamond = styled.div<{
   box-sizing: border-box;
   background: #df114f;
   box-shadow: inset 6px 6px 6px 0px rgba(0, 0, 0, 0.25);
-  width: ${(props) => props.diagonal};
-  height: ${(props) => props.diagonal};
+  ${({ diagonal }) => css`
+    width: ${diagonal};
+    height: ${diagonal};
+  `}
 `
 
-const DiamondContents = styled.div<{ fontSize: string }>`
+const DiamondContents = styled.div<{ fontSize: WaitingDiamondShapeProps['fontSize'] }>`
   transform: rotate(-45deg);
-  font-size: ${(props) => props.fontSize};
+  font-size: ${({ theme, fontSize }) => theme.fonts.sizes[fontSize]};
   color: #ffffff;
 `

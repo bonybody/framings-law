@@ -69,7 +69,7 @@ const Home: NextPage = () => {
           diamondColor="green"
           borderColor="red"
           borderSize="5px"
-          fontSize="20px"
+          fontSize="xs"
         >
           aaaaa
         </DiamondShape>
@@ -78,13 +78,11 @@ const Home: NextPage = () => {
           diamondColor="#D9D9D9"
           borderColor="#2B2B2B"
           borderSize="10px"
-          fontSize="40px"
+          fontSize="xs"
         >
           ?
         </DiamondShape>
-        <WaitingDiamondShape diagonal={200} fontSize="14px">
-          Loading...
-        </WaitingDiamondShape>
+        <WaitingDiamondShape diagonal={200} fontSize="xs" isJoining={true}></WaitingDiamondShape>
       </div>
     </Main>
   )

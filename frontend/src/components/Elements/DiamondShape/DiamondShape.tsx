@@ -1,5 +1,8 @@
+import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { ReactNode } from 'react'
+
+import { Fonts } from '@/styles'
 
 import { mixinDiamond, mixinDiamondWrap } from './mixin'
 
@@ -8,7 +11,7 @@ export type DiamondShapeProps = {
   diamondColor: string
   borderColor: string
   borderSize: string
-  fontSize: string
+  fontSize: keyof Fonts['sizes']
   children: ReactNode
 }
 
@@ -39,25 +42,29 @@ export const DiamondShape = ({
 
 const ShapeWrap = styled.div<{ diagonal: string }>`
   ${mixinDiamondWrap}
-  width: ${(props) => props.diagonal};
-  height: ${(props) => props.diagonal};
+  ${({ diagonal }) => css`
+    width: ${diagonal};
+    height: ${diagonal};
+  `}
 `
 
 const Diamond = styled.div<{
   diagonal: string
   diamondColor: string
-  borderColor: string
   borderSize: string
+  borderColor: string
 }>`
   ${mixinDiamond}
-  box-sizing: border-box;
-  width: ${(props) => props.diagonal};
-  height: ${(props) => props.diagonal};
-  background: ${(props) => props.diamondColor};
-  border: ${(props) => props.borderSize} solid ${(props) => props.borderColor};
+  ${({ diagonal, diamondColor, borderSize, borderColor }) => css`
+    width: ${diagonal};
+    height: ${diagonal};
+    background: ${diamondColor};
+    border: ${borderSize} solid ${borderColor};
+    box-sizing: border-box;
+  `}
 `
 
-const DiamondContents = styled.div<{ fontSize: string }>`
+const DiamondContents = styled.div<{ fontSize: DiamondShapeProps['fontSize'] }>`
   transform: rotate(-45deg);
-  font-size: ${(props) => props.fontSize};
+  font-size: ${({ theme, fontSize }) => theme.fonts.sizes[fontSize]};
 `
