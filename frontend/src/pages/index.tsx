@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 import { useForm } from 'react-hook-form'
 
-import { Button, DiamondShape, PostCard } from '@/components/Elements'
+import { Button, DiamondShape, PostCard, WaitingDiamondShape } from '@/components/Elements'
 import { InputField } from '@/components/Form'
 
 const Home: NextPage = () => {
@@ -91,7 +91,7 @@ const Home: NextPage = () => {
           diamondColor="green"
           borderColor="red"
           borderSize="5px"
-          fontSize="20px"
+          fontSize="xs"
         >
           aaaaa
         </DiamondShape>
@@ -100,10 +100,11 @@ const Home: NextPage = () => {
           diamondColor="#D9D9D9"
           borderColor="#2B2B2B"
           borderSize="10px"
-          fontSize="40px"
+          fontSize="xs"
         >
           ?
         </DiamondShape>
+        <WaitingDiamondShape diagonal={200} fontSize="xs" isJoining={true}></WaitingDiamondShape>
       </div>
     </Main>
   )
