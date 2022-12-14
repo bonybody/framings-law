@@ -1,9 +1,14 @@
+import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
+import { useForm } from 'react-hook-form'
 
-import { Button, DiamondShape, PostCard, WaitingDiamondShape } from '@/components'
+import { Button, DiamondShape, PostCard, WaitingDiamondShape } from '@/components/Elements'
+import { InputField } from '@/components/Form'
 
 const Home: NextPage = () => {
+  const { register } = useForm()
+  const theme = useTheme()
   return (
     <Main>
       <h1>Button</h1>
@@ -61,6 +66,23 @@ const Home: NextPage = () => {
           isSelect={false}
           isFlamePost={true}
         ></PostCard>
+      </div>
+      <h1>Input Field</h1>
+      <div>
+        <InputField
+          label="ルーム"
+          register={register('room')}
+          placeholder="room"
+          backgroundColor={theme.colors.primary.dark}
+        />
+      </div>
+      <div>
+        <InputField
+          label="ニックネーム"
+          register={register('nickname')}
+          placeholder="nickname"
+          backgroundColor={theme.colors.secondary.dark}
+        />
       </div>
       <h1>DiamondShape</h1>
       <div style={{ display: 'flex' }}>
