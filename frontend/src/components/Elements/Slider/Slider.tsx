@@ -3,28 +3,11 @@ import 'swiper/swiper-bundle.css'
 import styled from '@emotion/styled'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+import { Slide } from './data'
+
 export type SliderProps = {
   //
 }
-
-interface SlideTypes {
-  path: string
-}
-
-const Slide: SlideTypes[] = [
-  {
-    path: '/video/dummy.MP4'
-  },
-  {
-    path: '/video/dummy.MP4'
-  },
-  {
-    path: '/video/dummy.MP4'
-  },
-  {
-    path: '/video/dummy.MP4'
-  }
-]
 
 export const Slider = ({}: SliderProps) => {
   return (
