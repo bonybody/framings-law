@@ -9,7 +9,8 @@ import {
   CharacterDiamondShape,
   DiamondShape,
   PostCard,
-  WaitingDiamondShape} from '@/components/Elements'
+  WaitingDiamondShape
+} from '@/components/Elements'
 import { InputField } from '@/components/Form'
 
 const Home: NextPage = () => {
@@ -117,10 +118,9 @@ const Home: NextPage = () => {
           diagonal={200}
           fontSize="xs"
           diamondColor="cyan"
-          isMyDiamond={false}
-        >
-          <Image src={'/fire.png'} width={200} height={200}></Image>
-        </CharacterDiamondShape>
+          isMyDiamond={true}
+          charactorName="namae"
+        />
       </div>
     </Main>
   )
