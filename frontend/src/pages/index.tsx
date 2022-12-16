@@ -118,7 +118,8 @@ const Home: NextPage = () => {
           diagonal={200}
           fontSize="xs"
           diamondColor="cyan"
-          isMyDiamond={true}
+          isMyDiamond={false}
+          ready={false}
           charactorName="namae"
         />
       </div>
