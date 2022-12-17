@@ -3,12 +3,30 @@ import styled from '@emotion/styled'
 import { ReactNode } from 'react'
 
 export type MainLayoutProps = {
+  isCharacterBackground?: boolean
   children: ReactNode
 }
 
-export const MainLayout = ({ children }: MainLayoutProps) => {
+export const MainLayout = ({ isCharacterBackground = false, children }: MainLayoutProps) => {
+  if (isCharacterBackground) {
+    return (
+      <>
+        <Background>
+          <img src={'/background-chara.svg'} alt={''} />
+        </Background>
+        <UpperLeftTriangle>
+          <img src={'/rectangle-secondary.svg'} alt={''} />
+        </UpperLeftTriangle>
+        {children}
+        <BottomRightTriangle>
+          <img src={'/rectangle-primary.svg'} alt={''} />
+        </BottomRightTriangle>
+      </>
+    )
+  }
+
   return (
-    <div>
+    <>
       <UpperLeftTriangle>
         <img src={'/rectangle-secondary.svg'} alt={''} />
       </UpperLeftTriangle>
@@ -16,14 +34,28 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
       <BottomRightTriangle>
         <img src={'/rectangle-primary.svg'} alt={''} />
       </BottomRightTriangle>
-    </div>
+    </>
   )
 }
 
-const imgStyle = css`
-  width: 70vw;
+const triangleStyle = css`
+  width: calc(80px + 40vw);
   vertical-align: bottom;
 `
+
+const Background = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  z-index: -1000;
+  transform: translate(-50%, -50%);
+
+  img {
+    width: 100%;
+  }
+`
+
 const UpperLeftTriangle = styled.div`
   position: fixed;
   top: 0;
@@ -31,7 +63,7 @@ const UpperLeftTriangle = styled.div`
   z-index: -999;
 
   img {
-    ${imgStyle}
+    ${triangleStyle}
   }
 `
 
@@ -42,6 +74,6 @@ const BottomRightTriangle = styled.div`
   z-index: -999;
 
   img {
-    ${imgStyle}
+    ${triangleStyle}
   }
 `

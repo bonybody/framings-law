@@ -7,7 +7,7 @@ import { MainLayout } from '@/components/Layout'
 const Home: NextPage = () => {
   return (
     <MainLayout>
-      <Main>
+      {/* <Main>
         <div>Button</div>
         <div>
           <Button>Button</Button>
@@ -85,7 +85,7 @@ const Home: NextPage = () => {
             ?
           </DiamondShape>
         </div>
-      </Main>
+      </Main> */}
     </MainLayout>
   )
 }
