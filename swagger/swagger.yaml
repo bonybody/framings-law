@@ -29,12 +29,6 @@ paths:
       description: 新しくゲームのルームを作成する。
       tags:
         - Room
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/RoomCreateRequest'
-          description: ''
       security:
         - authorization: []
   '/rooms/{roomId}/joins':
@@ -134,11 +128,10 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
+                $ref: '#/components/schemas/Game'
       description: 新しくゲームを作成する。
+      tags:
+        - Game
       requestBody:
         content:
           application/json:
@@ -147,9 +140,6 @@ paths:
               properties:
                 roomId:
                   type: string
-        description: ''
-      tags:
-        - Game
   '/games/{gameId}':
     parameters:
       - type: string
@@ -158,7 +148,13 @@ paths:
         required: true
     get:
       summary: 特定のゲームの状態を取得する
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
       operationId: get-games-gameId
       description: '{gameId}で指定されたゲームの状態を取得する。'
       tags:
@@ -379,26 +375,7 @@ components:
       type: http
       scheme: bearer
       description: ''
-  responses:
-    CreateRoomResponse:
-      description: Example response
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              id:
-                type: string
-              hostUserId:
-                type: string
-              roomStatusId:
-                type: string
-              roomKey:
-                type: string
-              cardCount:
-                type: number
-              debateSeconds:
-                type: number
+  responses: {}
   schemas:
     Room:
       type: object
@@ -505,5 +482,20 @@ components:
               type: boolean
         isDeleted:
           type: boolean
-security:
-  - authorization: []
+    Game:
+      title: Game
+      x-stoplight:
+        id: drxq2nvw3khjb
+      type: object
+      properties:
+        id:
+          type: string
+        room_id:
+          type: string
+        status:
+          type: object
+          properties:
+            id:
+              type: string
+            code:
+              type: string
