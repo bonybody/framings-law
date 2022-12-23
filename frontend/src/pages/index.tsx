@@ -119,7 +119,7 @@ const Home: NextPage = () => {
           fontSize="xs"
           diamondColor="cyan"
           isMyDiamond={false}
-          ready={false}
+          isReady={false}
           charactorName="namae"
         />
       </div>

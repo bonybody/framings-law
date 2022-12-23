@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import Image from 'next/image'
 
 import { Fonts, theme } from '@/styles'
 
@@ -12,7 +11,7 @@ export type CharacterDiamondShapeProps = {
   borderSize: string
   fontSize: keyof Fonts['sizes']
   isMyDiamond: boolean
-  ready: boolean
+  isReady: boolean
   charactorName: string
 }
 
@@ -22,7 +21,7 @@ export const CharacterDiamondShape = ({
   borderSize,
   fontSize,
   isMyDiamond,
-  ready,
+  isReady,
   charactorName
 }: CharacterDiamondShapeProps) => {
   const shapeDiagonal = `${diagonal / Math.sqrt(2)}px`
@@ -36,11 +35,11 @@ export const CharacterDiamondShape = ({
           diamondColor={diamondColor}
           borderSize={borderSize}
           isMyDiamond={isMyDiamond}
-          ready={ready}
+          isReady={isReady}
         >
           <DiamondInnerContainer>
             <DiamondContents fontSize={fontSize} charactorName={charactorName}>
-              <Image src={'/fire.png'} width={200} height={200} />
+              <img src={'/fire.png'} width="100%" height="auto" />
             </DiamondContents>
           </DiamondInnerContainer>
           <DiamondText>aaaaaa</DiamondText>
@@ -63,16 +62,16 @@ const Diamond = styled.div<{
   diamondColor: string
   borderSize: string
   isMyDiamond: boolean
-  ready: boolean
+  isReady: boolean
 }>`
   position: relative;
   ${mixinDiamondWrap}
-  ${({ diagonal, diamondColor, borderSize, isMyDiamond, ready }) => css`
+  ${({ diagonal, diamondColor, borderSize, isMyDiamond, isReady }) => css`
     width: ${diagonal};
     height: ${diagonal};
     border: ${borderSize} solid ${isMyDiamond ? '#FF8A00' : '#FFFFFF'};
     background-color: ${diamondColor};
-    filter: ${isMyDiamond ? '()' : ready ? 'none' : 'brightness(0.3)'};
+    filter: ${isMyDiamond ? 'none' : isReady ? 'none' : 'brightness(0.3)'};
   `}
   box-sizing: border-box;
   transform: rotate(45deg);
