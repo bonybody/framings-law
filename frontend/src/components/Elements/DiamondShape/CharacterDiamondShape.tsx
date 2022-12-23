@@ -5,6 +5,20 @@ import { Fonts, theme } from '@/styles'
 
 import { mixinDiamondWrap } from './mixin'
 
+export interface CharacterImagePath {
+  name: {
+    taro: './fire.png'
+    jiro: './favicon.ico'
+  }
+}
+
+const characterImagePath: CharacterImagePath = {
+  name: {
+    taro: './fire.png',
+    jiro: './favicon.ico'
+  }
+}
+
 export type CharacterDiamondShapeProps = {
   diagonal: number
   diamondColor: string
@@ -12,7 +26,7 @@ export type CharacterDiamondShapeProps = {
   fontSize: keyof Fonts['sizes']
   isMyDiamond: boolean
   isReady: boolean
-  charactorName: string
+  charactorName: keyof CharacterImagePath['name']
 }
 
 export const CharacterDiamondShape = ({
@@ -39,7 +53,7 @@ export const CharacterDiamondShape = ({
         >
           <DiamondInnerContainer>
             <DiamondContents fontSize={fontSize} charactorName={charactorName}>
-              <img src={'/fire.png'} width="100%" height="auto" />
+              <img src={characterImagePath.name[charactorName]} width="100%" height="auto" />
             </DiamondContents>
           </DiamondInnerContainer>
           <DiamondText>aaaaaa</DiamondText>

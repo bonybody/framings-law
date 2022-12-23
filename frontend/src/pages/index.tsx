@@ -120,7 +120,7 @@ const Home: NextPage = () => {
           diamondColor="cyan"
           isMyDiamond={false}
           isReady={false}
-          charactorName="namae"
+          charactorName="jiro"
         />
       </div>
     </Main>
