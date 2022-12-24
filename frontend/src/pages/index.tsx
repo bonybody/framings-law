@@ -10,7 +10,9 @@ const Home: NextPage = () => {
       <Anne />
       <Logo src="/question.svg" alt="logo" />
       <Title src="/titleLogo.svg" alt="title" />
-      <StartButton>Tap to start game</StartButton>
+      <CreateRoomButton>
+        <Text>Create room</Text>
+      </CreateRoomButton>
     </Container>
   )
 }
@@ -23,7 +25,7 @@ const Container = styled.div`
   overflow: hidden;
 `
 
-// ロゴ
+// ?マーク
 const Logo = styled.img`
   position: absolute;
   width: 49.5px;
@@ -67,12 +69,19 @@ const Flashing = keyframes`
   }
 `
 
-// スタートボタン
-const StartButton = styled.a`
+// Create roomボタン
+const CreateRoomButton = styled.button`
   display: block;
   position: relative;
-  text-align: center;
   top: 55vh;
+
+  margin: 0 auto;
+  //アニメーション
+  /* animation: ${Flashing} 2s linear infinite; */
+`
+
+// ボタン内テキスト
+const Text = styled.p`
   font-family: ${(props) => props.theme.fonts.fonts.sub};
   font-weight: bold;
   font-size: ${(props) => props.theme.fonts.sizes.body2};
@@ -81,7 +90,4 @@ const StartButton = styled.a`
     0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b;
-
-  //アニメーション
-  animation: ${Flashing} 2s linear infinite;
 `
