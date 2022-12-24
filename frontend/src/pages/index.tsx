@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const { register } = useForm()
   const theme = useTheme()
   return (
-    <MainLayout isCharacterBackground>
+    <MainLayout>
       <Main>
         <Headline2>Button</Headline2>
         <div>
