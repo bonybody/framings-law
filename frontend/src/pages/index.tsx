@@ -119,8 +119,8 @@ const Home: NextPage = () => {
           fontSize="xs"
           diamondColor="cyan"
           isMyDiamond={false}
-          ready={false}
-          charactorName="namae"
+          isReady={false}
+          charactorName="jiro"
         />
       </div>
     </Main>
