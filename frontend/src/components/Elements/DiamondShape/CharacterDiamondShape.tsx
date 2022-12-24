@@ -1,21 +1,33 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import { Fonts, theme } from '@/styles'
+import { Fonts } from '@/styles'
 
 import { mixinDiamondWrap } from './mixin'
 
-export interface CharacterImagePath {
-  name: {
-    taro: './fire.png'
-    jiro: './favicon.ico'
+export type CharacterObj = {
+  character: {
+    anne: {
+      kanaName: 'アンネ'
+      path: './anne.svg'
+    }
+    dai: {
+      kanaName: 'ダイ'
+      path: './fire.svg'
+    }
   }
 }
 
-const characterImagePath: CharacterImagePath = {
-  name: {
-    taro: './fire.png',
-    jiro: './favicon.ico'
+export const characterObj: CharacterObj = {
+  character: {
+    anne: {
+      kanaName: 'アンネ',
+      path: './anne.svg'
+    },
+    dai: {
+      kanaName: 'ダイ',
+      path: './fire.svg'
+    }
   }
 }
 
@@ -26,7 +38,7 @@ export type CharacterDiamondShapeProps = {
   fontSize: keyof Fonts['sizes']
   isMyDiamond: boolean
   isReady: boolean
-  charactorName: keyof CharacterImagePath['name']
+  charactorName: keyof CharacterObj['character']
 }
 
 export const CharacterDiamondShape = ({
@@ -53,10 +65,10 @@ export const CharacterDiamondShape = ({
         >
           <DiamondInnerContainer>
             <DiamondContents fontSize={fontSize} charactorName={charactorName}>
-              <img src={characterImagePath.name[charactorName]} width="100%" height="auto" />
+              <CharacterImage src={characterObj.character[charactorName].path} />
             </DiamondContents>
           </DiamondInnerContainer>
-          <DiamondText>aaaaaa</DiamondText>
+          <DiamondText>{characterObj.character[charactorName].kanaName}</DiamondText>
         </Diamond>
       </ShapeWrap>
     </div>
@@ -97,16 +109,25 @@ const DiamondInnerContainer = styled.div`
   ${mixinDiamondWrap}
   overflow: hidden;
 `
-const DiamondText = styled.div`
-  position: absolute;
-  top: -35px;
-  left: -5px;
+
+const CharacterImage = styled.img`
+  width: 135%;
+  height: 135%;
+  margin-top: -22%;
+  margin-left: -19%;
 `
 
 const DiamondContents = styled.div<{
   charactorName: string
   fontSize: CharacterDiamondShapeProps['fontSize']
 }>`
+  width: 100%;
+  height: 100%;
   transform: rotate(-45deg);
   font-size: ${({ theme, fontSize }) => theme.fonts.sizes[fontSize]};
+`
+const DiamondText = styled.div`
+  position: absolute;
+  top: -35px;
+  left: -5px;
 `
