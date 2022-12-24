@@ -14,6 +14,7 @@ export const MainLayout = ({ isCharacterBackground = false, children }: MainLayo
         <Background>
           <img src={'/background-chara.svg'} alt={''} />
         </Background>
+
         <UpperLeftTriangle>
           <img src={'/rectangle-secondary.svg'} alt={''} />
         </UpperLeftTriangle>
@@ -45,11 +46,17 @@ const triangleStyle = css`
 
 const Background = styled.div`
   position: fixed;
-  top: 50%;
+  top: 20%;
   left: 50%;
   width: 100%;
+  height: 100vh;
   z-index: -1000;
   transform: translate(-50%, -50%);
+
+  /* background-image: url('/background-chara.svg');
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat; */
 
   img {
     width: 100%;
@@ -63,6 +70,8 @@ const UpperLeftTriangle = styled.div`
   z-index: -999;
 
   img {
+    /* box-sizing: border-box; */
+    /* border-right: 10px solid #2b2b2b; */
     ${triangleStyle}
   }
 `
