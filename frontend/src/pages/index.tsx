@@ -1,7 +1,6 @@
 import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
-import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 
 import {
@@ -120,7 +119,7 @@ const Home: NextPage = () => {
           diamondColor="cyan"
           isMyDiamond={false}
           isReady={false}
-          charactorName="jiro"
+          charactorName="anne"
         />
       </div>
     </Main>
