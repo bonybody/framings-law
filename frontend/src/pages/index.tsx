@@ -28,20 +28,20 @@ const Logo = styled.img`
   position: absolute;
   width: 49.5px;
   height: 49.5px;
-  top: 6.5vh;
+  top: 4.5vh;
   right: 6.5vw;
 `
 
 // アンネ
 const Anne = styled.div`
   position: absolute;
-  width: 108%;
-  height: 108%;
+  width: 100%;
+  height: 100%;
   /* aspect-ratio: 9/20; */
   /* top: 6.5vh; */
   background-image: url('/anne.svg');
-  background-position: top calc(10px + 52%) right 50%;
-  background-size: calc(1px + 105%) calc(1px + 110%);
+  /* background-position: top calc(10px + 52%) right 50%; */
+  /* background-size: calc(1px + 105%) calc(1px + 110%); */
   background-repeat: no-repeat;
 `
 
@@ -52,7 +52,8 @@ const Title = styled.img`
   width: 85vw;
   height: 18.5vh;
   margin: 0 auto;
-  top: 26vh;
+  top: 148px;
+  // 26vh
 `
 
 // ボタン点滅
