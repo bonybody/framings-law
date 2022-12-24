@@ -40,4 +40,4 @@ next-env.d.ts
 # .eslintignore original
 /generator
 src/api/
-*.config.js
+/*.js

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint:fix": "yarn run lint --fix --ignore-path .eslintignore",
+    "lint:fix": "eslint . --fix --ignore-path .eslintignore",
     "format": "prettier . --write --ignore-path .prettierignore",
     "format:lint": "yarn format && yarn lint:fix",
     "lint-staged": "lint-staged",
