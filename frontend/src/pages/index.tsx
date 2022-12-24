@@ -47,17 +47,6 @@ const Anne = styled.div`
   background-repeat: no-repeat;
 `
 
-// タイトルロゴ
-const Title = styled.img`
-  position: relative;
-  display: block;
-  width: 85vw;
-  height: 18.5vh;
-  margin: 0 auto;
-  top: 148px;
-  // 26vh
-`
-
 // ボタン点滅
 const Flashing = keyframes`
   0%,
@@ -69,19 +58,55 @@ const Flashing = keyframes`
   }
 `
 
+// タイトルロゴ
+const Title = styled.img`
+  position: relative;
+  display: block;
+  width: 85vw;
+  height: 18.5vh;
+  margin: 0 auto;
+  top: 148px;
+
+  //アニメーション
+  animation: ${Flashing} 2s linear infinite;
+`
+
 // Create roomボタン
 const CreateRoomButton = styled.button`
   display: block;
   position: relative;
-  top: 55vh;
-
+  min-height: 60px;
+  width: 61.6vw;
+  height: 7.1vh;
+  top: 42.7vh;
   margin: 0 auto;
-  //アニメーション
-  /* animation: ${Flashing} 2s linear infinite; */
+  box-sizing: border-box;
+  border: 5px solid ${(props) => props.theme.colors.border.black};
+  background-color: ${(props) => props.theme.colors.primary.main};
+
+  // 画像
+  &::before {
+    display: inline-block;
+    width: 25%;
+    aspect-ratio: 16/9.5;
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: 4%;
+    background-image: url('/createRoom.svg');
+    background-size: cover;
+  }
 `
 
 // ボタン内テキスト
 const Text = styled.p`
+  display: block;
+  margin: auto;
+  position: absolute;
+  top: 55%;
+  left: 20px;
+  transform: translateY(-50%);
+  width: 160px;
   font-family: ${(props) => props.theme.fonts.fonts.sub};
   font-weight: bold;
   font-size: ${(props) => props.theme.fonts.sizes.body2};
@@ -90,4 +115,5 @@ const Text = styled.p`
     0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b;
+  z-index: 2;
 `
