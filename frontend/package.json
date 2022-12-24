@@ -11,6 +11,7 @@
     "format:lint": "yarn format && yarn lint:fix",
     "lint-staged": "lint-staged",
     "prepare": "cd .. && husky install frontend/.husky",
+    "api:build": "npx openapi2aspida -c ./aspida.config.js",
     "plop": "plop"
   },
   "dependencies": {
