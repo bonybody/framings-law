@@ -40,8 +40,8 @@ const Anne = styled.div`
   /* aspect-ratio: 9/20; */
   /* top: 6.5vh; */
   background-image: url('/anne.svg');
-  /* background-position: top calc(10px + 52%) right 50%; */
-  /* background-size: calc(1px + 105%) calc(1px + 110%); */
+  background-position: top calc(-40px - 10%) right 30%;
+  background-size: calc(1px + 110%) calc(1px + 100%);
   background-repeat: no-repeat;
 `
 
