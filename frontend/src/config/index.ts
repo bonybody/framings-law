@@ -1,3 +1,5 @@
+export const API_SERVER = process.env.NEXT_PUBLIC_API_SERVER as string
+
 export const FIREBASE = {
   API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
