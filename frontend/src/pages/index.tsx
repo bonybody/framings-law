@@ -116,7 +116,6 @@ const Home: NextPage = () => {
           borderSize="8px"
           diagonal={200}
           fontSize="xs"
-          diamondColor="cyan"
           isMyDiamond={false}
           isReady={false}
           charactorName="anne"
