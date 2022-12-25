@@ -11,8 +11,11 @@ const Home: NextPage = () => {
       <Logo src="/question.svg" alt="logo" />
       <Title src="/titleLogo.svg" alt="title" />
       <CreateRoomButton>
-        <Text>Create room</Text>
+        <CreateRoomText>Create room</CreateRoomText>
       </CreateRoomButton>
+      <JoinTheRoomButton>
+        <JoinThehRoomText>Join the room</JoinThehRoomText>
+      </JoinTheRoomButton>
     </Container>
   )
 }
@@ -39,10 +42,8 @@ const Anne = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  /* aspect-ratio: 9/20; */
-  /* top: 6.5vh; */
   background-image: url('/anne.svg');
-  background-position: top calc(-40px - 10%) right 30%;
+  background-position: top calc(-30px - 10%) right 30%;
   background-size: calc(1px + 110%) calc(1px + 100%);
   background-repeat: no-repeat;
 `
@@ -78,7 +79,7 @@ const CreateRoomButton = styled.button`
   min-height: 60px;
   width: 61.6vw;
   height: 7.1vh;
-  top: 42.7vh;
+  top: 43.3vh;
   margin: 0 auto;
   box-sizing: border-box;
   border: 5px solid ${(props) => props.theme.colors.border.black};
@@ -91,29 +92,49 @@ const CreateRoomButton = styled.button`
     aspect-ratio: 16/9.5;
     content: '';
     position: absolute;
-    top: 15%;
+    top: 50%;
     right: 4%;
+    transform: translateY(-50%);
     background-image: url('/createRoom.svg');
     background-size: cover;
   }
 `
 
-// ボタン内テキスト
-const Text = styled.p`
+// Join the roomボタン
+const JoinTheRoomButton = styled(CreateRoomButton)`
+  top: 46.3vh;
+  background-color: ${(props) => props.theme.colors.secondary.main};
+
+  // 画像
+  &::before {
+    width: 14%;
+    aspect-ratio: 9/13;
+    right: 6%;
+    background-image: url('/joinTheRoom.svg');
+  }
+`
+
+// Create roomボタン内テキスト
+const CreateRoomText = styled.p`
   display: block;
   margin: auto;
   position: absolute;
   top: 55%;
-  left: 20px;
+  left: 1%;
   transform: translateY(-50%);
   width: 160px;
   font-family: ${(props) => props.theme.fonts.fonts.sub};
   font-weight: bold;
-  font-size: ${(props) => props.theme.fonts.sizes.body2};
+  font-size: clamp(20px, 5vw, 60px);
   color: ${(props) => props.theme.colors.white};
   text-shadow: 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b;
   z-index: 2;
+`
+
+// Join the roomボタン内テキスト
+const JoinThehRoomText = styled(CreateRoomText)`
+  width: 180px;
 `
