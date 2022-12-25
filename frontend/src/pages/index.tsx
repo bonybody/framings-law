@@ -76,9 +76,8 @@ const Title = styled.img`
 const CreateRoomButton = styled.button`
   display: block;
   position: relative;
-  min-height: 60px;
-  width: 61.6vw;
-  height: 7.1vh;
+  width: 240px;
+  height: 60px;
   top: 43.3vh;
   margin: 0 auto;
   box-sizing: border-box;
@@ -88,12 +87,12 @@ const CreateRoomButton = styled.button`
   // 画像
   &::before {
     display: inline-block;
-    width: 25%;
+    width: 58.79px;
     aspect-ratio: 16/9.5;
     content: '';
     position: absolute;
     top: 50%;
-    right: 4%;
+    right: 10px;
     transform: translateY(-50%);
     background-image: url('/createRoom.svg');
     background-size: cover;
@@ -107,9 +106,9 @@ const JoinTheRoomButton = styled(CreateRoomButton)`
 
   // 画像
   &::before {
-    width: 14%;
-    aspect-ratio: 9/13;
-    right: 6%;
+    width: 33px;
+    height: 46px;
+    right: 10px;
     background-image: url('/joinTheRoom.svg');
   }
 `
@@ -120,12 +119,12 @@ const CreateRoomText = styled.p`
   margin: auto;
   position: absolute;
   top: 55%;
-  left: 1%;
+  left: 26px;
   transform: translateY(-50%);
   width: 160px;
   font-family: ${(props) => props.theme.fonts.fonts.sub};
   font-weight: bold;
-  font-size: clamp(20px, 5vw, 60px);
+  font-size: 24px;
   color: ${(props) => props.theme.colors.white};
   text-shadow: 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
     0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
