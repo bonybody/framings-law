@@ -12,6 +12,7 @@ const Home: NextPage = () => {
   const theme = useTheme()
   return (
     <MainLayout>
+      {/* <SubLayout> */}
       <Main>
         <Headline2>Button</Headline2>
         <div>
@@ -87,7 +88,7 @@ const Home: NextPage = () => {
           />
         </div>
         <Headline2>DiamondShape</Headline2>
-        <div style={{ display: 'flex' }}>
+        <div>
           <DiamondShape
             diagonal={200}
             diamondColor="green"
@@ -109,6 +110,7 @@ const Home: NextPage = () => {
           <WaitingDiamondShape diagonal={200} fontSize="xs" isJoining={true}></WaitingDiamondShape>
         </div>
       </Main>
+      {/* </SubLayout> */}
     </MainLayout>
   )
 }
