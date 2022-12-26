@@ -273,3 +273,8 @@ const Headline2 = styled.h2`
 const Main = styled.div`
   //
 `
+
+// const Headline2 = styled.h2`
+//   margin: 0;
+//   padding: 16px 0;
+// `
