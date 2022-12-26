@@ -10,11 +10,11 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <>
       <UpperLeftTriangle>
-        <img src={'/rectangle-secondary.svg'} alt={''} />
+        <img src={'/secondary-rectangle.svg'} alt={''} />
       </UpperLeftTriangle>
       {children}
       <BottomRightTriangle>
-        <img src={'/rectangle-primary.svg'} alt={''} />
+        <img src={'/primary-rectangle.svg'} alt={''} />
       </BottomRightTriangle>
     </>
   )
