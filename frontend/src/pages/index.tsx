@@ -42,7 +42,7 @@ const Anne = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url('/anne.svg');
+  background-image: url('/anneBack.svg');
   background-position: top calc(-30px - 10%) right 30%;
   background-size: calc(1px + 110%) calc(1px + 100%);
   background-repeat: no-repeat;
@@ -122,7 +122,7 @@ const CreateRoomText = styled.p`
   left: 26px;
   transform: translateY(-50%);
   width: 160px;
-  font-family: ${(props) => props.theme.fonts.fonts.sub};
+  font-family: ${(props) => props.theme.fonts.fontFamily.sub};
   font-weight: bold;
   font-size: 24px;
   color: ${(props) => props.theme.colors.white};
