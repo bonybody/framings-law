@@ -18,6 +18,7 @@ const Home: NextPage = () => {
   const theme = useTheme()
   return (
     <MainLayout>
+      {/* <SubLayout> */}
       <Main>
         <Headline2>Button</Headline2>
         <div>
@@ -123,6 +124,7 @@ const Home: NextPage = () => {
           />
         </div>
       </Main>
+      {/* </SubLayout> */}
     </MainLayout>
   )
 }
