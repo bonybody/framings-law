@@ -31,16 +31,11 @@ const Divider = styled.span`
   transform: translate(-50%, -50%);
   clip-path: polygon(0% 81%, 0% 79%, 100% 19%, 100% 21%);
   background-color: #2b2b2b;
+  z-index: -998;
 `
 
 const UpperLeftTriangle = styled.div`
   position: fixed;
-
-  /* top: -25%;
-  left: 25%;
-  width: 200vw;
-  height: 150vw;
-  transform: rotate(-45deg) translate(-50%, -50%); */
   width: 100vw;
   height: 100vh;
   clip-path: polygon(0% 80%, 0% 0%, 100% 0%, 100% 20%);
@@ -56,5 +51,4 @@ const BottomRightTriangle = styled.div`
   clip-path: polygon(0% 100%, 0% 80%, 100% 20%, 100% 100%);
   background-color: ${({ theme }) => theme.colors.primary.main};
   z-index: -999;
-  /* transform: */
 `
