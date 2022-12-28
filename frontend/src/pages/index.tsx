@@ -1,12 +1,14 @@
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
 
-import { Button, DiamondShape, PostCard } from '@/components/Elements'
+import { Button, DiamondShape, PostCard, Slider } from '@/components/Elements'
+import { Slide } from '@/config/slideData'
 
 const Home: NextPage = () => {
   return (
     <Main>
-      <h1>Button</h1>
+      <Slider data={Slide} />
+      {/* <h1>Button</h1>
       <div>
         <Button>Button</Button>
       </div>
@@ -82,7 +84,7 @@ const Home: NextPage = () => {
         >
           ?
         </DiamondShape>
-      </div>
+      </div> */}
     </Main>
   )
 }
@@ -90,6 +92,6 @@ const Home: NextPage = () => {
 export default Home
 
 const Main = styled.div`
-  max-width: 700px;
+  /* max-width: 700px; */
   margin: 0 auto;
 `

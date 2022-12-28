@@ -3,25 +3,42 @@ import 'swiper/swiper-bundle.css'
 import styled from '@emotion/styled'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
-import { Slide } from './data'
+import type { SlideTypes } from '../../../config/slideData'
 
 export type SliderProps = {
-  //
+  data: SlideTypes[]
 }
 
-export const Slider = ({}: SliderProps) => {
+export const Slider = ({ data}: SliderProps) => {
   return (
     <Swiper slidesPerView={1}>
-      {Slide.map((data, index) => (
-        <SwiperSlide key={index}>
-          <Content>
-            <video id="video" playsInline muted autoPlay loop>
-              <source src={data.path} type="video/mp4" />
-              <p>動画を再生できる環境ではありません。</p>
-            </video>
-          </Content>
-        </SwiperSlide>
-      ))}
+      <SwiperSlide>
+        <Content>
+          <video id="video" playsInline muted autoPlay loop>
+            <source src={path} type="video/mp4" />
+            <p>動画を再生できる環境ではありません。</p>
+          </video>
+        </Content>
+        <DispContent></DispContent>
+      </SwiperSlide>
+      <SwiperSlide>
+        <Content>
+          <video id="video" playsInline muted autoPlay loop>
+            <source src={path} type="video/mp4" />
+            <p>動画を再生できる環境ではありません。</p>
+          </video>
+        </Content>
+        <DispContent></DispContent>
+      </SwiperSlide>
+      <SwiperSlide>
+        <Content>
+          <video id="video" playsInline muted autoPlay loop>
+            <source src={path} type="video/mp4" />
+            <p>動画を再生できる環境ではありません。</p>
+          </video>
+        </Content>
+        <DispContent></DispContent>
+      </SwiperSlide>
     </Swiper>
   )
 }
@@ -40,3 +57,5 @@ const Content = styled.div`
     aspect-ratio: 9 / 16;
   }
 `
+
+const DispContent = styled.div``

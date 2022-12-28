@@ -1,4 +1,4 @@
-interface SlideTypes {
+export type SlideTypes = {
   path: string
 }
 
