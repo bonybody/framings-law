@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 export type InputProps = {
-  placeholder: string
+  placeholder?: string
   register: UseFormRegisterReturn
   backgroundColor: string
   minWidth?: string

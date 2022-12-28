@@ -5,7 +5,7 @@ import { Input } from './Input'
 
 export type InputFieldProps = {
   label: string
-  placeholder: string
+  placeholder?: string
   register: UseFormRegisterReturn
   backgroundColor: string
   minWidth?: string

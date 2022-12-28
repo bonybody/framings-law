@@ -5,13 +5,14 @@ import { useForm } from 'react-hook-form'
 
 import { Button, DiamondShape, PostCard, WaitingDiamondShape } from '@/components/Elements'
 import { InputField } from '@/components/Form'
+import { StartRoom } from '@/module/room/components/StartRoom/StartRoom'
 
 const Home: NextPage = () => {
   const { register } = useForm()
   const theme = useTheme()
   return (
     <Main>
-      <h1>Button</h1>
+      {/* <h1>Button</h1>
       <div>
         <Button>Button</Button>
       </div>
@@ -105,7 +106,7 @@ const Home: NextPage = () => {
           ?
         </DiamondShape>
         <WaitingDiamondShape diagonal={200} fontSize="xs" isJoining={true}></WaitingDiamondShape>
-      </div>
+      </div> */}
     </Main>
   )
 }
