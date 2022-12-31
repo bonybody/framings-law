@@ -15,7 +15,8 @@ const TextInput = styled.input<Pick<InputProps, 'backgroundColor'>>`
   font-family: inherit;
   width: 100%;
   height: 56px;
-  padding-left: 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
   font-size: 24px;
   color: white;
   border-radius: 8px;
