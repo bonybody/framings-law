@@ -1,24 +1,44 @@
 import styled from '@emotion/styled'
+import { useForm } from 'react-hook-form'
 
 import { InputField } from '@/components/Form'
+import { theme } from '@/styles'
 
 import { StartRoom } from './StartRoom'
 
 export const JoinRoom = () => {
+  const { register } = useForm()
   return (
-    <StartRoom text={'ルームの作成'} buttonText={'作成！'} roomType={'create'}>
-      <InputArea>
-        <InputField label="" register={} backgroundColor={}></InputField>
-        <InputField label="" register={} backgroundColor={}></InputField>
-        <InputField label="" register={} backgroundColor={}></InputField>
-      </InputArea>
-    </StartRoom>
+    <JoinRoomArea>
+      <StartRoom text={'ルームへの参加'} buttonText={'参加する！！'} roomType={'join'}>
+        <InputArea>
+          <InputField
+            label="ルームキー"
+            register={register('roomKey')}
+            backgroundColor={theme.colors.secondary.dark}
+          ></InputField>
+        </InputArea>
+      </StartRoom>
+    </JoinRoomArea>
   )
 }
 
-const InputArea = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+const JoinRoomArea = styled.div`
+  &::after {
+    content: '';
+    display: inline-block;
+    background: url('/join-room.svg') no-repeat;
+    width: 41.6%;
+    aspect-ratio: 162.48/214.2;
+    position: absolute;
+    background-size: contain;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    margin: 0 16px 16px 0;
+  }
+`
 
-  gap: 20px;
+const InputArea = styled.div`
+  width: 256px;
 `
