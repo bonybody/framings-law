@@ -4,7 +4,7 @@
   "license": "MIT",
   "bin": {},
   "scripts": {
-    "openapi:gen-ts": "openapi-typescript ../swagger/swagger.yaml --output schema.ts",
+    "openapi:gen-ts": "openapi-typescript ../swagger/swagger.yaml --output src/schema.ts",
     "server:dev": "node -r esbuild-register src/interface/server/index.ts",
     "server:build": "etsc",
     "server:prod": "node dist/interface/server/index",
