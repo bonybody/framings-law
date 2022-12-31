@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { paths } from "../../../../schema";
+import { paths } from "../../../schema";
 import { RoomUseCase } from "../../../usecase";
 import { authMiddleware } from "../middleware/auth";
 

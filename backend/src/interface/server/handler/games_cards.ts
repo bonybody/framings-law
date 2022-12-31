@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { paths } from "../../../../schema";
+import { paths } from "../../../schema";
 import { GameCardUseCase } from "../../../usecase/game_card";
 import { GamePlayerUseCase } from "../../../usecase/game_player";
 import { authMiddleware } from "../middleware/auth";
