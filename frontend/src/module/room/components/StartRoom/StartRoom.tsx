@@ -27,7 +27,9 @@ export const StartRoom = ({ text, children, buttonText, roomType }: StartRoomPro
       </DiamondShape>
 
       <InputArea>{children}</InputArea>
-      <Button>{buttonText}</Button>
+      <ButtonArea>
+        <Button>{buttonText}</Button>
+      </ButtonArea>
     </Wrap>
   )
 }
@@ -68,4 +70,8 @@ const RoomHead = styled.h2`
 const InputArea = styled.div`
   min-height: 194px;
   margin: 30px 0 87px 0;
+`
+
+const ButtonArea = styled.div`
+  z-index: 999;
 `
