@@ -1,5 +1,8 @@
 export interface Fonts {
-  mainFont: "'Yusei Magic', sans-serif"
+  fontFamily: {
+    main: "'Yusei Magic', sans-serif"
+    sub: 'sans-serif'
+  }
   sizes: {
     xs: '0.875rem'
     sm: '1rem'
@@ -41,7 +44,10 @@ type CustomTheme = {
 
 export const theme: CustomTheme = {
   fonts: {
-    mainFont: "'Yusei Magic', sans-serif",
+    fontFamily: {
+      main: "'Yusei Magic', sans-serif",
+      sub: 'sans-serif'
+    },
     sizes: {
       xs: '0.875rem',
       sm: '1rem',
