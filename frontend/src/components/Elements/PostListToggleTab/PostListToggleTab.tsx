@@ -4,14 +4,18 @@ import { AllTab, FlamerTab, TabProps } from './Tab'
 
 export type PostListToggleTabProps = {
   // ユーザーがフレイマーかどうか
-  isFlamer: boolean
+  isFlamer?: boolean
   // すべて、炎上、どちらを選択しているか
-  selectedTab: TabProps['selectedTab']
+  selectedTab?: TabProps['selectedTab']
   // クリック
   handleTab: TabProps['handleTab']
 }
 
-export const PostListToggleTab = ({ isFlamer, selectedTab, handleTab }: PostListToggleTabProps) => {
+export const PostListToggleTab = ({
+  isFlamer = false,
+  selectedTab = 'all',
+  handleTab
+}: PostListToggleTabProps) => {
   return (
     <TabBox>
       <AllTab selectedTab={selectedTab} handleTab={handleTab} />
