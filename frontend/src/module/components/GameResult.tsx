@@ -4,7 +4,8 @@ import { Button, PostCard, PostListToggleTab } from '@/components/Elements'
 import { SubLayout } from '@/components/Layout'
 
 export type GameResultProps = {
-  //
+  // フレイマーかどうか
+  // isFlamer: boolean
 }
 
 // ゲームリザルト画面
@@ -15,7 +16,13 @@ export const GameResult = ({}: GameResultProps) => {
       <Main>
         <Timelimit>残り015秒</Timelimit>
         <TabBox>
-          <PostListToggleTab isFlamer={false} selectedTab={'all'} handleTab={} />
+          <PostListToggleTab
+            isFlamer={true}
+            selectedTab={'all'}
+            handleTab={(arg): void => {
+              arg
+            }}
+          />
         </TabBox>
         <CardBox>
           <PostCard
@@ -53,6 +60,11 @@ export const GameResult = ({}: GameResultProps) => {
   )
 }
 
+// タブの選択状態(フレイマーのみ)
+// const TabState = () => {
+//   const []
+// }
+
 // 隙間
 const Main = styled.div`
   margin: 0 15px;
@@ -62,10 +74,7 @@ const Main = styled.div`
 const Timelimit = styled.div`
   width: 101px;
   margin: auto;
-  position: absolute;
-  top: 51px;
-  left: 0;
-  right: 0;
+  padding-top: 6vh;
   font-size: 24px;
   color: ${(props) => props.theme.colors.white};
   text-shadow: 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
@@ -76,12 +85,12 @@ const Timelimit = styled.div`
 
 // タブ位置
 const TabBox = styled.div`
-  padding-top: 116px;
+  padding-top: 3.5vh;
 `
 
 // カード位置
 const CardBox = styled.div`
-  height: 462px;
+  height: 55vh;
   display: flex;
   flex-flow: column;
   padding-top: 23px;
@@ -92,7 +101,7 @@ const CardBox = styled.div`
 const ButtonBox = styled.div`
   width: fit-content;
   position: absolute;
-  bottom: 77px;
+  bottom: 9vh;
   left: 0;
   right: 0;
   margin: auto;
