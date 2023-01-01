@@ -18,7 +18,7 @@ axiosInstance.interceptors.response.use(
   }
 )
 
-export const api = (headers?: AxiosRequestHeaders) => {
+export const apiClient = (headers?: AxiosRequestHeaders) => {
   return aspidaApi(
     aspida(axiosInstance, {
       headers: {
