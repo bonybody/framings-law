@@ -155,7 +155,7 @@ export class GameCardRepository {
 
   async raiseDeleteflag(id: string) {
     const res = await singleQuery<GameCardRow>(
-      "UPDATE [ ONLY ] table_name SET is_deleted = true WHERE id = $1",
+      "UPDATE game_cards SET is_deleted = true WHERE id = $1 RETURNING *",
       [id]
     );
     if (res.rowCount === 0) return null;

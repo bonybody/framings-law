@@ -1,4 +1,5 @@
 export const lifeCycleList = [
+  "init",
   "ready",
   "debate",
   "vote",
