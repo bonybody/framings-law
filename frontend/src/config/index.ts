@@ -6,3 +6,9 @@ export const FIREBASE = {
   MESSAGING_SENDER_ID: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   APP_ID: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 }
+
+export const PUSHER = {
+  APP_ID: process.env.NEXT_PUBLIC_PUSHER_APP_ID as string,
+  APP_KEY: process.env.NEXT_PUBLIC_PUSHER_APP_KEY as string,
+  APP_SECRET: process.env.NEXT_PUBLIC_PUSHER_APP_SECRET as string
+}
