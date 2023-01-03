@@ -1,91 +1,56 @@
 import styled from '@emotion/styled'
+import { useState } from 'react'
 
-import { Button, PostCard, PostListToggleTab } from '@/components/Elements'
+import { Button, PostListToggleTab, PostListToggleTabProps } from '@/components/Elements'
 import { SubLayout } from '@/components/Layout'
 
+import { PostCardList } from '../game/components/Debate/PostCardList'
+import { TimeRemaining } from '../game/components/Debate/TimeRemaining'
+
 export type GameResultProps = {
+  gameId: string | number
   // フレイマーかどうか
-  // isFlamer: boolean
+  isFlamer: boolean
 }
 
 // ゲームリザルト画面
 
-export const GameResult = ({}: GameResultProps) => {
+export const GameResult = ({ gameId, isFlamer }: GameResultProps) => {
+  const [tab, setTab] = useState<Required<PostListToggleTabProps['selectedTab']>>('all')
+
+  const handleTab: PostListToggleTabProps['handleTab'] = (selectedTab) => {
+    if (!isFlamer) return
+    setTab(selectedTab)
+  }
+
   return (
     <SubLayout>
-      <Main>
-        <Timelimit>残り015秒</Timelimit>
-        <TabBox>
-          <PostListToggleTab
-            isFlamer={true}
-            selectedTab={'all'}
-            handleTab={(arg): void => {
-              arg
-            }}
-          />
-        </TabBox>
+      <Container>
+        <TimeRemaining />
+        <TabContainer>
+          <PostListToggleTab isFlamer={isFlamer} selectedTab={tab} handleTab={handleTab} />
+        </TabContainer>
         <CardBox>
-          <PostCard
-            postedDate="8月20日"
-            age="25"
-            gender="男"
-            content="あああ"
-            isSelect={true}
-            isFlamePost={false}
-          />
-          <PostCard
-            postedDate="8月20日"
-            age="25"
-            gender="男"
-            content="あああ"
-            isSelect={true}
-            isFlamePost={false}
-          />
-          <PostCard
-            postedDate="8月20日"
-            age="25"
-            gender="男"
-            content="あああ"
-            isSelect={true}
-            isFlamePost={false}
-          />
+          <PostCardList gameId={gameId} isFlamer={isFlamer} />
         </CardBox>
         <ButtonBox>
-          <Button isActive isDisable>
+          <Button isActive={false} isDisable={false}>
             これに決める
           </Button>
         </ButtonBox>
-      </Main>
+      </Container>
     </SubLayout>
   )
 }
 
-// タブの選択状態(フレイマーのみ)
-// const TabState = () => {
-//   const []
-// }
-
 // 隙間
-const Main = styled.div`
-  margin: 0 15px;
-`
-
-// 秒数
-const Timelimit = styled.div`
-  width: 101px;
-  margin: auto;
-  padding-top: 6vh;
-  font-size: 24px;
-  color: ${(props) => props.theme.colors.white};
-  text-shadow: 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
-    0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
-    0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b, 0 0 3px #2b2b2b,
-    0 0 3px #2b2b2b;
+const Container = styled.div`
+  padding: 0 16px;
 `
 
 // タブ位置
-const TabBox = styled.div`
-  padding-top: 3.5vh;
+const TabContainer = styled.div`
+  padding-top: 3vh;
 `
 
 // カード位置
