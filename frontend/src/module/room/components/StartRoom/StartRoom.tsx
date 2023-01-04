@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
-import type { ReactNode } from 'react'
+import type { MouseEventHandler, ReactNode } from 'react'
 
 import { Button, DiamondShape } from '@/components/Elements'
 
@@ -8,10 +8,11 @@ export type StartRoomProps = {
   text: string
   children: ReactNode
   buttonText: string
+  onClick: MouseEventHandler<HTMLButtonElement>
   roomType: 'create' | 'join'
 }
 
-export const StartRoom = ({ text, children, buttonText, roomType }: StartRoomProps) => {
+export const StartRoom = ({ text, children, buttonText, onClick, roomType }: StartRoomProps) => {
   return (
     <Wrap roomType={roomType}>
       <RoomHead>{text}</RoomHead>
@@ -28,7 +29,7 @@ export const StartRoom = ({ text, children, buttonText, roomType }: StartRoomPro
 
       <InputArea>{children}</InputArea>
       <ButtonArea>
-        <Button>{buttonText}</Button>
+        <Button onClick={onClick}>{buttonText}</Button>
       </ButtonArea>
     </Wrap>
   )
