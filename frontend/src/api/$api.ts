@@ -13,7 +13,7 @@ import type { Methods as Methods9 } from './rooms/_roomId@string/readies'
 import type { Methods as Methods10 } from './rooms/_roomId@string/users'
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
-  const prefix = (baseURL === undefined ? 'http://localhost:3000/' : baseURL).replace(/\/$/, '')
+  const prefix = (baseURL === undefined ? 'http://localhost:8000/' : baseURL).replace(/\/$/, '')
   const PATH0 = '/games'
   const PATH1 = '/cards'
   const PATH2 = '/players'
