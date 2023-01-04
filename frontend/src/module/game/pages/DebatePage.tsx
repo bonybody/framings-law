@@ -1,5 +1,9 @@
+import { useRouter } from 'next/router'
+
 import { Debate } from '../components/Debate'
 
 export const DebatePage = () => {
-  return <Debate gameId={'hoge'} isFlamer={true} />
+  const router = useRouter()
+
+  return <Debate gameId={router.query.gameId as string} isFlamer={true} />
 }
