@@ -1,7 +1,7 @@
-import { apiClient } from '@/lib/api'
+import { apiClient, ApiClientOptions } from '@/lib/api'
 
-export const getJoinRoom = async (uid: string, roomId: string) => {
-  const res = await apiClient({ uid: uid }).rooms._roomId(roomId).joins.$post()
+export const getJoinRoom = async (idToken: ApiClientOptions['idToken'], roomId: string) => {
+  const res = await apiClient({ idToken: idToken }).rooms._roomId(roomId).joins.$post()
   console.log(res)
   return res
 }
