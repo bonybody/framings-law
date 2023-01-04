@@ -9,4 +9,8 @@ export const styles = css`
     margin: 0;
     background: #d2104a;
   }
+  body {
+    margin: 0;
+    background: #d2104a;
+  }
 `
