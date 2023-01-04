@@ -18,12 +18,13 @@ axiosInstance.interceptors.response.use(
   }
 )
 
-export const apiClient = (headers?: AxiosRequestHeaders) => {
+export const apiClient = ({ uid }: { uid: string }, headers?: AxiosRequestHeaders) => {
   return api(
     aspida(axiosInstance, {
       headers: {
         ...headers,
-        accept: 'application/json'
+        accept: 'application/json',
+        Authorization: `Bearer ${uid}`
       }
     })
   )
