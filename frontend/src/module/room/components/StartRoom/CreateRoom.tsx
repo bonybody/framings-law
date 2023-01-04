@@ -1,28 +1,12 @@
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react'
 
-import { firebaseAuth } from '@/lib/firebase'
+import { useAuthContext } from '@/module/auth'
 
 import { getCreateRoom } from '../../api/getCreateRoom'
-// import { useForm } from 'react-hook-form'
-// import { InputField } from '@/components/Form'
-// import { theme } from '@/styles'
 import { StartRoom } from './StartRoom'
 
 export const CreateRoom = () => {
-  // const { register } = useForm()
-  const [idToken, setIdToken] = useState<string>('')
-
-  useEffect(() => {
-    firebaseAuth.currentUser
-      ?.getIdToken()
-      .then((res) => {
-        setIdToken(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
+  const { idToken } = useAuthContext()
 
   const handleClick = async () => {
     await getCreateRoom(idToken)
@@ -36,23 +20,7 @@ export const CreateRoom = () => {
         roomType={'create'}
         onClick={handleClick}
       >
-        <InputArea>
-          {/* <InputField
-            label="投稿カード枚数"
-            register={register('postCard')}
-            backgroundColor={theme.colors.primary.dark}
-          ></InputField>
-          <InputField
-            label="ディベート分数"
-            register={register('debateMinute')}
-            backgroundColor={theme.colors.primary.dark}
-          ></InputField>
-          <InputField
-            label="参加できる人数"
-            register={register('numberOfParticipants')}
-            backgroundColor={theme.colors.primary.dark}
-          ></InputField> */}
-        </InputArea>
+        <InputArea />
       </StartRoom>
     </CreateRoomArea>
   )

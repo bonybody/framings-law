@@ -1,30 +1,16 @@
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react'
-// import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { InputField } from '@/components/Form'
-import { firebaseAuth } from '@/lib/firebase'
+import { useAuthContext } from '@/module/auth'
 import { theme } from '@/styles'
 
 import { getJoinRoom } from '../../api/getJoinRoom'
 import { StartRoom } from './StartRoom'
 
 export const JoinRoom = () => {
+  const { idToken } = useAuthContext()
   const { register, getValues } = useForm<{ roomKey: string }>()
-
-  const [idToken, setIdToken] = useState<string>('')
-
-  useEffect(() => {
-    firebaseAuth.currentUser
-      ?.getIdToken()
-      .then((res) => {
-        setIdToken(res)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
 
   const handleClick = async () => {
     await getJoinRoom(idToken, getValues('roomKey'))
