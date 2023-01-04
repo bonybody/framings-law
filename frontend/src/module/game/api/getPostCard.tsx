@@ -10,7 +10,7 @@ type GetPostCardOptions = {
   isFlaming?: boolean
 }
 
-const getPostCard = async ({ gameId, isDeleted, isFlaming }: GetPostCardOptions) => {
+export const getPostCard = async ({ gameId, isDeleted, isFlaming }: GetPostCardOptions) => {
   /**
    * コメンタリティとbodyの違い
    */
