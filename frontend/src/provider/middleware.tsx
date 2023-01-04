@@ -1,7 +1,6 @@
-import { User } from 'firebase/auth'
 import { ReactNode, useCallback, useEffect } from 'react'
 
-import { login, useAuthContext, useSetAuthContext } from '@/module/auth'
+import { login, useAuthContext, User, useSetAuthContext } from '@/module/auth'
 
 type Props = {
   children: ReactNode
@@ -14,7 +13,8 @@ export const Middleware = ({ children }: Props) => {
   const handleAuth = useCallback((user: User) => {
     setAuth({
       uid: user.uid,
-      isAnonymous: user.isAnonymous
+      isAnonymous: user.isAnonymous,
+      idToken: user.idToken
     })
   }, [])
 
