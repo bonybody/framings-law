@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { InputField } from '@/components/Form'
@@ -10,7 +11,14 @@ export const JoinRoom = () => {
   const { register } = useForm()
   return (
     <JoinRoomArea>
-      <StartRoom text={'ルームへの参加'} buttonText={'参加する！！'} roomType={'join'}>
+      <StartRoom
+        text={'ルームへの参加'}
+        buttonText={'参加する！！'}
+        roomType={'join'}
+        onClick={() => {
+          console.log('Join')
+        }}
+      >
         <InputArea>
           <InputField
             label="ルームキー"

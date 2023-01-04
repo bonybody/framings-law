@@ -10,7 +10,14 @@ export const CreateRoom = () => {
   const { register } = useForm()
   return (
     <CreateRoomArea>
-      <StartRoom text={'ルームの作成'} buttonText={'作成！'} roomType={'create'}>
+      <StartRoom
+        text={'ルームの作成'}
+        buttonText={'作成！'}
+        roomType={'create'}
+        onClick={() => {
+          console.log('Create')
+        }}
+      >
         <InputArea>
           <InputField
             label="投稿カード枚数"
