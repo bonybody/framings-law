@@ -5,7 +5,10 @@ export const styles = css`
     font-family: 'Yusei Magic', sans-serif;
     margin: 0;
   }
-  ,
+  body {
+    margin: 0;
+    background: #d2104a;
+  }
   body {
     margin: 0;
     background: #d2104a;

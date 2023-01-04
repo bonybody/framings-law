@@ -21,7 +21,7 @@ export const roomTriggers = {
     return pusher.trigger(`room-${roomId}`, "ready", { users });
   },
   start: async (roomId: string, gameId: string) => {
-    return pusher.trigger(`room-${roomId}`, "changeState", {
+    return pusher.trigger(`room-${roomId}`, "start", {
       gameId,
     });
   },
@@ -29,7 +29,7 @@ export const roomTriggers = {
 
 type GameProgress = {
   turn: number;
-  phase: "ready" | "debate" | "vote" | "totalling";
+  phase: "ready" | "debate" | "vote" | "totalling" | "result";
 };
 
 export const gameTriggers = {

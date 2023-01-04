@@ -166,21 +166,17 @@ export interface components {
       };
       isDeleted?: boolean;
     };
-  };
-  responses: {
-    /** @description Example response */
-    CreateRoomResponse: {
-      content: {
-        "application/json": {
-          id?: string;
-          hostUserId?: string;
-          roomStatusId?: string;
-          roomKey?: string;
-          cardCount?: number;
-          debateSeconds?: number;
-        };
+    /** Game */
+    Game: {
+      id?: string;
+      room_id?: string;
+      status?: {
+        id?: string;
+        code?: string;
       };
     };
+  };
+  responses: {
   };
   parameters: never;
   requestBodies: never;
@@ -276,9 +272,7 @@ export interface operations {
       /** @description Created */
       201: {
         content: {
-          "application/json": {
-            id?: string;
-          };
+          "application/json": components["schemas"]["Game"];
         };
       };
     };
@@ -289,6 +283,12 @@ export interface operations {
      * @description {gameId}で指定されたゲームの状態を取得する。
      */
     responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "application/json": components["schemas"]["Game"];
+        };
+      };
     };
   };
   "get-games-gameId-posts": {

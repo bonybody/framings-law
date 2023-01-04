@@ -6,6 +6,7 @@ import {
 } from "../repository";
 import { GameCardUseCase } from "./game_card";
 import { GamePlayerUseCase } from "./game_player";
+import { GameProgressUseCase } from "./game_progress";
 
 export class GameUseCase {
   private roomRepository: RoomRepository;
@@ -13,18 +14,21 @@ export class GameUseCase {
   private gameRepository: GameRepository;
   private gamePlayerUseCase: GamePlayerUseCase;
   private gameCardUseCase: GameCardUseCase;
+  private gameProgressUseCase: GameProgressUseCase;
   constructor(
     roomRepository: RoomRepository,
     gameStatusRepository: GameStatusRepository,
     gameRepository: GameRepository,
     gamePlayerUseCase: GamePlayerUseCase,
-    gameCardUseCase: GameCardUseCase
+    gameCardUseCase: GameCardUseCase,
+    gameProgressUseCase: GameProgressUseCase
   ) {
     this.roomRepository = roomRepository;
     this.gameStatusRepository = gameStatusRepository;
     this.gameRepository = gameRepository;
     this.gamePlayerUseCase = gamePlayerUseCase;
     this.gameCardUseCase = gameCardUseCase;
+    this.gameProgressUseCase = gameProgressUseCase;
   }
 
   static factory() {
@@ -33,7 +37,8 @@ export class GameUseCase {
       new GameStatusRepository(),
       new GameRepository(),
       GamePlayerUseCase.factory(),
-      GameCardUseCase.factory()
+      GameCardUseCase.factory(),
+      GameProgressUseCase.factory()
     );
   }
 
@@ -52,6 +57,7 @@ export class GameUseCase {
     await this.gameCardUseCase.init(game.id, room.card_count);
     await this.gamePlayerUseCase.init(roomId, game.id);
     await roomTriggers.start(roomId, game.id);
+    await this.gameProgressUseCase.update(game.id, 1, "ready");
     await gameTriggers.ready(game.id, 1);
     return game.id;
   }

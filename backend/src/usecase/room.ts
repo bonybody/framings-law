@@ -39,7 +39,6 @@ export class RoomUseCase {
     if (room === null) throw new Error();
     await this.join(room.id, hostUserId);
     await this.ready(room.id, hostUserId);
-    console.log(hostUserId);
     return {
       id: room.id,
       hostUerId: room.host_user_id,

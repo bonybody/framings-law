@@ -25,7 +25,7 @@ export class GameProgressUseCase {
 
   async now(gameId: string): Promise<GameProgress> {
     const progress = await this.gameProgressRepository.find(gameId);
-    if (lifeCycleList.includes(progress.phase as LifeCycle)) throw new Error();
+    if (!lifeCycleList.includes(progress.phase as LifeCycle)) throw new Error();
     return {
       turn: progress.turn,
       phase: progress.phase as LifeCycle,
@@ -44,8 +44,6 @@ export class GameProgressUseCase {
 
   async ready(gameId: string, turn: number) {
     this.gameProgressRepository.find(gameId);
-    const res = await this.gameProgressRepository.create(gameId, turn, "ready");
-    if (res !== "OK") throw new Error();
     await gameTriggers.ready(gameId, turn);
     await this.update(gameId, turn, "debate");
   }
@@ -71,7 +69,7 @@ export class GameProgressUseCase {
     if (isEnd) {
       await this.update(gameId, turn, "result");
     } else {
-      await this.update(gameId, turn++, "debate");
+      await this.update(gameId, ++turn, "ready");
     }
   }
 

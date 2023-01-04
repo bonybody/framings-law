@@ -66,12 +66,10 @@ export class GamePlayerRepository {
   }
 
   async findWithCharacter(id: string) {
-    console.log(id);
     const res = await singleQuery<GamePlayerWithCharacterRow>(
       "SELECT game_players.id, game_id, user_id, character_id, is_framer, display_name, image_url FROM game_players INNER JOIN characters ON game_players.character_id = characters.id  WHERE game_players.id = $1",
       [id]
     );
-    console.log(res.rows);
 
     if (res.rowCount === 0) return null;
     return gamePlayerWithCharacterRowSchema.parse(res.rows[0]);
