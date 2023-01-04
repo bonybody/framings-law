@@ -11,6 +11,27 @@ $ yarn
 $ yarn dev # 開発サーバー起動
 ```
 
+## backend開発環境構築
+1. `serviceAccountKey.json`を`backend/`直下に配置する。
+2. `cd backend`
+3. `make init`
+4. `.env`を書き換える
+5. `docker compose up`
+6. `make server/dev`
+### Swagger UI
+```
+docker compose up
+```
+[http://localhost:8080/]
+
+### 動作テスト
+```
+docker compoose up
+```
+```
+cd backend; make test
+```
+
 ## DB情報
 ### 開発環境
 user：`framings`
