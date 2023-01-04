@@ -6,6 +6,7 @@ import { MainLayout } from '@/components/Layout'
 
 import { PostCardList } from './PostCardList'
 import { TimeRemaining } from './TimeRemaining'
+import { UserList } from './UserList'
 
 export type DebateProps = {
   gameId: string | number
@@ -29,6 +30,7 @@ export const Debate = ({ gameId, isFlamer }: DebateProps) => {
         </TabContainer>
 
         <PostCardList gameId={gameId} isFlamer={isFlamer} />
+        <UserList />
       </Container>
     </MainLayout>
   )
