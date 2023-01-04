@@ -1,7 +1,7 @@
 import aspida from '@aspida/axios'
 import Axios, { AxiosRequestHeaders } from 'axios'
 
-import { default as aspidaApi } from '@/api/$api'
+import api from '@/api/$api'
 import { API_SERVER } from '@/config'
 
 const axiosInstance = Axios.create({
@@ -19,10 +19,11 @@ axiosInstance.interceptors.response.use(
 )
 
 export const apiClient = (headers?: AxiosRequestHeaders) => {
-  return aspidaApi(
+  return api(
     aspida(axiosInstance, {
       headers: {
-        ...headers
+        ...headers,
+        accept: 'application/json'
       }
     })
   )
