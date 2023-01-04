@@ -2,19 +2,21 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 
 import { GameCard } from '@/api/@types'
-import { apiClient } from '@/lib/api'
+import { apiClient, ApiClientOptions } from '@/lib/api'
 
-type GetPostCardOptions = {
-  gameId: string | number
+import { GameId } from '../types'
+
+type GetPostCardOptions = Pick<ApiClientOptions, 'uid'> & {
+  gameId: GameId
   isDeleted?: boolean
   isFlaming?: boolean
 }
 
-export const getPostCard = async ({ gameId, isDeleted, isFlaming }: GetPostCardOptions) => {
+export const getPostCard = async ({ uid, gameId, isDeleted, isFlaming }: GetPostCardOptions) => {
   /**
    * コメンタリティとbodyの違い
    */
-  const { cards } = await apiClient()
+  const { cards } = await apiClient({ uid })
     .games._gameId(gameId)
     .cards.$get({
       query: {

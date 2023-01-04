@@ -1,14 +1,17 @@
 import { PostCard } from '@/components/Elements'
+import { useAuthContext } from '@/module/auth'
 
 import { usePostCard } from '../../api/getPostCard'
+import { GameId } from '../../types'
 
 export type PostCardListProps = {
-  gameId: string | number
+  gameId: GameId
   isFlamer: boolean
 }
 
 export const PostCardList = ({ gameId, isFlamer }: PostCardListProps) => {
-  const { cardList } = usePostCard({ gameId, isFlaming: isFlamer, isDeleted: true })
+  const { uid } = useAuthContext()
+  const { cardList } = usePostCard({ uid, gameId, isFlaming: isFlamer, isDeleted: true })
 
   return (
     <>

@@ -2,19 +2,22 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 
 import { ApiHookState } from '@/@types'
-// import { apiClient } from '@/lib/api'
+import { ApiClientOptions } from '@/lib/api'
 
-type GetGameJoinUserOptions = {
-  gameId: string
+import { GameId } from '../types'
+// import { apiClient, ApiClientOptions } from '@/lib/api'
+
+type GetGameJoinUserOptions = Pick<ApiClientOptions, 'uid'> & {
+  gameId: GameId
 }
 
-export const getGameJoinUser = async ({ gameId }: GetGameJoinUserOptions) => {
-  // const res = await apiClient().games._gameId(gameId).players.$get()
+export const getGameJoinUser = async ({ uid, gameId }: GetGameJoinUserOptions) => {
+  // const res = await apiClient({ uid }).games._gameId(gameId).players.$get()
   const res = {
     players: [
       {
         id: '1',
-        userId: 'userId',
+        userId: uid,
         gameId: gameId,
         isFramer: true,
         character: {
@@ -25,7 +28,40 @@ export const getGameJoinUser = async ({ gameId }: GetGameJoinUserOptions) => {
       },
       {
         id: '2',
-        userId: 'userId',
+        userId: uid,
+        gameId: gameId,
+        isFramer: true,
+        character: {
+          id: 'id',
+          displayName: 'anne',
+          imageUrl: 'anne'
+        }
+      },
+      {
+        id: '3',
+        userId: uid,
+        gameId: gameId,
+        isFramer: true,
+        character: {
+          id: 'id',
+          displayName: 'anne',
+          imageUrl: 'anne'
+        }
+      },
+      {
+        id: '4',
+        userId: uid,
+        gameId: gameId,
+        isFramer: true,
+        character: {
+          id: 'id',
+          displayName: 'anne',
+          imageUrl: 'anne'
+        }
+      },
+      {
+        id: '5',
+        userId: uid,
         gameId: gameId,
         isFramer: true,
         character: {
@@ -46,7 +82,7 @@ type UseGameJoinUserState = ApiHookState & {
         players: {
           id: string
           userId: string
-          gameId: string
+          gameId: string | number
           isFramer: boolean
           character: {
             id: string

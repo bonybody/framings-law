@@ -4,12 +4,13 @@ import { useState } from 'react'
 import { PostListToggleTab, PostListToggleTabProps } from '@/components/Elements'
 import { MainLayout } from '@/components/Layout'
 
+import { GameId } from '../../types'
 import { PostCardList } from './PostCardList'
 import { TimeRemaining } from './TimeRemaining'
 import { UserList } from './UserList'
 
 export type DebateProps = {
-  gameId: string | number
+  gameId: GameId
   isFlamer: boolean
 }
 
@@ -30,7 +31,9 @@ export const Debate = ({ gameId, isFlamer }: DebateProps) => {
         </TabContainer>
 
         <PostCardList gameId={gameId} isFlamer={isFlamer} />
-        <UserList />
+        <UserListContainer>
+          <UserList gameId={gameId} />
+        </UserListContainer>
       </Container>
     </MainLayout>
   )
@@ -38,8 +41,16 @@ export const Debate = ({ gameId, isFlamer }: DebateProps) => {
 
 const Container = styled.div`
   padding: 0 16px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 `
 
 const TabContainer = styled.div`
   padding-top: 3vh;
+`
+
+const UserListContainer = styled.div`
+  margin-top: auto;
+  padding-bottom: 16px;
 `
