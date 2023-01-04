@@ -141,16 +141,17 @@ export class GameCardUseCase {
       mostedValue[0]
     );
     if (deleted === null) throw new Error();
-    const remainingCount = await this.countFraming(gameId);
+    // const remainingCount = await this.countFraming(gameId);
     return deleted;
   }
 
   async countFraming(gameId: string) {
     const options = {
-      isFramiing: true,
+      isFraming: true,
       isDeleted: false,
     };
     const res = await this.gameCardRepository.search(gameId, options);
+
     if (res === undefined) return 0;
     return res.length;
   }

@@ -1,4 +1,4 @@
-import { GameHealthCheckRepository, GamePlayerRepository } from "../repository";
+import { GameHealthCheckRepository } from "../repository";
 import { GamePlayerUseCase } from "./game_player";
 import { GameProgressUseCase } from "./game_progress";
 
@@ -14,6 +14,14 @@ export class GameHealthCheckUseCase {
     this.gameHealthCheckRepository = gameHealthCheckRepository;
     this.gamePlayerUseCase = gamePlayerUseCase;
     this.gameProgressUseCase = gameProgressUseCase;
+  }
+
+  static factory() {
+    return new GameHealthCheckUseCase(
+      new GameHealthCheckRepository(),
+      GamePlayerUseCase.factory(),
+      GameProgressUseCase.factory()
+    );
   }
 
   async get(gameId: string) {
@@ -46,6 +54,8 @@ export class GameHealthCheckUseCase {
   async nextAction(gameId: string) {
     const now = await this.gameProgressUseCase.now(gameId);
     switch (now.phase) {
+      case "init":
+        break;
       case "ready":
         await this.gameProgressUseCase.ready(gameId, now.turn);
         break;
@@ -63,5 +73,6 @@ export class GameHealthCheckUseCase {
       default:
         break;
     }
+    await this.reset(gameId);
   }
 }
