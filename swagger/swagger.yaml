@@ -159,8 +159,19 @@ paths:
       description: '{gameId}で指定されたゲームの状態を取得する。'
       tags:
         - Game
-      security:
-        - Authorization: []
+  '/games/{gameId}/health-check':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-games-gameId-health-check
+      responses:
+        '200':
+          description: OK
   '/games/{gameId}/cards':
     parameters:
       - type: string
@@ -305,6 +316,27 @@ paths:
       operationId: get-games-gameId-players-playerId
       security:
         - authorization: []
+  '/games/{gameId}/vote':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-games-gameId-vote
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gameCardId:
+                  type: string
 definitions:
   User:
     title: User
@@ -488,14 +520,9 @@ components:
         id: drxq2nvw3khjb
       type: object
       properties:
-        id:
+        turn:
+          type: number
+        phase:
           type: string
-        room_id:
-          type: string
-        status:
-          type: object
-          properties:
-            id:
-              type: string
-            code:
-              type: string
+security:
+  - authorization: []
