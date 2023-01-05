@@ -5,10 +5,10 @@ import { Input } from './Input'
 
 export type InputFieldProps = {
   label: string
-  placeholder: string
+  placeholder?: string
   register: UseFormRegisterReturn
   backgroundColor: string
-  minWidth?: string
+  width?: string
 }
 
 export const InputField = ({
@@ -16,20 +16,19 @@ export const InputField = ({
   register,
   placeholder,
   backgroundColor,
-  minWidth
+  width
 }: InputFieldProps) => {
   return (
-    <>
+    <InputFieldArea width={width}>
       <Label>{label}</Label>
-      <Input
-        register={register}
-        placeholder={placeholder}
-        backgroundColor={backgroundColor}
-        minWidth={minWidth}
-      />
-    </>
+      <Input register={register} placeholder={placeholder} backgroundColor={backgroundColor} />
+    </InputFieldArea>
   )
 }
+
+const InputFieldArea = styled.div<{ width?: string }>`
+  width: ${(props) => props.width}; ;
+`
 
 const Label = styled.label`
   color: white;
