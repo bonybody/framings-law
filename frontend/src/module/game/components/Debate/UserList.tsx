@@ -23,7 +23,7 @@ export const UserList = ({ gameId }: UserListProps) => {
               player.character.displayName as CharacterDiamondShapeProps['charactorName']
             }
             isMyDiamond={player.userId !== uid}
-            diagonal={56}
+            diagonal={64}
             borderSize={'3px'}
             fontSize={'12px'}
             textOffset={{ top: '-18px', left: '0px' }}
@@ -37,17 +37,17 @@ export const UserList = ({ gameId }: UserListProps) => {
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   max-width: 100vw;
   width: 100%;
-  height: 90px;
+  height: 100px;
+  margin: 0 auto;
 `
 
 const Content = styled.div<{ number: number }>`
   &:nth-of-type(2),
   :nth-of-type(4) {
-    position: relative;
     margin-top: auto;
-    right: 5px;
+    margin-left: -15px;
   }
 `
