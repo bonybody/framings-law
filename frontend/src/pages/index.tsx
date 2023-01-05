@@ -1,19 +1,22 @@
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 // ホーム画面
 
 const Home: NextPage = () => {
+  const router = useRouter()
+
   return (
     <Container>
       <Anne />
       <Logo src="/question.svg" alt="logo" />
       <Title src="/titleLogo.svg" alt="title" />
-      <CreateRoomButton>
+      <CreateRoomButton onClick={() => router.push('/room/create')}>
         <CreateRoomText>Create room</CreateRoomText>
       </CreateRoomButton>
-      <JoinTheRoomButton>
+      <JoinTheRoomButton onClick={() => router.push('/room/join')}>
         <JoinThehRoomText>Join the room</JoinThehRoomText>
       </JoinTheRoomButton>
     </Container>
