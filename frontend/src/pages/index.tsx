@@ -121,6 +121,7 @@ const Home: NextPage = () => {
             isMyDiamond={false}
             isReady={false}
             charactorName="anne"
+            textOffset={{ top: '0px', left: '0px' }}
           />
         </div>
       </Main>
