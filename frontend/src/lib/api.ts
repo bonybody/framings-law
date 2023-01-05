@@ -3,6 +3,7 @@ import Axios, { AxiosRequestHeaders } from 'axios'
 
 import api from '@/api/$api'
 import { API_SERVER } from '@/config'
+import { User } from '@/module/auth'
 
 const axiosInstance = Axios.create({
   baseURL: API_SERVER
@@ -18,13 +19,17 @@ axiosInstance.interceptors.response.use(
   }
 )
 
-export const apiClient = ({ uid }: { uid: string }, headers?: AxiosRequestHeaders) => {
+export type ApiClientOptions = Pick<User, 'idToken'> & {
+  headers?: AxiosRequestHeaders
+}
+
+export const apiClient = ({ idToken, headers }: ApiClientOptions) => {
   return api(
     aspida(axiosInstance, {
       headers: {
         ...headers,
         accept: 'application/json',
-        Authorization: `Bearer ${uid}`
+        Authorization: `Bearer ${idToken}`
       }
     })
   )

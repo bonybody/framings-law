@@ -3,6 +3,7 @@ import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useStat
 type AuthContext = {
   uid: string
   isAnonymous: boolean | null
+  idToken: string
 }
 
 type SetAuthContext = Dispatch<SetStateAction<AuthContext>>
@@ -27,7 +28,8 @@ const [useSetAuthContext, setAuthContext] = customCreateContext<SetAuthContext>(
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthContext>({
     uid: '',
-    isAnonymous: null
+    isAnonymous: null,
+    idToken: ''
   })
 
   return (

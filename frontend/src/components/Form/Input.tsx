@@ -2,29 +2,21 @@ import styled from '@emotion/styled'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
 export type InputProps = {
-  placeholder: string
+  placeholder?: string
   register: UseFormRegisterReturn
   backgroundColor: string
-  minWidth?: string
 }
 
-export const Input = ({ placeholder, register, backgroundColor, minWidth }: InputProps) => {
-  return (
-    <TextInput
-      placeholder={placeholder}
-      {...register}
-      backgroundColor={backgroundColor}
-      minWidth={minWidth}
-    />
-  )
+export const Input = ({ placeholder, register, backgroundColor }: InputProps) => {
+  return <TextInput placeholder={placeholder} {...register} backgroundColor={backgroundColor} />
 }
 
-const TextInput = styled.input<Pick<InputProps, 'backgroundColor' | 'minWidth'>>`
+const TextInput = styled.input<Pick<InputProps, 'backgroundColor'>>`
   font-family: inherit;
   width: 100%;
-  min-width: ${(props) => props.minWidth};
   height: 56px;
-  padding-left: 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
   font-size: 24px;
   color: white;
   border-radius: 8px;
