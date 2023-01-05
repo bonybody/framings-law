@@ -12,10 +12,10 @@ export const getChannel = (channelName: string) => {
 
 type Users = string[]
 
-// type GameProgress = {
-//   turn: number
-//   phase: 'ready' | 'debate' | 'vote' | 'totalling' | 'result'
-// }
+export type GameProgress = {
+  turn: number
+  phase: 'ready' | 'debate' | 'vote' | 'totalling' | 'result'
+}
 
 export const roomEvents = {
   // eslint-disable-next-line @typescript-eslint/ban-types
