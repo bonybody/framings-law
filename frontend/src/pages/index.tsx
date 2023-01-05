@@ -6,19 +6,17 @@ import type { NextPage } from 'next'
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Container>
-        <Anne />
-        <Logo src="/question.svg" alt="logo" />
-        <Title src="/titleLogo.svg" alt="title" />
-        <CreateRoomButton>
-          <CreateRoomText>Create room</CreateRoomText>
-        </CreateRoomButton>
-        <JoinTheRoomButton>
-          <JoinThehRoomText>Join the room</JoinThehRoomText>
-        </JoinTheRoomButton>
-      </Container>
-    </div>
+    <Container>
+      <Anne />
+      <Logo src="/question.svg" alt="logo" />
+      <Title src="/titleLogo.svg" alt="title" />
+      <CreateRoomButton>
+        <CreateRoomText>Create room</CreateRoomText>
+      </CreateRoomButton>
+      <JoinTheRoomButton>
+        <JoinThehRoomText>Join the room</JoinThehRoomText>
+      </JoinTheRoomButton>
+    </Container>
   )
 }
 
