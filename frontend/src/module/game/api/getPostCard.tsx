@@ -6,17 +6,22 @@ import { apiClient, ApiClientOptions } from '@/lib/api'
 
 import { GameId } from '../types'
 
-type GetPostCardOptions = Pick<ApiClientOptions, 'uid'> & {
+type GetPostCardOptions = Pick<ApiClientOptions, 'idToken'> & {
   gameId: GameId
   isDeleted?: boolean
   isFlaming?: boolean
 }
 
-export const getPostCard = async ({ uid, gameId, isDeleted, isFlaming }: GetPostCardOptions) => {
+export const getPostCard = async ({
+  idToken,
+  gameId,
+  isDeleted,
+  isFlaming
+}: GetPostCardOptions) => {
   /**
    * コメンタリティとbodyの違い
    */
-  const { cards } = await apiClient({ uid })
+  const { cards } = await apiClient({ idToken })
     .games._gameId(gameId)
     .cards.$get({
       query: {

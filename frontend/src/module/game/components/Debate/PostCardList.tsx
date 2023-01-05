@@ -10,8 +10,8 @@ export type PostCardListProps = {
 }
 
 export const PostCardList = ({ gameId, isFlamer }: PostCardListProps) => {
-  const { uid } = useAuthContext()
-  const { cardList } = usePostCard({ uid, gameId, isFlaming: isFlamer, isDeleted: true })
+  const { idToken } = useAuthContext()
+  const { cardList } = usePostCard({ idToken, gameId, isFlaming: isFlamer, isDeleted: true })
 
   return (
     <>

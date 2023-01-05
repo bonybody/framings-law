@@ -11,8 +11,8 @@ export type UserListProps = {
 }
 
 export const UserList = ({ gameId }: UserListProps) => {
-  const { uid } = useAuthContext()
-  const { userList } = useGameJoinUser({ uid, gameId })
+  const { idToken } = useAuthContext()
+  const { userList } = useGameJoinUser({ idToken, gameId })
 
   return (
     <Container>
@@ -22,7 +22,7 @@ export const UserList = ({ gameId }: UserListProps) => {
             charactorName={
               player.character.displayName as CharacterDiamondShapeProps['charactorName']
             }
-            isMyDiamond={player.userId !== uid}
+            isMyDiamond={player.userId !== idToken}
             diagonal={64}
             borderSize={'3px'}
             fontSize={'12px'}

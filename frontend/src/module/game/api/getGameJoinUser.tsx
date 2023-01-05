@@ -4,20 +4,21 @@ import { useQuery } from 'react-query'
 import { ApiHookState } from '@/@types'
 import { ApiClientOptions } from '@/lib/api'
 
-import { GameId } from '../types'
 // import { apiClient, ApiClientOptions } from '@/lib/api'
+import { GameId } from '../types'
 
-type GetGameJoinUserOptions = Pick<ApiClientOptions, 'uid'> & {
+type GetGameJoinUserOptions = Pick<ApiClientOptions, 'idToken'> & {
   gameId: GameId
 }
 
-export const getGameJoinUser = async ({ uid, gameId }: GetGameJoinUserOptions) => {
-  // const res = await apiClient({ uid }).games._gameId(gameId).players.$get()
+export const getGameJoinUser = async ({ idToken, gameId }: GetGameJoinUserOptions) => {
+  // const res = await apiClient({ idToken }).games._gameId(gameId).players.$get()
+  console.log(idToken)
   const res = {
     players: [
       {
         id: '1',
-        userId: uid,
+        userId: '1',
         gameId: gameId,
         isFramer: true,
         character: {
@@ -28,7 +29,7 @@ export const getGameJoinUser = async ({ uid, gameId }: GetGameJoinUserOptions) =
       },
       {
         id: '2',
-        userId: uid,
+        userId: '2',
         gameId: gameId,
         isFramer: true,
         character: {
@@ -39,7 +40,7 @@ export const getGameJoinUser = async ({ uid, gameId }: GetGameJoinUserOptions) =
       },
       {
         id: '3',
-        userId: uid,
+        userId: '3',
         gameId: gameId,
         isFramer: true,
         character: {
@@ -50,7 +51,7 @@ export const getGameJoinUser = async ({ uid, gameId }: GetGameJoinUserOptions) =
       },
       {
         id: '4',
-        userId: uid,
+        userId: '4',
         gameId: gameId,
         isFramer: true,
         character: {
@@ -61,7 +62,7 @@ export const getGameJoinUser = async ({ uid, gameId }: GetGameJoinUserOptions) =
       },
       {
         id: '5',
-        userId: uid,
+        userId: '5',
         gameId: gameId,
         isFramer: true,
         character: {
@@ -72,7 +73,9 @@ export const getGameJoinUser = async ({ uid, gameId }: GetGameJoinUserOptions) =
       }
     ]
   }
+
   return await Promise.resolve(res)
+  // return res
 }
 
 type UseGameJoinUserState = ApiHookState & {
