@@ -12,7 +12,7 @@ export const getChannel = (channelName: string) => {
 
 type Users = string[]
 
-type GameProgress = {
+export type GameProgress = {
   turn: number
   phase: 'ready' | 'debate' | 'vote' | 'totalling' | 'result'
 }
