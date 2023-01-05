@@ -1,20 +1,18 @@
 import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 
-import { Fonts } from '@/styles'
-
 import { mixinDiamondWrap } from './mixin'
 
 export type CharacterObj = {
   character: {
     anne: {
       kanaName: 'アンネ'
-      path: './anne.svg'
+      path: '/anne.svg'
       backgroundColor: '#5E99C3'
     }
     dai: {
       kanaName: 'ダイ'
-      path: './fire.svg'
+      path: '/fire.svg'
       backgroundColor: '#5E99C3'
     }
   }
@@ -24,12 +22,12 @@ export const characterObj: CharacterObj = {
   character: {
     anne: {
       kanaName: 'アンネ',
-      path: './anne.svg',
+      path: '/anne.svg',
       backgroundColor: '#5E99C3'
     },
     dai: {
       kanaName: 'ダイ',
-      path: './fire.svg',
+      path: '/fire.svg',
       backgroundColor: '#5E99C3'
     }
   }
@@ -38,10 +36,11 @@ export const characterObj: CharacterObj = {
 export type CharacterDiamondShapeProps = {
   diagonal: number
   borderSize: string
-  fontSize: keyof Fonts['sizes']
+  fontSize: string
   isMyDiamond: boolean
   isReady: boolean
   charactorName: keyof CharacterObj['character']
+  textOffset: { top: string; left: string }
 }
 
 export const CharacterDiamondShape = ({
@@ -50,7 +49,8 @@ export const CharacterDiamondShape = ({
   fontSize,
   isMyDiamond,
   isReady,
-  charactorName
+  charactorName,
+  textOffset
 }: CharacterDiamondShapeProps) => {
   const shapeDiagonal = `${diagonal / Math.sqrt(2)}px`
   const shapeSide = `${diagonal}px`
@@ -67,12 +67,12 @@ export const CharacterDiamondShape = ({
             isReady={isReady}
           >
             <DiamondInnerContainer>
-              <DiamondContents fontSize={fontSize} charactorName={charactorName}>
+              <DiamondContents>
                 <CharacterImage src={characterObj.character[charactorName].path} />
               </DiamondContents>
             </DiamondInnerContainer>
           </Diamond>
-          <DiamondText isMyDiamond={isMyDiamond}>
+          <DiamondText isMyDiamond={isMyDiamond} fontSize={fontSize} textOffset={textOffset}>
             {characterObj.character[charactorName].kanaName}
           </DiamondText>
         </DiamondWrapper>
@@ -127,23 +127,25 @@ const CharacterImage = styled.img`
   margin-left: -19%;
 `
 
-const DiamondContents = styled.div<{
-  charactorName: string
-  fontSize: CharacterDiamondShapeProps['fontSize']
-}>`
+const DiamondContents = styled.div`
   width: 100%;
   height: 100%;
   transform: rotate(-45deg);
-  font-size: ${({ theme, fontSize }) => theme.fonts.sizes[fontSize]};
 `
+
 const DiamondText = styled.div<{
   isMyDiamond: boolean
+  fontSize: CharacterDiamondShapeProps['fontSize']
+  textOffset: CharacterDiamondShapeProps['textOffset']
 }>`
   position: absolute;
-  top: -25px;
-  left: 5px;
   font-weight: bold;
-  font-family: ${({ theme }) => theme.fonts.fontFamily.sub};
-  color: ${({ isMyDiamond, theme }) =>
-    isMyDiamond ? theme.colors.primary.dark : theme.colors.white};
+
+  ${({ isMyDiamond, fontSize, textOffset, theme: { colors, fonts } }) => css`
+    top: ${textOffset.top};
+    left: ${textOffset.left};
+    font-size: ${fontSize};
+    font-family: ${fonts.fontFamily.sub};
+    color: ${isMyDiamond ? colors.primary.dark : colors.white};
+  `}
 `
