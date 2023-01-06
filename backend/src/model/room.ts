@@ -1,6 +1,6 @@
 export type Room = {
   id: string;
-  hostUerId: string;
+  hostUserId: string;
   status: {
     id: string;
     code: string;

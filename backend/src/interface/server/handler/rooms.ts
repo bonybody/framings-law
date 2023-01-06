@@ -14,6 +14,12 @@ roomsRouter.post("/rooms/", authMiddleware, async (req, res) => {
   res.send(body);
 });
 
+roomsRouter.get("/rooms/:roomId", authMiddleware, async (req, res) => {
+  const roomId = req.params.roomId;
+  const room = await roomUseCase.find(roomId);
+  res.status(200).send(room);
+});
+
 roomsRouter.post("/rooms/:roomId/joins", authMiddleware, async (req, res) => {
   const userId = res.locals.firebaseUid;
   const roomId = req.params.roomId;
