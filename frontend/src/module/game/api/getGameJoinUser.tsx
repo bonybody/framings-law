@@ -34,7 +34,6 @@ export const useGameJoinUser = (options: GetGameJoinUserOptions) => {
     onSuccess: (data) => {
       let _data: GamePlayer[] = []
       if (data.length < 5) {
-        console.log(data.length)
         for (let i = data.length; i < 5; i++) {
           _data = [
             ..._data,

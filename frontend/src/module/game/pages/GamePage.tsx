@@ -13,7 +13,7 @@ export const GamePage = () => {
       ({
         debate: <Debate gameId={router.query.gameId as string} isFlamer={true} />,
         voting: <Voting gameId={router.query.gameId as string} isFlamer={true} />
-      }['voting']),
+      }['debate']),
     []
   )
 
