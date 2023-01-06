@@ -36,7 +36,7 @@ export const gameEvents = {
   ready: (gameId: string, callback: (data: { turn: number }) => void) => {
     getChannel(`game-${gameId}`).bind('ready', callback)
   },
-  debate: (gameId: string, callback: (data: { turn: number; timeLimit: Date }) => void) => {
+  debate: (gameId: string, callback: (data: { turn: number; timeLimit: string }) => void) => {
     getChannel(`game-${gameId}`).bind('debate', callback)
   },
   vote: (gameId: string, callback: (data: { turn: number }) => void) => {

@@ -1,22 +1,13 @@
 import styled from '@emotion/styled'
-import { useRouter } from 'next/router'
 
 import { TextWithShadow } from '@/components/Elements'
 import { SubLayout } from '@/components/Layout'
-import { useAuthContext } from '@/module/auth'
 
-import { usePostCard } from '../../api/getPostCard'
-
-export const VotingResult = () => {
-  const { idToken } = useAuthContext()
-  const router = useRouter()
-  const gameId = router.query.gameId as string
-
-  const { cardList } = usePostCard({ idToken, gameId, isFlaming: true, isDeleted: false })
+export const VotingResult = ({ end }: { end: boolean }) => {
   return (
     <SubLayout>
       <Wrap>
-        {cardList?.length === 0 ? (
+        {end ? (
           <TextWithShadow size={'lg'} shadowWidth={7}>
             決着
           </TextWithShadow>

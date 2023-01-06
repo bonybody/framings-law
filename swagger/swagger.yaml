@@ -565,10 +565,7 @@ components:
         phase:
           type: string
         phaseContent:
-          type: object
-          properties:
-            sample:
-              type: string
+          type: string
     GameStatus:
       title: GameStatus
       x-stoplight:

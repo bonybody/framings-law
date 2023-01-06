@@ -29,6 +29,7 @@ export class GameProgressUseCase {
     return {
       turn: progress.turn,
       phase: progress.phase as LifeCycle,
+      phaseContent: progress.phaseContent,
     };
   }
 
@@ -36,7 +37,7 @@ export class GameProgressUseCase {
     gameId: string,
     turn: number,
     phase: LifeCycle,
-    phaseContent?: object
+    phaseContent?: string
   ): Promise<GameProgress> {
     await this.gameProgressRepository.create(gameId, turn, phase, phaseContent);
     return await this.now(gameId);
@@ -45,35 +46,67 @@ export class GameProgressUseCase {
   async ready(gameId: string, turn: number) {
     this.gameProgressRepository.find(gameId);
     await gameTriggers.ready(gameId, turn);
-    await this.update(gameId, turn, "debate");
+    await this.update(gameId, turn, "ready");
   }
 
   async debate(gameId: string, turn: number) {
     const now = getNow();
-    const timeLimit = addSeconds(now, 600);
-    await gameTriggers.debate(gameId, turn, timeLimit.toDate());
-    await this.update(gameId, turn, "vote");
+    const timeLimit = addSeconds(now, 30).toDate().toISOString();
+    await gameTriggers.debate(gameId, turn, timeLimit);
+    await this.update(gameId, turn, "debate", JSON.stringify({ timeLimit }));
   }
 
   async vote(gameId: string, turn: number) {
     // const res = await this.gameCardUseCase;
-    await this.update(gameId, turn, "totalling");
+    await gameTriggers.vote(gameId, turn);
+    await this.update(gameId, turn, "vote");
   }
 
   async totalling(gameId: string, turn: number) {
     const deletedCard = await this.gameCardUseCase.totalling(gameId);
-    const remainingCount = await this.gameCardUseCase.countFraming(gameId);
-    const isEnd = remainingCount < 1;
+
+    const remainingFlamingCount = await this.gameCardUseCase.countFraming(
+      gameId
+    );
+
+    const remainingCards = await this.gameCardUseCase.search(gameId, {
+      isDeleted: false,
+    });
+
+    const isEnd =
+      remainingFlamingCount < 1 ||
+      remainingCards.length === remainingFlamingCount;
     await gameTriggers.totalling(gameId, turn, deletedCard.id, isEnd);
+    await this.update(
+      gameId,
+      turn,
+      "totalling",
+      JSON.stringify({
+        deletedCardId: deletedCard.id,
+        end: isEnd,
+      })
+    );
+  }
+  async nextTurnOrResult(gameId: string, turn: number) {
+    const remainingFlamingCount = await this.gameCardUseCase.countFraming(
+      gameId
+    );
+
+    const remainingCards = await this.gameCardUseCase.search(gameId, {
+      isDeleted: false,
+    });
+
+    const isEnd =
+      remainingFlamingCount < 1 ||
+      remainingCards.length === remainingFlamingCount;
 
     if (isEnd) {
       await this.update(gameId, turn, "result");
+      gameTriggers.result(gameId, turn);
     } else {
-      await this.update(gameId, ++turn, "ready");
+      await this.debate(gameId, ++turn);
     }
   }
 
-  async result(gameId: string, turn: number) {
-    gameTriggers.result(gameId, turn);
-  }
+  async result(gameId: string, turn: number) {}
 }

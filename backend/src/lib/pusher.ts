@@ -36,7 +36,7 @@ export const gameTriggers = {
   ready: async (gameId: string, turn: number) => {
     return pusher.trigger(`game-${gameId}`, "ready", { turn });
   },
-  debate: async (gameId: string, turn: number, timeLimit: Date) => {
+  debate: async (gameId: string, turn: number, timeLimit: string) => {
     return pusher.trigger(`game-${gameId}`, "debate", {
       turn,
       timeLimit,

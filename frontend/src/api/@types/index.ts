@@ -56,10 +56,7 @@ export type GameCard = {
 export type Game = {
   turn?: number | undefined
   phase?: string | undefined
-
-  phaseContent?: {
-    sample?: string | undefined
-  } | undefined
+  phaseContent?: string | undefined
 }
 
 export type GameStatus = {

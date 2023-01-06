@@ -14,7 +14,7 @@ export class GameProgressRepository {
     gameId: string,
     turn: number,
     phase: "init" | "ready" | "debate" | "vote" | "totalling" | "result",
-    phaseContent?: object
+    phaseContent?: string
   ) {
     return await setObject(`games/${gameId}/progress`, {
       turn,

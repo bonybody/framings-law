@@ -34,11 +34,11 @@ export const PostCardList = ({
             .map((flameCard) => (
               <PostCardContainer key={flameCard.id}>
                 <PostCard
-                  isSelect={cardId !== null ? flameCard.card!.id! === cardId : true}
+                  isSelect={cardId !== null ? flameCard.id! === cardId : true}
                   content={flameCard.card!.body!}
                   isFlamePost={isFlamer === true ? flameCard.card!.isFraming! : false}
                   postedDate={flameCard.card!.postedAt!.split('T')[0]}
-                  handleClick={() => handleCardId(flameCard.card!.id!)}
+                  handleClick={() => handleCardId(flameCard.id!)}
                 />
               </PostCardContainer>
             ))}
@@ -52,11 +52,11 @@ export const PostCardList = ({
         cardList.map((all) => (
           <PostCardContainer key={all.id}>
             <PostCard
-              isSelect={cardId !== null ? all.card!.id! === cardId : true}
+              isSelect={cardId !== null ? all.id! === cardId : true}
               content={all.card!.body!}
               isFlamePost={isFlamer === true ? all.card!.isFraming! : false}
               postedDate={all.card!.postedAt!.split('T')[0]}
-              handleClick={() => handleCardId(all.card!.id!)}
+              handleClick={() => handleCardId(all.id!)}
             />
           </PostCardContainer>
         ))}
