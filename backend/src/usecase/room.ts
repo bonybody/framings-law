@@ -52,6 +52,24 @@ export class RoomUseCase {
     };
   }
 
+  async find(roomId: string): Promise<Room> {
+    const room = await this.roomRepository.find(roomId);
+    if (room === null) throw new Error();
+    const status = await this.roomStatusRepository.find(room.room_status_id);
+    if (status === null) throw new Error();
+    return {
+      id: room.id,
+      hostUserId: room.host_user_id,
+      cardCount: room.card_count,
+      debateSeconds: room.debate_seconds,
+      key: room.room_key,
+      status: {
+        id: status.id,
+        code: status.status_code,
+      },
+    };
+  }
+
   async join(roomId: string, userId: string): Promise<RoomUsers["join"]> {
     await pushList(`rooms/${roomId}/join`, [userId]);
     const users = await this.getJoinUsers(roomId);

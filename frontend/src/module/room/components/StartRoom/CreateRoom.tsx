@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 
 import { useAuthContext } from '@/module/auth'
 
@@ -7,9 +8,12 @@ import { StartRoom } from './StartRoom'
 
 export const CreateRoom = () => {
   const { idToken } = useAuthContext()
+  const router = useRouter()
 
   const handleClick = async () => {
-    await getCreateRoom(idToken)
+    const res = await getCreateRoom(idToken)
+    if (!res.id) return console.error('not found created room id')
+    await router.push(`/room/${res.id}`)
   }
 
   return (

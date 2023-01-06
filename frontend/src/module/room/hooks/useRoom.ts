@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { apiClient } from '@/lib/api'
 import { roomEvents } from '@/lib/pusher'
@@ -13,17 +13,17 @@ export const useRoom = (roomId: string) => {
   const { idToken } = useAuthContext()
 
   useEffect(() => {
-    ;async () => {
+    void (async () => {
       const res = await apiClient({ idToken }).rooms._roomId_string(roomId).users.$get()
       console.log(res)
       setRoomUsers({
         join: res.join ?? [],
         ready: res.ready ?? []
       })
-    }
+    })()
   }, [])
 
-  useCallback(() => {
+  useEffect(() => {
     roomEvents.join(roomId, (data) => {
       console.log(data)
       setRoomUsers({
@@ -31,9 +31,6 @@ export const useRoom = (roomId: string) => {
         ready: roomUsers.ready
       })
     })
-  }, [])
-
-  useCallback(() => {
     roomEvents.ready(roomId, (data) => {
       console.log(data)
       setRoomUsers({
@@ -41,9 +38,6 @@ export const useRoom = (roomId: string) => {
         ready: data.users
       })
     })
-  }, [])
-
-  useCallback(() => {
     roomEvents.start(roomId, async (data) => {
       console.log(data)
       await router.push(`/games/${data.gameId}`)

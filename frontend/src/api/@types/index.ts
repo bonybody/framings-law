@@ -61,3 +61,8 @@ export type Game = {
     sample?: string | undefined
   } | undefined
 }
+
+export type GameStatus = {
+  id?: string | undefined
+  code?: string | undefined
+}
