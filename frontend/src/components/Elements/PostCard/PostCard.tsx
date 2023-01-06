@@ -16,6 +16,7 @@ export type PostCardProps = {
   isSelect: boolean
   // 炎上カードだと思ったか
   isFlamePost: boolean
+  handleClick?: () => void
 }
 
 export const PostCard = ({
@@ -24,10 +25,11 @@ export const PostCard = ({
   gender,
   content,
   isSelect,
-  isFlamePost
+  isFlamePost,
+  handleClick
 }: PostCardProps) => {
   return (
-    <Card isFlamePost={isFlamePost} isSelect={isSelect}>
+    <Card isFlamePost={isFlamePost} isSelect={isSelect} onClick={handleClick}>
       <PostInfo>
         {/* <PostText>{postedDate + '/' + age + '代/' + gender}</PostText> */}
         <PostText>
@@ -56,7 +58,6 @@ const Card = styled.div<Required<Pick<PostCardProps, 'isSelect' | 'isFlamePost'>
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   opacity: ${(props) => (props.isSelect ? 'none' : props.theme.opacity)};
   box-sizing: border-box;
-  z-index: -1;
 
   // 炎
   &::before {
@@ -69,7 +70,6 @@ const Card = styled.div<Required<Pick<PostCardProps, 'isSelect' | 'isFlamePost'>
     content: '';
     background-image: ${(props) => (props.isFlamePost ? "url('/fire.png')" : 'none')};
     background-size: cover;
-    z-index: -1;
   }
 `
 
