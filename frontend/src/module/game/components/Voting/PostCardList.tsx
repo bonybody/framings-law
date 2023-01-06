@@ -23,7 +23,7 @@ export const PostCardList = ({
   handleCardId
 }: PostCardListProps) => {
   const { idToken } = useAuthContext()
-  const { cardList } = usePostCard({ idToken, gameId })
+  const { cardList } = usePostCard({ idToken, gameId, isDeleted: false })
 
   if (selectedTab === 'flame') {
     return (
