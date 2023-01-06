@@ -1,2 +1,2 @@
-export * from './pages/DebatePage'
+export * from './pages/GamePage'
 export * from './pages/ResultPage'
