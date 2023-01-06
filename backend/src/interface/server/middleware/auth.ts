@@ -9,10 +9,14 @@ export const authMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  const idToken = req.headers["authorization"];
-  const user = await authUseCase.checkIdToken(idToken);
-  if (!user) return res.status(403).send();
-  res.locals.id = user.id;
-  res.locals.firebaseUid = user.firebase_uid;
-  next();
+  try {
+    const idToken = req.headers["authorization"];
+    const user = await authUseCase.checkIdToken(idToken);
+    if (!user) return res.status(403).send();
+    res.locals.id = user.id;
+    res.locals.firebaseUid = user.firebase_uid;
+    next();
+  } catch (error) {
+    res.status(400).send();
+  }
 };
