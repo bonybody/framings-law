@@ -27,7 +27,7 @@ export const DeleteCard = ({ cardId, gameId }: { cardId: string; gameId: string 
         {card && (
           <>
             <PostCard
-              postedDate={card.card!.postedAt!}
+              postedDate={card.card!.postedAt!.split('T')[0]}
               content={card.card!.body!}
               isSelect={true}
               isFlamePost={false}

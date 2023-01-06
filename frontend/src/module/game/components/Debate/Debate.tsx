@@ -48,23 +48,25 @@ export const Debate = ({ gameId, isFlamer, timeLimit }: DebateProps) => {
   }
 
   return (
-    <MainLayout>
-      <Container>
-        {isEnd && <DebateFinish />}
-        {!isEnd && (
-          <>
-            <TimeRemaining timeLimit={time} />
-            <TabContainer>
-              <PostListToggleTab isFlamer={isFlamer} selectedTab={tab} handleTab={handleTab} />
-            </TabContainer>
-            <PostCardList gameId={gameId} isFlamer={isFlamer} selectedTab={tab} />
-            <UserListContainer>
-              <UserList gameId={gameId} />
-            </UserListContainer>
-          </>
-        )}
-      </Container>
-    </MainLayout>
+    <>
+      {isEnd && <DebateFinish />}
+      {!isEnd && (
+        <>
+          <MainLayout>
+            <Container>
+              <TimeRemaining timeLimit={time} />
+              <TabContainer>
+                <PostListToggleTab isFlamer={isFlamer} selectedTab={tab} handleTab={handleTab} />
+              </TabContainer>
+              <PostCardList gameId={gameId} isFlamer={isFlamer} selectedTab={tab} />
+              <UserListContainer>
+                <UserList gameId={gameId} />
+              </UserListContainer>
+            </Container>
+          </MainLayout>
+        </>
+      )}
+    </>
   )
 }
 
