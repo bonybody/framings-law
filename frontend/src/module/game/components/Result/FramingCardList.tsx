@@ -33,9 +33,8 @@ export const FramingCardList = ({ gameId }: FramingCardListProps) => {
 }
 
 const Wrap = styled.div`
-  margin-top: 16px;
   display: flex;
   flex-direction: column;
-
   gap: 16px;
+  margin-top: 16px;
 `

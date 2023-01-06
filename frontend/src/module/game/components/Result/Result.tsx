@@ -37,7 +37,7 @@ export const Result = ({ gameId }: ResultProps) => {
         />
 
         <ButtonWrap>
-          <Button onClick={() => router.push('/')}>退出</Button>
+          <Button onClick={() => router.push('/')}>退出する</Button>
         </ButtonWrap>
       </Container>
     </MainLayout>
