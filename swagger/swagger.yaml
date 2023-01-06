@@ -365,7 +365,13 @@ paths:
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameStatus'
       operationId: get-games-gameId-status
 definitions:
   User:

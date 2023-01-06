@@ -18,7 +18,7 @@ export const Assignment = ({ gameId }: { gameId: string }) => {
       setPlayer(data.player)
       setTimeout(async () => {
         await apiClient({ idToken }).games._gameId_string(gameId).health_check.$post()
-      }, 3000)
+      }, 6000)
     })()
   }, [gameId, idToken])
   const isFramer = useMemo(() => {

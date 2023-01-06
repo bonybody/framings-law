@@ -23,8 +23,8 @@ export const Totalling = ({
       setCurrent('message')
       setTimeout(async () => {
         await apiClient({ idToken }).games._gameId_string(gameId).health_check.$post()
-      }, 3000)
-    }, 3000)
+      }, 6000)
+    }, 4000)
   }, [])
 
   return (

@@ -1,29 +1,48 @@
 import styled from '@emotion/styled'
+import { useEffect, useState } from 'react'
 
+import { GameStatus } from '@/api/@types'
 import { TextWithShadow } from '@/components/Elements'
 import { MainLayout } from '@/components/Layout'
+import { apiClient } from '@/lib/api'
+import { useAuthContext } from '@/module/auth'
 
-export const Win = () => {
-  const isFramer = false
+export const Win = ({ gameId }: { gameId: string }) => {
+  const { idToken } = useAuthContext()
+
+  const [game, setGame] = useState<GameStatus | undefined>(undefined)
+
+  useEffect(() => {
+    void (async () => {
+      const res = await apiClient({ idToken }).games._gameId_string(gameId).status.$get()
+      console.log(res)
+      setGame(res)
+    })()
+  }, [])
+
   return (
     <MainLayout>
       <Wrap>
-        {isFramer ? (
-          <TextWithShadow size={'xl'} shadowWidth={7}>
-            <Text>
-              <Role isFramer={isFramer}>フレイマー</Role>
-              <br />
-              の勝利
-            </Text>
-          </TextWithShadow>
-        ) : (
-          <TextWithShadow size={'xl'} shadowWidth={7}>
-            <Text>
-              <Role isFramer={isFramer}>ファウンダー</Role>
-              <br />
-              の勝利
-            </Text>
-          </TextWithShadow>
+        {game && (
+          <>
+            {game.code === 'framer' ? (
+              <TextWithShadow size={'xl'} shadowWidth={7}>
+                <Text>
+                  <Role isFramer={true}>フレイマー</Role>
+                  <br />
+                  の勝利
+                </Text>
+              </TextWithShadow>
+            ) : (
+              <TextWithShadow size={'xl'} shadowWidth={7}>
+                <Text>
+                  <Role isFramer={false}>ファインダー</Role>
+                  <br />
+                  の勝利
+                </Text>
+              </TextWithShadow>
+            )}
+          </>
         )}
       </Wrap>
     </MainLayout>

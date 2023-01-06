@@ -39,10 +39,19 @@ export class GameRepository {
 
   async find(id: string) {
     const res = await singleQuery<GameWithStatusRow>(
-      `${withStatusSelect} WHERE id = $1`,
+      `${withStatusSelect} WHERE games.id = $1`,
       [id]
     );
     if (res.rowCount === 0) return null;
     return gameWithStatusRowSchema.parse(res.rows[0]);
+  }
+
+  async changeStatus(id: string, statusId: string) {
+    const res = await singleQuery<GameRow>(
+      "UPDATE games SET game_status_id = $1 WHERE id = $2 RETURNING *",
+      [statusId, id]
+    );
+    if (res.rowCount === 0) return null;
+    return gameRowSchema.parse(res.rows[0]);
   }
 }

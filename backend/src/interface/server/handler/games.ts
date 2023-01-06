@@ -38,6 +38,12 @@ gamesRouter.get("/games/:gameId", authMiddleware, async (req, res) => {
     res.status(400).send();
   }
 });
+gamesRouter.get("/games/:gameId/status", authMiddleware, async (req, res) => {
+  const gameId = req.params.gameId;
+  console.log(res.locals);
+  const status = await gameUseCase.findStatus(gameId);
+  res.status(200).send(status);
+});
 
 gamesRouter.post(
   "/games/:gameId/health-check",
