@@ -8,12 +8,13 @@ import type { Methods as Methods4 } from './games/_gameId@string/health-check'
 import type { Methods as Methods5 } from './games/_gameId@string/players'
 import type { Methods as Methods6 } from './games/_gameId@string/players/_playerId@string'
 import type { Methods as Methods7 } from './games/_gameId@string/players/me'
-import type { Methods as Methods8 } from './games/_gameId@string/vote'
-import type { Methods as Methods9 } from './rooms'
-import type { Methods as Methods10 } from './rooms/_roomId/joins'
-import type { Methods as Methods11 } from './rooms/_roomId@string'
-import type { Methods as Methods12 } from './rooms/_roomId@string/readies'
-import type { Methods as Methods13 } from './rooms/_roomId@string/users'
+import type { Methods as Methods8 } from './games/_gameId@string/status'
+import type { Methods as Methods9 } from './games/_gameId@string/vote'
+import type { Methods as Methods10 } from './rooms'
+import type { Methods as Methods11 } from './rooms/_roomId/joins'
+import type { Methods as Methods12 } from './rooms/_roomId@string'
+import type { Methods as Methods13 } from './rooms/_roomId@string/readies'
+import type { Methods as Methods14 } from './rooms/_roomId@string/users'
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'http://localhost:3000/' : baseURL).replace(/\/$/, '')
@@ -22,11 +23,12 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const PATH2 = '/health-check'
   const PATH3 = '/players'
   const PATH4 = '/players/me'
-  const PATH5 = '/vote'
-  const PATH6 = '/rooms'
-  const PATH7 = '/joins'
-  const PATH8 = '/readies'
-  const PATH9 = '/users'
+  const PATH5 = '/status'
+  const PATH6 = '/vote'
+  const PATH7 = '/rooms'
+  const PATH8 = '/joins'
+  const PATH9 = '/readies'
+  const PATH10 = '/users'
   const GET = 'GET'
   const POST = 'POST'
 
@@ -142,12 +144,25 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
               fetch<Methods5['get']['resBody'], BasicHeaders, Methods5['get']['status']>(prefix, `${prefix1}${PATH3}`, GET, option).json().then(r => r.body),
             $path: () => `${prefix}${prefix1}${PATH3}`
           },
-          vote: {
-            post: (option: { body: Methods8['post']['reqBody'], config?: T | undefined }) =>
-              fetch<void, BasicHeaders, Methods8['post']['status']>(prefix, `${prefix1}${PATH5}`, POST, option).send(),
-            $post: (option: { body: Methods8['post']['reqBody'], config?: T | undefined }) =>
-              fetch<void, BasicHeaders, Methods8['post']['status']>(prefix, `${prefix1}${PATH5}`, POST, option).send().then(r => r.body),
+          status: {
+            /**
+             * @returns OK
+             */
+            get: (option?: { config?: T | undefined } | undefined) =>
+              fetch<Methods8['get']['resBody'], BasicHeaders, Methods8['get']['status']>(prefix, `${prefix1}${PATH5}`, GET, option).json(),
+            /**
+             * @returns OK
+             */
+            $get: (option?: { config?: T | undefined } | undefined) =>
+              fetch<Methods8['get']['resBody'], BasicHeaders, Methods8['get']['status']>(prefix, `${prefix1}${PATH5}`, GET, option).json().then(r => r.body),
             $path: () => `${prefix}${prefix1}${PATH5}`
+          },
+          vote: {
+            post: (option: { body: Methods9['post']['reqBody'], config?: T | undefined }) =>
+              fetch<void, BasicHeaders, Methods9['post']['status']>(prefix, `${prefix1}${PATH6}`, POST, option).send(),
+            $post: (option: { body: Methods9['post']['reqBody'], config?: T | undefined }) =>
+              fetch<void, BasicHeaders, Methods9['post']['status']>(prefix, `${prefix1}${PATH6}`, POST, option).send().then(r => r.body),
+            $path: () => `${prefix}${prefix1}${PATH6}`
           }
         }
       },
@@ -167,7 +182,7 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
     },
     rooms: {
       _roomId: (val1: number | string) => {
-        const prefix1 = `${PATH6}/${val1}`
+        const prefix1 = `${PATH7}/${val1}`
 
         return {
           joins: {
@@ -175,28 +190,28 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
              * @returns OK
              */
             post: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods10['post']['resBody'], Methods10['post']['resHeaders'], Methods10['post']['status']>(prefix, `${prefix1}${PATH7}`, POST, option).json(),
+              fetch<Methods11['post']['resBody'], Methods11['post']['resHeaders'], Methods11['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json(),
             /**
              * @returns OK
              */
             $post: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods10['post']['resBody'], Methods10['post']['resHeaders'], Methods10['post']['status']>(prefix, `${prefix1}${PATH7}`, POST, option).json().then(r => r.body),
+              fetch<Methods11['post']['resBody'], Methods11['post']['resHeaders'], Methods11['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json().then(r => r.body),
             /**
              * @returns OK
              */
             get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods10['get']['resBody'], BasicHeaders, Methods10['get']['status']>(prefix, `${prefix1}${PATH7}`, GET, option).json(),
+              fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json(),
             /**
              * @returns OK
              */
             $get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods10['get']['resBody'], BasicHeaders, Methods10['get']['status']>(prefix, `${prefix1}${PATH7}`, GET, option).json().then(r => r.body),
-            $path: () => `${prefix}${prefix1}${PATH7}`
+              fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json().then(r => r.body),
+            $path: () => `${prefix}${prefix1}${PATH8}`
           }
         }
       },
       _roomId_string: (val1: string) => {
-        const prefix1 = `${PATH6}/${val1}`
+        const prefix1 = `${PATH7}/${val1}`
 
         return {
           readies: {
@@ -204,25 +219,12 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
              * @returns OK
              */
             post: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods12['post']['resBody'], BasicHeaders, Methods12['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json(),
+              fetch<Methods13['post']['resBody'], BasicHeaders, Methods13['post']['status']>(prefix, `${prefix1}${PATH9}`, POST, option).json(),
             /**
              * @returns OK
              */
             $post: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods12['post']['resBody'], BasicHeaders, Methods12['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json().then(r => r.body),
-            /**
-             * @returns OK
-             */
-            get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json(),
-            /**
-             * @returns OK
-             */
-            $get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json().then(r => r.body),
-            $path: () => `${prefix}${prefix1}${PATH8}`
-          },
-          users: {
+              fetch<Methods13['post']['resBody'], BasicHeaders, Methods13['post']['status']>(prefix, `${prefix1}${PATH9}`, POST, option).json().then(r => r.body),
             /**
              * @returns OK
              */
@@ -235,16 +237,29 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
               fetch<Methods13['get']['resBody'], BasicHeaders, Methods13['get']['status']>(prefix, `${prefix1}${PATH9}`, GET, option).json().then(r => r.body),
             $path: () => `${prefix}${prefix1}${PATH9}`
           },
+          users: {
+            /**
+             * @returns OK
+             */
+            get: (option?: { config?: T | undefined } | undefined) =>
+              fetch<Methods14['get']['resBody'], BasicHeaders, Methods14['get']['status']>(prefix, `${prefix1}${PATH10}`, GET, option).json(),
+            /**
+             * @returns OK
+             */
+            $get: (option?: { config?: T | undefined } | undefined) =>
+              fetch<Methods14['get']['resBody'], BasicHeaders, Methods14['get']['status']>(prefix, `${prefix1}${PATH10}`, GET, option).json().then(r => r.body),
+            $path: () => `${prefix}${prefix1}${PATH10}`
+          },
           /**
            * @returns OK
            */
           get: (option?: { config?: T | undefined } | undefined) =>
-            fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, prefix1, GET, option).json(),
+            fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, prefix1, GET, option).json(),
           /**
            * @returns OK
            */
           $get: (option?: { config?: T | undefined } | undefined) =>
-            fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+            fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
           $path: () => `${prefix}${prefix1}`
         }
       },
@@ -253,14 +268,14 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
        * @returns OK
        */
       post: (option?: { config?: T | undefined } | undefined) =>
-        fetch<Methods9['post']['resBody'], BasicHeaders, Methods9['post']['status']>(prefix, PATH6, POST, option).json(),
+        fetch<Methods10['post']['resBody'], BasicHeaders, Methods10['post']['status']>(prefix, PATH7, POST, option).json(),
       /**
        * 新しくゲームのルームを作成する。
        * @returns OK
        */
       $post: (option?: { config?: T | undefined } | undefined) =>
-        fetch<Methods9['post']['resBody'], BasicHeaders, Methods9['post']['status']>(prefix, PATH6, POST, option).json().then(r => r.body),
-      $path: () => `${prefix}${PATH6}`
+        fetch<Methods10['post']['resBody'], BasicHeaders, Methods10['post']['status']>(prefix, PATH7, POST, option).json().then(r => r.body),
+      $path: () => `${prefix}${PATH7}`
     }
   }
 }

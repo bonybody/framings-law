@@ -62,5 +62,17 @@ export class GameUseCase {
     return game.id;
   }
 
+  async findStatus(id: string) {
+    const game = await this.gameRepository.find(id);
+    console.log(game);
+
+    if (game === null) throw new Error();
+    const status = await this.gameStatusRepository.find(game.game_status_id);
+    if (status === null) throw new Error();
+    return {
+      id: status.id,
+      code: status.status_code,
+    };
+  }
   async ready(gameId: string, userId: string) {}
 }

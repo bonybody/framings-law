@@ -1,25 +1,37 @@
 import { addSeconds, getNow } from "../lib/dayjs";
 import { gameTriggers } from "../lib/pusher";
 import { GameProgress, LifeCycle, lifeCycleList } from "../model";
-import { GameProgressRepository } from "../repository";
+import {
+  GameProgressRepository,
+  GameRepository,
+  GameStatusRepository,
+} from "../repository";
 import { GameCardUseCase } from "./game_card";
 
 export class GameProgressUseCase {
   private gameProgressRepository: GameProgressRepository;
   private gameCardUseCase: GameCardUseCase;
+  private gameStatusRepository: GameStatusRepository;
+  private gameRepository: GameRepository;
 
   constructor(
     gameProgressRepository: GameProgressRepository,
-    gameCardUseCase: GameCardUseCase
+    gameCardUseCase: GameCardUseCase,
+    gameStatusRepository: GameStatusRepository,
+    gameRepository: GameRepository
   ) {
     this.gameProgressRepository = gameProgressRepository;
     this.gameCardUseCase = gameCardUseCase;
+    this.gameStatusRepository = gameStatusRepository;
+    this.gameRepository = gameRepository;
   }
 
   static factory() {
     return new GameProgressUseCase(
       new GameProgressRepository(),
-      GameCardUseCase.factory()
+      GameCardUseCase.factory(),
+      new GameStatusRepository(),
+      new GameRepository()
     );
   }
 
@@ -101,7 +113,14 @@ export class GameProgressUseCase {
       remainingCards.length === remainingFlamingCount;
 
     if (isEnd) {
-      await this.update(gameId, turn, "result");
+      let winner = "";
+      if (remainingFlamingCount < 1) winner = "finder";
+      if (remainingCards.length === remainingFlamingCount) winner = "framer";
+      const status = await this.gameStatusRepository.findByCode(winner);
+      if (status === null) throw new Error();
+      const res = await this.gameRepository.changeStatus(gameId, status.id);
+      console.log(res);
+      await await this.update(gameId, turn, "result");
       gameTriggers.result(gameId, turn);
     } else {
       await this.debate(gameId, ++turn);
