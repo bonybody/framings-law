@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 
 import { InputField } from '@/components/Form'
@@ -11,9 +12,12 @@ import { StartRoom } from './StartRoom'
 export const JoinRoom = () => {
   const { idToken } = useAuthContext()
   const { register, getValues } = useForm<{ roomKey: string }>()
+  const router = useRouter()
 
   const handleClick = async () => {
-    await getJoinRoom(idToken, getValues('roomKey'))
+    const res = await getJoinRoom(idToken, getValues('roomKey'))
+    if (!res) return console.error('failed join')
+    await router.push(`/room/${getValues('roomKey')}`)
   }
 
   return (
