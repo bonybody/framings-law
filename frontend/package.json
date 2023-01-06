@@ -7,7 +7,7 @@
     "dev:80": "next dev -p 80",
     "build": "next build",
     "build:export": "next build && next export",
-    "build:render": "yarn && next build && next start",
+    "build:render": "yarn && next build",
     "start": "next start",
     "lint:fix": "eslint . --fix --ignore-path .eslintignore",
     "format": "prettier . --write --ignore-path .prettierignore",
