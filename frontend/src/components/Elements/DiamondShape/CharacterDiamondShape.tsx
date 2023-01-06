@@ -15,6 +15,11 @@ export type CharacterObj = {
       path: '/fire.svg'
       backgroundColor: '#5E99C3'
     }
+    noPlayer: {
+      kanaName: 'Player'
+      path: ''
+      backgroundColor: '#DF114F'
+    }
   }
 }
 
@@ -29,6 +34,11 @@ export const characterObj: CharacterObj = {
       kanaName: 'ダイ',
       path: '/fire.svg',
       backgroundColor: '#5E99C3'
+    },
+    noPlayer: {
+      kanaName: 'Player',
+      path: '',
+      backgroundColor: '#DF114F'
     }
   }
 }
@@ -68,7 +78,11 @@ export const CharacterDiamondShape = ({
           >
             <DiamondInnerContainer>
               <DiamondContents>
-                <CharacterImage src={characterObj.character[charactorName].path} />
+                {charactorName === 'noPlayer' ? (
+                  <NoPlayer>Player</NoPlayer>
+                ) : (
+                  <CharacterImage src={characterObj.character[charactorName].path} />
+                )}
               </DiamondContents>
             </DiamondInnerContainer>
           </Diamond>
@@ -128,6 +142,7 @@ const CharacterImage = styled.img`
 `
 
 const DiamondContents = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   transform: rotate(-45deg);
@@ -148,4 +163,15 @@ const DiamondText = styled.div<{
     font-family: ${fonts.fontFamily.sub};
     color: ${isMyDiamond ? colors.primary.dark : colors.white};
   `}
+`
+
+const NoPlayer = styled.div`
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  line-height: 16px;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
 `

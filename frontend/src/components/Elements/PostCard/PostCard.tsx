@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 // 投稿カード
 
 import styled from '@emotion/styled'
@@ -6,9 +7,9 @@ export type PostCardProps = {
   // 投稿日
   postedDate: string
   // 年齢
-  age: string
+  age?: string
   // 性別
-  gender: string
+  gender?: string
   // 投稿内容
   content: string
   // 選択できる状態か否か
@@ -28,7 +29,12 @@ export const PostCard = ({
   return (
     <Card isFlamePost={isFlamePost} isSelect={isSelect}>
       <PostInfo>
-        <PostText>{postedDate + '/' + age + '代/' + gender}</PostText>
+        {/* <PostText>{postedDate + '/' + age + '代/' + gender}</PostText> */}
+        <PostText>
+          {[age, gender].every((props) => props !== undefined)
+            ? postedDate + '/' + age + '代/' + gender
+            : postedDate}
+        </PostText>
       </PostInfo>
       <PostContent>
         <PostText>{content}</PostText>
