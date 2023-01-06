@@ -22,7 +22,7 @@ export const RoomUsers = (props: RoomUsersProps) => {
     if (!res.id) return console.error('not found create game id')
   }
   const ready = async () => {
-    if (!roomUsers.ready.includes(uid)) return
+    if (roomUsers.ready.includes(uid)) return
     const res = await apiClient({ idToken }).rooms._roomId_string(room.id).readies.$post()
     if (!res) return console.error('missing ready request')
   }
