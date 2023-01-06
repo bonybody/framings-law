@@ -1,9 +1,9 @@
 import { NextPage } from 'next'
 
-import { DebatePage } from '@/module/game'
+import { GamePage } from '@/module/game'
 
 const GameRoom: NextPage = () => {
-  return <DebatePage />
+  return <GamePage />
 }
 
 export default GameRoom
