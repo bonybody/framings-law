@@ -37,7 +37,7 @@ export const PostCardList = ({
                   isSelect={cardId !== null ? flameCard.card!.id! === cardId : true}
                   content={flameCard.card!.body!}
                   isFlamePost={isFlamer === true ? flameCard.card!.isFraming! : false}
-                  postedDate={flameCard.card!.postedAt!}
+                  postedDate={flameCard.card!.postedAt!.split('T')[0]}
                   handleClick={() => handleCardId(flameCard.card!.id!)}
                 />
               </PostCardContainer>
