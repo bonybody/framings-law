@@ -14,7 +14,6 @@ export type UserListProps = {
 export const UserList = ({ gameId }: UserListProps) => {
   const { idToken, uid } = useAuthContext()
   const { userList } = useGameJoinUser({ idToken, gameId })
-  console.log(uid)
 
   return (
     <Container>
