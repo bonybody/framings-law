@@ -30,7 +30,7 @@ export const Debate = ({ gameId, isFlamer }: DebateProps) => {
           <PostListToggleTab isFlamer={isFlamer} selectedTab={tab} handleTab={handleTab} />
         </TabContainer>
 
-        <PostCardList gameId={gameId} isFlamer={isFlamer} />
+        <PostCardList gameId={gameId} isFlamer={isFlamer} selectedTab={tab} />
         <UserListContainer>
           <UserList gameId={gameId} />
         </UserListContainer>
@@ -52,5 +52,5 @@ const TabContainer = styled.div`
 
 const UserListContainer = styled.div`
   margin-top: auto;
-  padding-bottom: 16px;
+  padding: 24px 0 16px 0;
 `

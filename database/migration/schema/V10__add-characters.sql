@@ -5,7 +5,7 @@ CREATE TABLE characters (
     PRIMARY KEY (id)
 );
 
-INSERT INTO characters (display_name) VALUES ('キャラ1');
+INSERT INTO characters (display_name) VALUES ('anne');
 INSERT INTO characters (display_name) VALUES ('キャラ2');
 INSERT INTO characters (display_name) VALUES ('キャラ3');
 INSERT INTO characters (display_name) VALUES ('キャラ4');
