@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styled from '@emotion/styled'
 
 import { CharacterDiamondShape, CharacterDiamondShapeProps } from '@/components/Elements'
@@ -11,26 +12,28 @@ export type UserListProps = {
 }
 
 export const UserList = ({ gameId }: UserListProps) => {
-  const { idToken } = useAuthContext()
+  const { idToken, uid } = useAuthContext()
   const { userList } = useGameJoinUser({ idToken, gameId })
+  console.log(uid)
 
   return (
     <Container>
-      {userList?.players.map((player, index) => (
-        <Content key={player.id} number={index}>
-          <CharacterDiamondShape
-            charactorName={
-              player.character.displayName as CharacterDiamondShapeProps['charactorName']
-            }
-            isMyDiamond={player.userId !== idToken}
-            diagonal={64}
-            borderSize={'3px'}
-            fontSize={'12px'}
-            textOffset={{ top: '-18px', left: '0px' }}
-            isReady
-          />
-        </Content>
-      ))}
+      {userList &&
+        userList.map((player, index) => (
+          <Content key={index} number={index}>
+            <CharacterDiamondShape
+              charactorName={
+                player.character!.displayName as CharacterDiamondShapeProps['charactorName']
+              }
+              isMyDiamond={player.userId === uid}
+              diagonal={64}
+              borderSize={'3px'}
+              fontSize={'12px'}
+              textOffset={{ top: '-18px', left: '0px' }}
+              isReady
+            />
+          </Content>
+        ))}
     </Container>
   )
 }
