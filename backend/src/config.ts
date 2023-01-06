@@ -5,11 +5,13 @@ type Config = {
     port: number;
   };
   db: {
-    host: string;
-    port: number;
-    user: string;
-    password: string;
-    database: string;
+    connectionString: string;
+    // host: string;
+    // port: number;
+    // user: string;
+    // password: string;
+    // database: string;
+    // ssl: true;
   };
   firebase: {
     apiKey: string;
@@ -35,11 +37,12 @@ export const CONFIG: Config = {
     port: parseInt(process.env.PORT),
   },
   db: {
-    host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT),
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+    connectionString: process.env.DB_URL,
+    // host: process.env.DB_HOST,
+    // port: parseInt(process.env.DB_PORT),
+    // user: process.env.DB_USER,
+    // password: process.env.DB_PASSWORD,
+    // database: process.env.DB_DATABASE,
   },
   firebase: {
     apiKey: process.env.FIRE_API_KEY,

@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:80": "next dev -p 80",
     "build": "next build",
+    "build:export": "next build && next export",
+    "build:render": "yarn && next build && next export",
     "start": "next start",
     "lint:fix": "eslint . --fix --ignore-path .eslintignore",
     "format": "prettier . --write --ignore-path .prettierignore",

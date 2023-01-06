@@ -31,6 +31,24 @@ paths:
         - Room
       security:
         - authorization: []
+  '/rooms/{roomId}':
+    parameters:
+      - schema:
+          type: string
+        name: roomId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+      operationId: get-rooms-roomId
   '/rooms/{roomId}/joins':
     parameters:
       - type: string
@@ -128,7 +146,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Game'
+                $ref: '#/components/schemas/GameStatus'
       description: 新しくゲームを作成する。
       tags:
         - Game
@@ -337,6 +355,18 @@ paths:
               properties:
                 gameCardId:
                   type: string
+  '/games/{gameId}/status':
+    parameters:
+      - schema:
+          type: string
+        name: gameId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+      operationId: get-games-gameId-status
 definitions:
   User:
     title: User
@@ -432,6 +462,16 @@ components:
               type: string
             code:
               type: string
+      x-examples:
+        Example 1:
+          id: string
+          hostUserId: string
+          cardCount: 0
+          debateSeconds: 0
+          key: string
+          status:
+            id: string
+            code: string
     RoomUsers:
       title: RoomUser
       x-stoplight:
@@ -529,5 +569,15 @@ components:
           properties:
             sample:
               type: string
+    GameStatus:
+      title: GameStatus
+      x-stoplight:
+        id: yp8csbq5vs6y5
+      type: object
+      properties:
+        id:
+          type: string
+        code:
+          type: string
 security:
   - authorization: []

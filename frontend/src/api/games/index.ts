@@ -6,7 +6,7 @@ export type Methods = {
   post: {
     status: 201
     /** Created */
-    resBody: Types.Game
+    resBody: Types.GameStatus
 
     reqBody: {
       roomId: string

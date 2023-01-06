@@ -11,8 +11,9 @@ import type { Methods as Methods7 } from './games/_gameId@string/players/me'
 import type { Methods as Methods8 } from './games/_gameId@string/vote'
 import type { Methods as Methods9 } from './rooms'
 import type { Methods as Methods10 } from './rooms/_roomId/joins'
-import type { Methods as Methods11 } from './rooms/_roomId@string/readies'
-import type { Methods as Methods12 } from './rooms/_roomId@string/users'
+import type { Methods as Methods11 } from './rooms/_roomId@string'
+import type { Methods as Methods12 } from './rooms/_roomId@string/readies'
+import type { Methods as Methods13 } from './rooms/_roomId@string/users'
 
 const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
   const prefix = (baseURL === undefined ? 'http://localhost:3000/' : baseURL).replace(/\/$/, '')
@@ -203,22 +204,22 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
              * @returns OK
              */
             post: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods11['post']['resBody'], BasicHeaders, Methods11['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json(),
+              fetch<Methods12['post']['resBody'], BasicHeaders, Methods12['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json(),
             /**
              * @returns OK
              */
             $post: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods11['post']['resBody'], BasicHeaders, Methods11['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json().then(r => r.body),
+              fetch<Methods12['post']['resBody'], BasicHeaders, Methods12['post']['status']>(prefix, `${prefix1}${PATH8}`, POST, option).json().then(r => r.body),
             /**
              * @returns OK
              */
             get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json(),
+              fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json(),
             /**
              * @returns OK
              */
             $get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json().then(r => r.body),
+              fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, `${prefix1}${PATH8}`, GET, option).json().then(r => r.body),
             $path: () => `${prefix}${prefix1}${PATH8}`
           },
           users: {
@@ -226,14 +227,25 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
              * @returns OK
              */
             get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, `${prefix1}${PATH9}`, GET, option).json(),
+              fetch<Methods13['get']['resBody'], BasicHeaders, Methods13['get']['status']>(prefix, `${prefix1}${PATH9}`, GET, option).json(),
             /**
              * @returns OK
              */
             $get: (option?: { config?: T | undefined } | undefined) =>
-              fetch<Methods12['get']['resBody'], BasicHeaders, Methods12['get']['status']>(prefix, `${prefix1}${PATH9}`, GET, option).json().then(r => r.body),
+              fetch<Methods13['get']['resBody'], BasicHeaders, Methods13['get']['status']>(prefix, `${prefix1}${PATH9}`, GET, option).json().then(r => r.body),
             $path: () => `${prefix}${prefix1}${PATH9}`
-          }
+          },
+          /**
+           * @returns OK
+           */
+          get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, prefix1, GET, option).json(),
+          /**
+           * @returns OK
+           */
+          $get: (option?: { config?: T | undefined } | undefined) =>
+            fetch<Methods11['get']['resBody'], BasicHeaders, Methods11['get']['status']>(prefix, prefix1, GET, option).json().then(r => r.body),
+          $path: () => `${prefix}${prefix1}`
         }
       },
       /**

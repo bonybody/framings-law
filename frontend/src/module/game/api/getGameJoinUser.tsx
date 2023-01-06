@@ -15,13 +15,13 @@ export const getGameJoinUser = async ({ idToken, gameId }: GetGameJoinUserOption
   const { players } = await apiClient({ idToken })
     .games._gameId_string(gameId as string)
     .players.$get()
-
   return players
 }
 
 type UseGameJoinUserState = ApiHookState & {
   userList: GamePlayer[]
 }
+
 export const useGameJoinUser = (options: GetGameJoinUserOptions) => {
   const [state, setState] = useState<UseGameJoinUserState>({
     userList: [],
