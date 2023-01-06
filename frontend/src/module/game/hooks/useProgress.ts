@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { apiClient } from '@/lib/api'
 import { gameEvents } from '@/lib/pusher'
@@ -22,65 +22,43 @@ export const useProgress = (gameId: string) => {
     }
   }, [])
 
-  useCallback(
-    () =>
-      gameEvents.ready(gameId, (data) => {
-        console.log(data)
-        setProgress({
-          turn: data.turn,
-          phase: 'ready'
-        })
-      }),
-    []
-  )
-
-  useCallback(
-    () =>
-      gameEvents.debate(gameId, (data) => {
-        console.log(data)
-        setProgress({
-          turn: data.turn,
-          phase: 'debate'
-        })
-      }),
-    []
-  )
-
-  useCallback(
-    () =>
-      gameEvents.vote(gameId, (data) => {
-        console.log(data)
-        setProgress({
-          turn: data.turn,
-          phase: 'vote'
-        })
-      }),
-    []
-  )
-
-  useCallback(
-    () =>
-      gameEvents.totalling(gameId, (data) => {
-        console.log(data)
-        setProgress({
-          turn: data.turn,
-          phase: 'totalling'
-        })
-      }),
-    []
-  )
-
-  useCallback(
-    () =>
-      gameEvents.result(gameId, (data) => {
-        console.log(data)
-        setProgress({
-          turn: data.turn,
-          phase: 'result'
-        })
-      }),
-    []
-  )
+  useEffect(() => {
+    gameEvents.ready(gameId, (data) => {
+      console.log(data)
+      setProgress({
+        turn: data.turn,
+        phase: 'ready'
+      })
+    })
+    gameEvents.debate(gameId, (data) => {
+      console.log(data)
+      setProgress({
+        turn: data.turn,
+        phase: 'debate'
+      })
+    })
+    gameEvents.vote(gameId, (data) => {
+      console.log(data)
+      setProgress({
+        turn: data.turn,
+        phase: 'vote'
+      })
+    })
+    gameEvents.totalling(gameId, (data) => {
+      console.log(data)
+      setProgress({
+        turn: data.turn,
+        phase: 'totalling'
+      })
+    })
+    gameEvents.result(gameId, (data) => {
+      console.log(data)
+      setProgress({
+        turn: data.turn,
+        phase: 'result'
+      })
+    })
+  }, [])
 
   return { progress }
 }
