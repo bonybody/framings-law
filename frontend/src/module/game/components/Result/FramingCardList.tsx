@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styled from '@emotion/styled'
 
 import { PostCard } from '@/components/Elements'
@@ -20,12 +21,10 @@ export const FramingCardList = ({ gameId }: FramingCardListProps) => {
         framingCardList.map((card) => (
           <PostCard
             key={card.id}
-            age={'20'}
-            gender={'男'}
             isSelect={true}
             content={card.card!.body!}
             isFlamePost={card.card!.isFraming!}
-            postedDate={card.card!.postedAt!}
+            postedDate={card.card!.postedAt!.split('T')[0]}
           />
         ))}
     </Wrap>

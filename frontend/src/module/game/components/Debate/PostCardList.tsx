@@ -29,7 +29,7 @@ export const PostCardList = ({ gameId, isFlamer, selectedTab }: PostCardListProp
                   isSelect
                   content={flameCard.card!.body!}
                   isFlamePost={isFlamer === true ? flameCard.card!.isFraming! : false}
-                  postedDate={flameCard.card!.postedAt!}
+                  postedDate={flameCard.card!.postedAt!.split('T')[0]}
                 />
               </PostCardContainer>
             ))}
