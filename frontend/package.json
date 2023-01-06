@@ -9,6 +9,7 @@
     "build:export": "next build && next export",
     "build:render": "yarn && next build",
     "start": "next start",
+    "start:80": "next start -p 80",
     "lint:fix": "eslint . --fix --ignore-path .eslintignore",
     "format": "prettier . --write --ignore-path .prettierignore",
     "format:lint": "yarn format && yarn lint:fix",

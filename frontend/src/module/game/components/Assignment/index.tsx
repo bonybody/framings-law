@@ -1,31 +1,54 @@
 import styled from '@emotion/styled'
+import { useEffect, useMemo, useState } from 'react'
 
+import { GamePlayer } from '@/api/@types'
 import { TextWithShadow } from '@/components/Elements'
 import { MainLayout } from '@/components/Layout'
+import { apiClient } from '@/lib/api'
+import { useAuthContext } from '@/module/auth'
 
-export const Assignment = () => {
-  const isFramer = true
+export const Assignment = ({ gameId }: { gameId: string }) => {
+  const { idToken } = useAuthContext()
+  const [player, setPlayer] = useState<GamePlayer | undefined>(undefined)
+
+  useEffect(() => {
+    void (async () => {
+      const data = await apiClient({ idToken }).games._gameId_string(gameId).players.me.$get()
+      console.log(data)
+      setPlayer(data.player)
+      setTimeout(async () => {
+        await apiClient({ idToken }).games._gameId_string(gameId).health_check.$post()
+      }, 3000)
+    })()
+  }, [gameId, idToken])
+  const isFramer = useMemo(() => {
+    return !!player?.isFramer
+  }, [player])
 
   return (
     <MainLayout>
       <Wrap>
-        <Text>
-          <TextWithShadow size={'body2'} shadowWidth={3}>
-            あなたは、
-          </TextWithShadow>
-        </Text>
-        {isFramer ? (
-          <Role isFramer={isFramer}>
-            <TextWithShadow size={'xl'} shadowWidth={7}>
-              <span>フレイマー</span>
-            </TextWithShadow>
-          </Role>
-        ) : (
-          <Role isFramer={isFramer}>
-            <TextWithShadow size={'xl'} shadowWidth={7}>
-              <span>ファウンダー</span>
-            </TextWithShadow>
-          </Role>
+        {player && (
+          <>
+            <Text>
+              <TextWithShadow size={'body2'} shadowWidth={3}>
+                あなたは、
+              </TextWithShadow>
+            </Text>
+            {isFramer ? (
+              <Role isFramer={isFramer}>
+                <TextWithShadow size={'xl'} shadowWidth={7}>
+                  <span>フレイマー</span>
+                </TextWithShadow>
+              </Role>
+            ) : (
+              <Role isFramer={isFramer}>
+                <TextWithShadow size={'xl'} shadowWidth={7}>
+                  <span>ファインダー</span>
+                </TextWithShadow>
+              </Role>
+            )}
+          </>
         )}
       </Wrap>
     </MainLayout>

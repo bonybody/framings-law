@@ -7,5 +7,6 @@ export type GameId = string | number
 export type Progress = {
   turn: number
   phase: 'ready' | 'debate' | 'vote' | 'totalling' | 'result'
-  phaseContent?: object
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  phaseContent?: any
 }

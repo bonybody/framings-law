@@ -3,12 +3,12 @@ import { useCallback, useState } from 'react'
 
 import { Button, PostListToggleTab, PostListToggleTabProps } from '@/components/Elements'
 import { SubLayout } from '@/components/Layout'
+import { apiClient } from '@/lib/api'
 import { useAuthContext } from '@/module/auth'
 
 import { postVote } from '../../api/postVote'
 import { GameId } from '../../types'
 import { PostCardList } from './PostCardList'
-import { TimeRemaining } from './TimeRemaining'
 
 export type VotingProps = {
   gameId: GameId
@@ -26,19 +26,20 @@ export const Voting = ({ gameId, isFlamer }: VotingProps) => {
   }, [])
 
   const handleCardId = useCallback((id: string) => {
-    setCardId((prev) => (prev === id ? null : id))
+    console.log(id)
+    setCardId(id)
   }, [])
 
   const votingAction = useCallback(async () => {
     console.log(cardId)
     if (cardId === null) return
     await postVote({ idToken, gameId, cardId })
-  }, [])
+    await apiClient({ idToken }).games._gameId_string(gameId.toString()).health_check.$post()
+  }, [cardId])
 
   return (
     <SubLayout>
       <Container>
-        <TimeRemaining />
         <TabContainer>
           <PostListToggleTab isFlamer={isFlamer} selectedTab={tab} handleTab={handleTab} />
         </TabContainer>

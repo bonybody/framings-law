@@ -57,19 +57,19 @@ export class GameHealthCheckUseCase {
       case "init":
         break;
       case "ready":
-        await this.gameProgressUseCase.ready(gameId, now.turn);
-        break;
-      case "debate":
         await this.gameProgressUseCase.debate(gameId, now.turn);
         break;
-      case "vote":
+      case "debate":
         await this.gameProgressUseCase.vote(gameId, now.turn);
         break;
-      case "totalling":
+      case "vote":
         await this.gameProgressUseCase.totalling(gameId, now.turn);
         break;
+      case "totalling":
+        await this.gameProgressUseCase.nextTurnOrResult(gameId, now.turn);
+        break;
       case "result":
-        await this.gameProgressUseCase.result(gameId, now.turn);
+        break;
       default:
         break;
     }

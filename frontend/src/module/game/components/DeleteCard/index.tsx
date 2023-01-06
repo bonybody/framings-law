@@ -1,23 +1,44 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import styled from '@emotion/styled'
+import { useEffect, useState } from 'react'
 
+import { GameCard } from '@/api/@types'
 import { PostCard, TextWithShadow } from '@/components/Elements'
 import { SubLayout } from '@/components/Layout'
+import { apiClient } from '@/lib/api'
+import { useAuthContext } from '@/module/auth'
 
-export const DeleteCard = () => {
+export const DeleteCard = ({ cardId, gameId }: { cardId: string; gameId: string }) => {
+  const [card, setCard] = useState<GameCard | undefined>(undefined)
+  const { idToken } = useAuthContext()
+  useEffect(() => {
+    void (async () => {
+      const res = await apiClient({ idToken })
+        .games._gameId_string(gameId)
+        .cards._cardId(cardId)
+        .$get()
+      setCard(res.card)
+    })()
+  }, [cardId, gameId])
+
   return (
     <SubLayout>
       <Wrap>
-        <PostCard
-          postedDate={'2001-3-11'}
-          content={'福島旅行楽しい！！今から県またぐー。'}
-          isSelect={true}
-          isFlamePost={true}
-        />
-        <Text>
-          <TextWithShadow size={'body2'} shadowWidth={3}>
-            が削除されました。
-          </TextWithShadow>
-        </Text>
+        {card && (
+          <>
+            <PostCard
+              postedDate={card.card!.postedAt!}
+              content={card.card!.body!}
+              isSelect={true}
+              isFlamePost={false}
+            />
+            <Text>
+              <TextWithShadow size={'body2'} shadowWidth={3}>
+                が削除されました。
+              </TextWithShadow>
+            </Text>
+          </>
+        )}
       </Wrap>
     </SubLayout>
   )

@@ -2,10 +2,14 @@ import styled from '@emotion/styled'
 
 import { TextWithShadow } from '@/components/Elements'
 
-export const TimeRemaining = () => {
+export type TimeRemainingProps = {
+  timeLimit: number
+}
+export const TimeRemaining = (props: TimeRemainingProps) => {
+  const { timeLimit } = props
   return (
     <Text size={'body2'} shadowWidth={3}>
-      残り015秒
+      残り{timeLimit}秒
     </Text>
   )
 }
