@@ -14,29 +14,25 @@ export const useRoom = (roomId: string) => {
 
   useEffect(() => {
     void (async () => {
-      const res = await apiClient({ idToken }).rooms._roomId_string(roomId).users.$get()
-      console.log(res)
-      setRoomUsers({
-        join: res.join ?? [],
-        ready: res.ready ?? []
-      })
+      await updateUsers()
     })()
   }, [])
 
-  useEffect(() => {
-    roomEvents.join(roomId, (data) => {
-      console.log(data)
-      setRoomUsers({
-        join: data.users,
-        ready: roomUsers.ready
-      })
+  const updateUsers = async () => {
+    const res = await apiClient({ idToken }).rooms._roomId_string(roomId).users.$get()
+    console.log(res)
+    setRoomUsers({
+      join: res.join ?? [],
+      ready: res.ready ?? []
     })
-    roomEvents.ready(roomId, (data) => {
-      console.log(data)
-      setRoomUsers({
-        join: roomUsers.join,
-        ready: data.users
-      })
+  }
+
+  useEffect(() => {
+    roomEvents.join(roomId, async () => {
+      await updateUsers()
+    })
+    roomEvents.ready(roomId, async () => {
+      await updateUsers()
     })
     roomEvents.start(roomId, async (data) => {
       console.log(data)
