@@ -36,7 +36,7 @@ export const useRoom = (roomId: string) => {
     })
     roomEvents.start(roomId, async (data) => {
       console.log(data)
-      await router.push(`/games/${data.gameId}`)
+      await router.push(`/game/${data.gameId}`)
     })
   }, [])
 
