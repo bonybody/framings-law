@@ -1,28 +1,27 @@
 // import { useTheme } from '@emotion/react'
+import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import type { NextPage } from 'next'
+import { useForm } from 'react-hook-form'
 
-// import { useForm } from 'react-hook-form'
-// import {
-//   Button,
-//   CharacterDiamondShape,
-//   DiamondShape,
-//   PostCard,
-//   WaitingDiamondShape
-// } from '@/components/Elements'
-// import { InputField } from '@/components/Form'
+import {
+  Button,
+  CharacterDiamondShape,
+  DiamondShape,
+  PostCard,
+  WaitingDiamondShape
+} from '@/components/Elements'
+import { InputField } from '@/components/Form'
 import { MainLayout } from '@/components/Layout'
-import { Assignment } from '@/module/game/components/Assignment'
 
 const Home: NextPage = () => {
-  // const { register } = useForm()
-  // const theme = useTheme()
+  const { register } = useForm()
+  const theme = useTheme()
   return (
     <MainLayout>
       {/* <SubLayout> */}
       <Main>
-        <Assignment />
-        {/* <Headline2>Button</Headline2>
+        <Headline2>Button</Headline2>
         <div>
           <Button>Button</Button>
         </div>
@@ -125,7 +124,7 @@ const Home: NextPage = () => {
             charactorName="anne"
             textOffset={{ top: '0px', left: '0px' }}
           />
-        </div> */}
+        </div>
       </Main>
       {/* </SubLayout> */}
     </MainLayout>
