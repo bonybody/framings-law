@@ -11,4 +11,5 @@ export type LifeCycle = typeof lifeCycleList[number];
 export type GameProgress = {
   turn: number;
   phase: LifeCycle;
+  phaseContent?: object;
 };

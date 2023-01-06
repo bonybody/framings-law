@@ -54,11 +54,10 @@ export type GameCard = {
 }
 
 export type Game = {
-  id?: string | undefined
-  room_id?: string | undefined
+  turn?: number | undefined
+  phase?: string | undefined
 
-  status?: {
-    id?: string | undefined
-    code?: string | undefined
+  phaseContent?: {
+    sample?: string | undefined
   } | undefined
 }
