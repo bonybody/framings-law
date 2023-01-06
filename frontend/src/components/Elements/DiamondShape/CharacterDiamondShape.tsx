@@ -166,8 +166,6 @@ const DiamondText = styled.div<{
 `
 
 const NoPlayer = styled.div`
-  display: inline-block;
-  vertical-align: middle;
   position: absolute;
   top: 45%;
   left: 50%;
@@ -175,4 +173,5 @@ const NoPlayer = styled.div`
   transform: translate(-50%, -50%);
   color: white;
   font-size: 12px;
+  font-weight: bold;
 `
