@@ -10,6 +10,7 @@ declare module "process" {
         DB_USER: string;
         DB_PASSWORD: string;
         DB_DATABASE: string;
+        DB_URL: string;
         FIRE_API_KEY: string;
         FIRE_AUTH_DOMEIN: string;
         FIRE_PROJECT_ID: string;
