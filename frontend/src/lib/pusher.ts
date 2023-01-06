@@ -33,7 +33,7 @@ export const roomEvents = {
 }
 
 export const gameEvents = {
-  ready: (gameId: string, callback: (data: { turn: string }) => void) => {
+  ready: (gameId: string, callback: (data: { turn: number }) => void) => {
     getChannel(`game-${gameId}`).bind('ready', callback)
   },
   debate: (gameId: string, callback: (data: { turn: number; timeLimit: Date }) => void) => {
@@ -44,7 +44,6 @@ export const gameEvents = {
   },
   totalling: (
     gameId: string,
-    turn: number,
     callback: (data: { turn: number; deletedGameCardId: string; end: boolean }) => void
   ) => {
     getChannel(`game-${gameId}`).bind('totalling', callback)

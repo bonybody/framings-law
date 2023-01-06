@@ -524,5 +524,10 @@ components:
           type: number
         phase:
           type: string
+        phaseContent:
+          type: object
+          properties:
+            sample:
+              type: string
 security:
   - authorization: []
