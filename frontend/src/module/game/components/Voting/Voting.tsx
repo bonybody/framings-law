@@ -3,7 +3,9 @@ import { useCallback, useState } from 'react'
 
 import { Button, PostListToggleTab, PostListToggleTabProps } from '@/components/Elements'
 import { SubLayout } from '@/components/Layout'
+import { useAuthContext } from '@/module/auth'
 
+import { postVote } from '../../api/postVote'
 import { GameId } from '../../types'
 import { PostCardList } from './PostCardList'
 import { TimeRemaining } from './TimeRemaining'
@@ -14,6 +16,7 @@ export type VotingProps = {
 }
 
 export const Voting = ({ gameId, isFlamer }: VotingProps) => {
+  const { idToken } = useAuthContext()
   const [tab, setTab] = useState<Required<PostListToggleTabProps['selectedTab']>>('all')
   const [cardId, setCardId] = useState<string | null>(null)
 
@@ -26,8 +29,10 @@ export const Voting = ({ gameId, isFlamer }: VotingProps) => {
     setCardId((prev) => (prev === id ? null : id))
   }, [])
 
-  const votingAction = useCallback(() => {
+  const votingAction = useCallback(async () => {
     console.log(cardId)
+    if (cardId === null) return
+    await postVote({ idToken, gameId, cardId })
   }, [])
 
   return (

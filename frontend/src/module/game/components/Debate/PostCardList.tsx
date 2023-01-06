@@ -15,7 +15,7 @@ export type PostCardListProps = {
 
 export const PostCardList = ({ gameId, isFlamer, selectedTab }: PostCardListProps) => {
   const { idToken } = useAuthContext()
-  const { cardList } = usePostCard({ idToken, gameId })
+  const { cardList } = usePostCard({ idToken, gameId, isDeleted: false })
 
   if (selectedTab === 'flame') {
     return (
